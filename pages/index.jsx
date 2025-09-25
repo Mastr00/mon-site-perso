@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -7,40 +7,59 @@ export default function Home() {
       <Head>
         <title>Mehdi.dev - Portfolio</title>
       </Head>
-      <section className="bg-gray-50 min-h-screen flex flex-col justify-center items-center text-center px-6">
-        <h1 className="text-5xl font-extrabold text-gray-900">
-          Salut, je suis <span className="text-indigo-600">Mehdi</span> 👋
-        </h1>
-        <p className="mt-4 text-lg text-gray-600 max-w-2xl">
-          Étudiant en électronique & cybersécurité, passionné par les projets embarqués et le développement web.  
-          Bienvenue sur mon site perso où je partage mes <b>projets</b>, <b>expériences</b> et <b>idées</b>.
-        </p>
-        <div className="mt-6 flex gap-4">
-          <Link href="/projets" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+
+      {/* Hero Section */}
+      <section className="text-center py-16 px-6 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-5xl font-bold mb-4"
+        >
+          Salut, je suis <span className="text-indigo-600 dark:text-indigo-400">Mehdi</span> 👋
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+        >
+          Étudiant en électronique & cybersécurité, passionné par les projets embarqués, le dev web et la tech 🚀.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mt-6 flex justify-center space-x-4"
+        >
+          <a href="/projects" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
             Voir mes projets
-          </Link>
-          <Link href="/contact" className="px-6 py-3 border border-gray-400 rounded-lg hover:bg-gray-100">
+          </a>
+          <a href="/contact" className="px-6 py-3 border border-gray-400 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
             Me contacter
-          </Link>
-        </div>
+          </a>
+        </motion.div>
       </section>
 
-      <section className="py-16 bg-white">
+      {/* Section Projets Preview */}
+      <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-8 text-center">Pourquoi ce site ?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 shadow rounded-xl bg-gray-50">
-              <h3 className="font-bold text-lg mb-2">🚀 Portfolio</h3>
-              <p>Un aperçu de mes projets étudiants et perso en électronique, IoT et cybersécurité.</p>
-            </div>
-            <div className="p-6 shadow rounded-xl bg-gray-50">
-              <h3 className="font-bold text-lg mb-2">🔒 Sécurisé</h3>
-              <p>Authentification avec Auth0 et bonnes pratiques de sécurité intégrées.</p>
-            </div>
-            <div className="p-6 shadow rounded-xl bg-gray-50">
-              <h3 className="font-bold text-lg mb-2">📚 Blog</h3>
-              <p>Bientôt disponible : articles techniques, astuces et expériences de projet.</p>
-            </div>
+          <h2 className="text-3xl font-bold mb-8 text-center dark:text-white">Mes Projets</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div whileHover={{ scale: 1.05 }} className="p-6 shadow rounded-xl bg-gray-50 dark:bg-gray-700 dark:text-white">
+              <h3 className="font-bold text-lg mb-2">🚀 i-Cane</h3>
+              <p>Canne connectée avec capteurs pour aider les malvoyants.</p>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="p-6 shadow rounded-xl bg-gray-50 dark:bg-gray-700 dark:text-white">
+              <h3 className="font-bold text-lg mb-2">🔐 ESP32-C3 Red Team</h3>
+              <p>Exfiltration de données via Wi-Fi dans un scénario de cybersécurité.</p>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="p-6 shadow rounded-xl bg-gray-50 dark:bg-gray-700 dark:text-white">
+              <h3 className="font-bold text-lg mb-2">🌞 Suivi solaire</h3>
+              <p>Support motorisé à deux axes pour panneaux solaires.</p>
+            </motion.div>
           </div>
         </div>
       </section>
