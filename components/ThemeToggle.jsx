@@ -1,37 +1,40 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState('light');
 
+  // Initialize based on system preference or localStorage
   useEffect(() => {
-    try {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const stored = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-      const initial = stored || (prefersDark ? "dark" : "light");
-      setTheme(initial);
-      if (initial === "dark") document.documentElement.classList.add("dark");
-    } catch {}
+    const stored = localStorage.getItem('theme');
+    if (stored) {
+      setTheme(stored);
+      if (stored === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+    }
   }, []);
 
   const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : "light";
-    setTheme(next);
-    if (next === "dark") {
-      document.documentElement.classList.add("dark");
+    if (theme === 'light') {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.remove("dark");
+      setTheme('light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
-    try { localStorage.setItem("theme", next); } catch {}
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="px-3 py-2 rounded-lg border bg-gray-200 dark:bg-gray-700 dark:text-white"
-      aria-label="Toggle theme"
+      className="px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white text-sm"
     >
-      {theme === "light" ? "🌙 Sombre" : "☀️ Clair"}
+      {theme === 'light' ? '🌙 Sombre' : '☀️ Clair'}
     </button>
   );
 }
