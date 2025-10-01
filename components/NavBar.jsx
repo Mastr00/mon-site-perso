@@ -1,53 +1,41 @@
-import { useState } from "react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
-import { motion, AnimatePresence } from "framer-motion";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function NavBar() {
-  const [open, setOpen] = useState(false);
+  const { user } = useUser();
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-white dark:bg-gray-900 dark:text-white shadow-md relative">
-      <h1 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Mehdi.dev</h1>
-
-      {/* Menu Desktop */}
-      <ul className="hidden md:flex space-x-6 font-medium">
-        <li><Link href="/">Accueil</Link></li>
-        <li><Link href="/projects">Projets</Link></li>
-        <li><Link href="/dashboard">Dashboard</Link></li>
-        <li><Link href="/contact">Contact</Link></li>
-      </ul>
-
-      <div className="hidden md:block">
-        <ThemeToggle />
+    <nav className="flex justify-between items-center p-4 bg-white dark:bg-gray-900 shadow">
+      {/* Left side */}
+      <div className="flex gap-6">
+        <Link href="/" className="text-gray-800 dark:text-white hover:text-indigo-500">
+          Accueil
+        </Link>
+        {user && (
+          <Link href="/dashboard" className="text-gray-800 dark:text-white hover:text-indigo-500">
+            Dashboard
+          </Link>
+        )}
       </div>
 
-      {/* Burger menu */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="md:hidden text-2xl"
-      >
-        ☰
-      </button>
-
-      {/* Menu Mobile animé */}
-      <AnimatePresence>
-        {open && (
-          <motion.ul
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-16 left-0 w-full bg-white dark:bg-gray-900 shadow-md flex flex-col items-center space-y-4 py-6 md:hidden"
+      {/* Right side */}
+      <div>
+        {user ? (
+          <a
+            href="/api/auth/logout"
+            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
           >
-            <li><Link href="/">Accueil</Link></li>
-            <li><Link href="/projects">Projets</Link></li>
-            <li><Link href="/dashboard">Dashboard</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <ThemeToggle />
-          </motion.ul>
+            Se déconnecter
+          </a>
+        ) : (
+          <a
+            href="/api/auth/login"
+            className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+          >
+            Se connecter
+          </a>
         )}
-      </AnimatePresence>
+      </div>
     </nav>
   );
 }
