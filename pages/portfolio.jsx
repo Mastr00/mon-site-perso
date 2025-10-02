@@ -39,14 +39,12 @@ export default function Portfolio() {
       id: "fall_guard",
       title: "⚠️ Fall_guard — Détecteur de chute",
       descShort: "Détecteur de chute autonome avec envoi d'un SOS + coordonnées GPS si la personne ne se relève pas.",
-      desc: `All people have a risk of having a serious fall in an isolated place... When the person falls, the fall is automatically detected by the accelerometer; if the person does not get up, the device sends an "SOS" and GPS coordinates to emergency services and relatives.`,
       long: `As part of a project for our study in electronics and wireless communication we made a fall detector.
 
-All people have a risk of having a serious fall in an isolated place, whether it is an elderly person in a bathtub or an explorer on a mountain. Our idea is simple: detect falls and inform emergency services and the victim's relatives as quickly as possible. When the person falls, the fall is automatically detected by the accelerometer. The system analyzes the fall and, if the person does not get up, the device directly sends an "SOS" and GPS coordinates to help and loved ones.`,
+All people have a risk of having a serious fall in an isolated place, whether it is an elderly person in a bathtub or an explorer on a mountain.         Our idea is simple: detect falls and inform emergency services and the victim's relatives as quickly as possible. When the person falls, the fall is automatically detected by the accelerometer. The system analyzes the fall and, if the person does not get up, the device directly sends an "SOS" and GPS coordinates to help and loved ones.`,
       tags: ["Safety", "Wearable", "GPS", "Accelerometer"],
       canva: "https://www.canva.com/design/DAGEGtVhnBw/0-vhrQnHjY428aMI4KPUaQ/view?utm_content=DAGEGtVhnBw&utm_campaign=designshare&utm_medium=link&utm_source=editor",
-      demo: "#",
-      repo: "#"
+      repo: "https://github.com/Mastr00/Fall_guard"
     },
     {
       id: "dashboard-perso",
