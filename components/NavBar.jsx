@@ -2,12 +2,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import ThemeToggle from "./ThemeToggle";
-import { Menu, X } from "lucide-react"; // icônes burger
-import { motion, AnimatePresence } from "framer-motion"; // animations
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function NavBar() {
   const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
+
+  const linkStyle =
+    "text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400";
 
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md">
@@ -23,11 +26,13 @@ export default function NavBar() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/" className="nav-link">Accueil</Link>
-            <Link href="/portfolio" className="nav-link">Portfolio</Link>
-            <Link href="/contact" className="nav-link">Contact</Link>
-            {user && <Link href="/dashboard" className="nav-link">Dashboard</Link>}
+            <Link href="/" className={linkStyle}>Accueil</Link>
+            <Link href="/portfolio" className={linkStyle}>Portfolio</Link>
+            <Link href="/contact" className={linkStyle}>Contact</Link>
+            {user && <Link href="/dashboard" className={linkStyle}>Dashboard</Link>}
+
             <ThemeToggle />
+
             {!user ? (
               <a
                 href="/api/auth/login"
@@ -57,7 +62,7 @@ export default function NavBar() {
         </div>
       </div>
 
-      {/* Mobile dropdown menu avec animation */}
+      {/* Mobile dropdown menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -69,13 +74,11 @@ export default function NavBar() {
             className="md:hidden bg-white dark:bg-gray-900 shadow-lg overflow-hidden"
           >
             <div className="flex flex-col items-start p-4 space-y-3">
-              <Link href="/" className="nav-link" onClick={() => setIsOpen(false)}>Accueil</Link>
-              <Link href="/portfolio" className="nav-link" onClick={() => setIsOpen(false)}>Portfolio</Link>
-              <Link href="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link>
+              <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>Accueil</Link>
+              <Link href="/portfolio" className={linkStyle} onClick={() => setIsOpen(false)}>Portfolio</Link>
+              <Link href="/contact" className={linkStyle} onClick={() => setIsOpen(false)}>Contact</Link>
               {user && (
-                <Link href="/dashboard" className="nav-link" onClick={() => setIsOpen(false)}>
-                  Dashboard
-                </Link>
+                <Link href="/dashboard" className={linkStyle} onClick={() => setIsOpen(false)}>Dashboard</Link>
               )}
               <ThemeToggle />
               {!user ? (
@@ -100,17 +103,5 @@ export default function NavBar() {
         )}
       </AnimatePresence>
     </nav>
-  );
-}
-
-// Petite classe utilitaire pour pas répéter les styles
-function NavLink({ href, children }) {
-  return (
-    <Link
-      href={href}
-      className="w-full text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400"
-    >
-      {children}
-    </Link>
   );
 }
