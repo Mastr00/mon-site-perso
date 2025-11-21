@@ -12,30 +12,6 @@ export default function Portfolio() {
       repo: "https://github.com/Mastr00/wether"
     },
     {
-      id: "suivi-solaire",
-      title: "🌞 Suivi solaire avec GPS",
-      desc: "Support motorisé à deux axes pour panneaux solaires (contrôle Arduino/ESP32).",
-      tags: ["Énergie", "Arduino", "ESP32"],
-      demo: "#",
-      repo: "#"
-    },
-    {
-      id: "lidar_radar",
-      title: "📡 Radar ESP32-S3 + VL53L5CX",
-      desc: "Solution radar/lidar pour détection et monitoring temps réel.",
-      tags: ["ESP32-S3", "Ultrason"],
-      demo: "#",
-      repo: "https://github.com/Mastr00/lidar_radar"
-    },
-    {
-      id: "esp32-redteam",
-      title: "🔐 ESP32-C3 — Red Team",
-      desc: "Expérimentations : exfiltration Wi-Fi, sniff BLE — benchs pour tests de sécurité.",
-      tags: ["Sécurité", "ESP32-C3", "RedTeam"],
-      demo: "#",
-      repo: "#"
-    },
-    {
       id: "fall_guard",
       title: "⚠️ Fall_guard — Détecteur de chute",
       descShort: "Détecteur de chute autonome avec envoi d'un SOS + coordonnées GPS si la personne ne se relève pas.",
@@ -53,6 +29,30 @@ All people have a risk of having a serious fall in an isolated place, whether it
       tags: ["Next.js", "Auth0", "Tailwind", "Recharts"],
       demo: "https://mmsa.app",
       repo: "https://github.com/Mastr00/mon-site-perso"
+    },
+    {
+      id: "lidar_radar",
+      title: "📡 Radar ESP32-S3 + VL53L5CX",
+      desc: "Solution radar/lidar pour détection et monitoring temps réel.",
+      tags: ["ESP32-S3", "Ultrason"],
+      demo: "#",
+      repo: "https://github.com/Mastr00/lidar_radar"
+    },
+    {
+      id: "suivi-solaire",
+      title: "🌞 Suivi solaire avec GPS",
+      desc: "Support motorisé à deux axes pour panneaux solaires (contrôle Arduino/ESP32).",
+      tags: ["Énergie", "Arduino", "ESP32"],
+      demo: "#",
+      repo: "#"
+    },
+    {
+      id: "esp32-redteam",
+      title: "🕵️ ESP32 Marauder",
+      desc: "Expérimentations : exfiltration Wi-Fi, sniff BLE — benchs pour tests de sécurité.",
+      tags: ["Sécurité", "ESP32-C3", "RedTeam"],
+      demo: "#",
+      repo: "#"
     }
   ];
 
