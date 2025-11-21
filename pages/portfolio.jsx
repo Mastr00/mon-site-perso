@@ -20,12 +20,12 @@ export default function Portfolio() {
       repo: "#"
     },
     {
-      id: "radar-esp32",
-      title: "📡 Radar ESP32-C6 + HC-SR04",
-      desc: "Solution radar/ultrason pour détection et monitoring temps réel.",
-      tags: ["ESP32-C6", "Ultrason"],
+      id: "lidar_radar",
+      title: "📡 Radar ESP32-S3 + VL53L5CX",
+      desc: "Solution radar/lidar pour détection et monitoring temps réel.",
+      tags: ["ESP32-S3", "Ultrason"],
       demo: "#",
-      repo: "#"
+      repo: "https://github.com/Mastr00/lidar_radar"
     },
     {
       id: "esp32-redteam",
@@ -52,7 +52,7 @@ All people have a risk of having a serious fall in an isolated place, whether it
       desc: "Mon site perso (mmsa.app) — Next.js + Auth0 + Tailwind + Recharts.",
       tags: ["Next.js", "Auth0", "Tailwind", "Recharts"],
       demo: "https://mmsa.app",
-      repo: "#"
+      repo: "https://github.com/Mastr00/mon-site-perso"
     }
   ];
 
