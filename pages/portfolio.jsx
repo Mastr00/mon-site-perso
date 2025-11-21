@@ -4,12 +4,12 @@ import Link from "next/link";
 export default function Portfolio() {
   const projects = [
     {
-      id: "i-cane",
-      title: "🦯 i-Cane",
-      desc: "Canne connectée pour malvoyants — capteurs distance, vibration d'alerte, interface mobile.",
-      tags: ["IoT", "ESP32", "Accessibilité"],
+      id: "esp32-wether",
+      title: "🌦️ esp32-Wether",
+      desc: "Station météo et sécurité : ESP32-S3, GPS, capteurs (gaz, son, PIR), OLED et notifs Pushover.",
+      tags: ["ESP32-S3", "IoT", "C++", "Security"],
       demo: "#",
-      repo: "#"
+      repo: "https://github.com/Mastr00/wether"
     },
     {
       id: "suivi-solaire",
