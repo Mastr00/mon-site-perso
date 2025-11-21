@@ -34,7 +34,7 @@ All people have a risk of having a serious fall in an isolated place, whether it
       id: "lidar_radar",
       title: "📡 Radar ESP32-S3 + VL53L5CX",
       desc: "Solution radar/lidar pour détection et monitoring temps réel.",
-      tags: ["ESP32-S3", "Ultrason"],
+      tags: ["ESP32-S3", "lidar"],
       demo: "#",
       repo: "https://github.com/Mastr00/lidar_radar"
     },
