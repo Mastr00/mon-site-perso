@@ -46,22 +46,57 @@ function DashboardPage() {
             )}
           </motion.div>
 
-          {/* Grid Layout - Responsive Fix */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {/* Wrapper pour les widgets avec animation */}
-            {[WeatherWidget, GithubWidget, QuoteWidget, TasksWidget, NotesWidget].map((Widget, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="h-full"
-              >
-                <div className="h-full bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border border-gray-100 dark:border-gray-700/50">
-                  <Widget />
-                </div>
-              </motion.div>
-            ))}
+          {/* Grid Layout - Responsive Fix & Restore Sizes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
+
+            {/* Weather - 1 col */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1 }}
+            >
+              <WeatherWidget />
+            </motion.div>
+
+            {/* Github - 1 col */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <GithubWidget />
+            </motion.div>
+
+            {/* Quote - 2 cols */}
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <QuoteWidget />
+            </motion.div>
+
+            {/* Tasks - 2 cols */}
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <TasksWidget />
+            </motion.div>
+
+            {/* Notes - 2 cols */}
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <NotesWidget />
+            </motion.div>
+
           </div>
         </div>
       </div>
