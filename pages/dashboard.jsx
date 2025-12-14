@@ -8,6 +8,7 @@ import GithubWidget from "../components/dashboard/GithubWidget";
 import QuoteWidget from "../components/dashboard/QuoteWidget";
 import TasksWidget from "../components/dashboard/TasksWidget";
 import NotesWidget from "../components/dashboard/NotesWidget";
+import ProjectsWidget from "../components/dashboard/ProjectsWidget";
 
 function DashboardPage() {
   const { user } = useUser();
@@ -95,6 +96,16 @@ function DashboardPage() {
               transition={{ delay: 0.5 }}
             >
               <NotesWidget />
+            </motion.div>
+
+            {/* Projects - 2 cols */}
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <ProjectsWidget />
             </motion.div>
 
           </div>

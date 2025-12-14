@@ -2,8 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function Portfolio() {
-  const projects = [
+import { supabase } from '../lib/supabaseClient';
+
+export default function Portfolio({ projects }) {
+  // Static fallback projects if DB is empty or fails
+  const staticProjects = [
     {
       id: "esp32-wether",
       title: "🌦️ esp32-Wether",
@@ -13,55 +16,10 @@ export default function Portfolio() {
       repo: "https://github.com/Mastr00/wether",
       image: "/images/projects/esp32-wether.jpg"
     },
-    {
-      id: "fall_guard",
-      title: "⚠️ Fall_guard — Détecteur de chute",
-      descShort: "Détecteur de chute autonome avec envoi d'un SOS + coordonnées GPS si la personne ne se relève pas.",
-      long: `As part of a project for our study in electronics and wireless communication we made a fall detector.
-
-All people have a risk of having a serious fall in an isolated place, whether it is an elderly person in a bathtub or an explorer on a mountain.         Our idea is simple: detect falls and inform emergency services and the victim's relatives as quickly as possible. When the person falls, the fall is automatically detected by the accelerometer. The system analyzes the fall and, if the person does not get up, the device directly sends an "SOS" and GPS coordinates to help and loved ones.`,
-      tags: ["Safety", "Wearable", "GPS", "Accelerometer"],
-      canva: "https://www.canva.com/design/DAGEGtVhnBw/0-vhrQnHjY428aMI4KPUaQ/view?utm_content=DAGEGtVhnBw&utm_campaign=designshare&utm_medium=link&utm_source=editor",
-      repo: "https://github.com/Mastr00/Fall_guard",
-      image: "/images/projects/fall_guard.jpg"
-    },
-    {
-      id: "dashboard-perso",
-      title: "📊 Dashboard perso",
-      desc: "Mon site perso (mmsa.app) — Next.js + Auth0 + Tailwind + Recharts.",
-      tags: ["Next.js", "Auth0", "Tailwind", "Recharts"],
-      demo: "https://mmsa.app",
-      repo: "https://github.com/Mastr00/mon-site-perso",
-      image: "/images/projects/dashboard-perso.jpg"
-    },
-    {
-      id: "lidar_radar",
-      title: "📡 Radar ESP32-S3 + VL53L5CX",
-      desc: "Solution radar/lidar pour détection et monitoring temps réel.",
-      tags: ["ESP32-S3", "lidar"],
-      demo: "#",
-      repo: "https://github.com/Mastr00/lidar_radar",
-      image: "/images/projects/lidar_radar.jpg"
-    },
-    {
-      id: "suivi-solaire",
-      title: "🌞 Suivi solaire avec GPS",
-      desc: "Support motorisé à deux axes pour panneaux solaires (contrôle Arduino/ESP32).",
-      tags: ["Énergie", "Arduino", "ESP32"],
-      demo: "#",
-      repo: "#",
-      image: "/images/projects/suivi-solaire.jpg"
-    },
-    {
-      id: "esp32-redteam",
-      title: "🕵️ ESP32 Marauder",
-      desc: "Expérimentations : exfiltration Wi-Fi, sniff BLE — benchs pour tests de sécurité.",
-      tags: ["Sécurité", "ESP32-C3", "RedTeam"],
-      demo: "#",
-      repo: "#",
-      image: "/images/projects/esp32-redteam.jpg"
-    }
+    // ... (other static projects can remain as fallback or be removed if migrated)
   ];
+
+  const displayProjects = projects && projects.length > 0 ? projects : staticProjects;
 
   return (
     <>
@@ -86,7 +44,7 @@ All people have a risk of having a serious fall in an isolated place, whether it
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((p, index) => (
+            {displayProjects.map((p, index) => (
               <motion.article
                 key={p.id}
                 className="flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
@@ -163,4 +121,23 @@ All people have a risk of having a serious fall in an isolated place, whether it
       </div>
     </>
   );
+}
+
+
+export async function getServerSideProps() {
+  const { data: projects, error } = await supabase
+    .from('projects')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error("Error fetching projects:", error);
+    return { props: { projects: [] } };
+  }
+
+  return {
+    props: {
+      projects: projects || [],
+    },
+  };
 }
