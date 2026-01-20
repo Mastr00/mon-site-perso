@@ -28,6 +28,8 @@ export default function NavBar() {
           <div className="hidden md:flex items-center gap-6">
             <Link href="/" className={linkStyle}>Accueil</Link>
             <Link href="/portfolio" className={linkStyle}>Portfolio</Link>
+            <Link href="/cv" className={linkStyle}>CV</Link>
+            <Link href="/blog" className={linkStyle}>Blog</Link>
             <Link href="/contact" className={linkStyle}>Contact</Link>
             {user && <Link href="/dashboard" className={linkStyle}>Dashboard</Link>}
 
@@ -76,6 +78,8 @@ export default function NavBar() {
             <div className="flex flex-col items-start p-4 space-y-3">
               <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>Accueil</Link>
               <Link href="/portfolio" className={linkStyle} onClick={() => setIsOpen(false)}>Portfolio</Link>
+              <Link href="/cv" className={linkStyle} onClick={() => setIsOpen(false)}>CV</Link>
+              <Link href="/blog" className={linkStyle} onClick={() => setIsOpen(false)}>Blog</Link>
               <Link href="/contact" className={linkStyle} onClick={() => setIsOpen(false)}>Contact</Link>
               {user && (
                 <Link href="/dashboard" className={linkStyle} onClick={() => setIsOpen(false)}>Dashboard</Link>
