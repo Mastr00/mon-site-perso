@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, X, StickyNote } from "lucide-react";
 
 export default function NotesWidget() {
     const [notes, setNotes] = useState([]);
@@ -16,7 +17,7 @@ export default function NotesWidget() {
 
     const addNote = () => {
         if (noteInput.trim()) {
-            setNotes([...notes, noteInput]);
+            setNotes([noteInput, ...notes]);
             setNoteInput("");
         }
     };
@@ -26,32 +27,68 @@ export default function NotesWidget() {
     };
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow md:col-span-2">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">📝 Notes Rapides</h2>
-            <div className="flex gap-2 mb-4">
-                <input
-                    value={noteInput}
-                    onChange={(e) => setNoteInput(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === 'Enter') addNote(); }}
-                    className="flex-1 p-2 rounded border dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder="Écris une note..."
-                />
-                <button onClick={addNote} className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Ajouter</button>
+        <motion.div
+            whileHover={{ y: -5 }}
+            className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 md:col-span-2 flex flex-col h-full bg-gradient-to-bl from-white to-orange-50/30 dark:from-gray-800 dark:to-gray-900/50"
+        >
+            <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                    <span className="p-1.5 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400 rounded-lg">📝</span>
+                    Notes Rapides
+                </h2>
+                <div className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-xs font-bold px-2 py-1 rounded-md">
+                    {notes.length}
+                </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
-                {notes.map((n, i) => (
-                    <div key={i} className="relative p-3 bg-yellow-50 dark:bg-gray-700 rounded border border-yellow-100 dark:border-gray-600 group">
-                        <p className="text-gray-800 dark:text-gray-200 text-sm break-words">{n}</p>
-                        <button
-                            onClick={() => removeNote(i)}
-                            className="absolute top-1 right-1 text-red-400 opacity-0 group-hover:opacity-100 transition"
-                            aria-label="Supprimer la note"
+
+            <div className="flex gap-2 mb-6">
+                <div className="relative flex-grow">
+                    <input
+                        value={noteInput}
+                        onChange={(e) => setNoteInput(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') addNote(); }}
+                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all dark:text-white"
+                        placeholder="Nouvelle idée..."
+                    />
+                    <button
+                        onClick={addNote}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors"
+                    >
+                        <Plus size={16} />
+                    </button>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-60 overflow-y-auto custom-scrollbar pr-1">
+                <AnimatePresence>
+                    {notes.map((n, i) => (
+                        <motion.div
+                            key={`${i}-${n.substring(0, 5)}`}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            className="relative p-4 bg-yellow-50/80 dark:bg-gray-750 border border-yellow-200/50 dark:border-gray-600 rounded-xl group hover:shadow-md transition-all duration-300"
                         >
-                            ✕
-                        </button>
-                    </div>
-                ))}
-                {notes.length === 0 && <p className="text-gray-400 text-center italic col-span-full">Pas de notes.</p>}
+                            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    onClick={() => removeNote(i)}
+                                    className="p-1 text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full"
+                                >
+                                    <X size={14} />
+                                </button>
+                            </div>
+                            <p className="text-gray-700 dark:text-gray-200 text-sm font-medium break-words leading-relaxed pr-2">
+                                {n}
+                            </p>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+                {notes.length === 0 && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="col-span-full flex flex-col items-center justify-center py-8 text-gray-400">
+                        <StickyNote size={32} className="mb-2 opacity-20" />
+                        <p className="text-sm">Aucune note pour l'instant.</p>
+                    </motion.div>
+                )}
             </div>
         </motion.div>
     );
