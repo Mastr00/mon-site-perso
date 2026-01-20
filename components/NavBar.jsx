@@ -29,7 +29,7 @@ export default function NavBar() {
             <Link href="/" className={linkStyle}>Accueil</Link>
             <Link href="/portfolio" className={linkStyle}>Portfolio</Link>
             <Link href="/cv" className={linkStyle}>CV</Link>
-            <Link href="/blog" className={linkStyle}>Blog</Link>
+
             <Link href="/contact" className={linkStyle}>Contact</Link>
             {user && <Link href="/dashboard" className={linkStyle}>Dashboard</Link>}
 
