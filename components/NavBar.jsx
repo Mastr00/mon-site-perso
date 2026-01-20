@@ -13,7 +13,7 @@ export default function NavBar() {
     "text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400";
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md">
+    <nav className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
