@@ -22,9 +22,10 @@ export default function NavBar() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-indigo-600 dark:text-indigo-400"
+            className="flex items-center gap-2 text-xl font-bold text-indigo-600 dark:text-indigo-400"
           >
-            MMSA.app🚀
+            <img src="/logo.png" alt="Logo" className="h-8 w-8 object-contain" />
+            MMSA.app
           </Link>
 
           {/* Desktop menu */}
