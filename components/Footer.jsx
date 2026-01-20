@@ -29,7 +29,7 @@ export default function Footer() {
                             <Github size={24} />
                         </a>
                         <a
-                            href="https://linkedin.com"
+                            href="https://www.linkedin.com/in/mehdi-mamdouh-8493162b3/"
                             target="_blank"
                             rel="noreferrer"
                             className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -38,7 +38,7 @@ export default function Footer() {
                             <Linkedin size={24} />
                         </a>
                         <a
-                            href="mailto:contact@mehdi.dev"
+                            href="mailto:mehdimamdouh20@gmail.com"
                             className="text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                             aria-label="Email"
                         >
