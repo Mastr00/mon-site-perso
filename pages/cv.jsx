@@ -1,7 +1,10 @@
 import Head from "next/head";
 import { Download, Briefcase, GraduationCap, Wrench, Languages, Car, Heart, Calendar, Zap } from "lucide-react";
+import { useLanguage } from '../context/LanguageContext';
 
 export default function CE() { // CV - Curriculum Vitae
+    const { t } = useLanguage();
+
     const experiences = [
         {
             role: "Night Room Service",
@@ -100,9 +103,9 @@ export default function CE() { // CV - Curriculum Vitae
                             <h1 className="text-4xl font-bold mb-2">Mehdi Mamdouh</h1>
                             <p className="text-indigo-100 flex items-center gap-2 justify-center md:justify-start">
                                 <Calendar size={18} />
-                                Né le 28/06/2005
+                                {t.cv.born} 28/06/2005
                             </p>
-                            <p className="text-indigo-100 mt-1">Étudiant en Électronique & Passionné Tech</p>
+                            <p className="text-indigo-100 mt-1">{t.cv.studentDesc}</p>
                         </div>
 
                         <button
@@ -110,7 +113,7 @@ export default function CE() { // CV - Curriculum Vitae
                             className="flex items-center gap-2 px-6 py-2 bg-white/20 hover:bg-white/30 backdrop-blur rounded-full transition-all print:hidden"
                         >
                             <Download size={20} />
-                            <span>Télécharger PDF</span>
+                            <span>{t.cv.download}</span>
                         </button>
                     </div>
 
@@ -122,7 +125,7 @@ export default function CE() { // CV - Curriculum Vitae
                             {/* Skills (Progress Bars) */}
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Wrench size={20} className="text-indigo-400" /> Compétences
+                                    <Wrench size={20} className="text-indigo-400" /> {t.cv.skills}
                                 </h3>
                                 <div className="space-y-4">
                                     {skills.map(s => (
@@ -145,25 +148,25 @@ export default function CE() { // CV - Curriculum Vitae
                             {/* NEW SECTION: Machines & Hardware */}
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Zap size={20} className="text-indigo-400" /> Machines & Matériel
+                                    <Zap size={20} className="text-indigo-400" /> {t.cv.machines}
                                 </h3>
                                 <div className="p-4 bg-gray-800 rounded-lg print:bg-gray-300 print:text-black">
-                                    <p className="text-sm text-gray-300 print:text-black font-semibold mb-2">
-                                        Expertise Fabrication et Prototypage :
+                                    <p className="text-sm leading-relaxed text-gray-300 print:text-black">
+                                        <span className="text-indigo-400 font-bold block mb-1">{t.cv.machinesTitle}</span>
+                                        {t.cv.machinesDesc}
+                                        <ul className="list-disc list-inside mt-1 ml-1 space-y-0.5">
+                                            <li><strong>CNC</strong> (Fraisage, réglage, maintenance)</li>
+                                            <li><strong>Impression 3D</strong> (FDM, SLA, Maintenance)</li>
+                                            <li><strong>Découpe & Gravure Laser</strong></li>
+                                        </ul>
                                     </p>
-                                    <ul className="list-disc list-inside text-sm text-gray-300 print:text-black space-y-1">
-                                        <li><strong>CNC</strong> (Fraisage, réglage, maintenance)</li>
-                                        <li><strong>Impression 3D</strong> (FDM, SLA)</li>
-                                        <li><strong>Découpe & Gravure Laser</strong></li>
-                                        <li><strong>Conception CAO</strong> (Fusion 360)</li>
-                                    </ul>
                                 </div>
                             </section>
 
                             {/* Languages */}
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Languages size={20} className="text-indigo-400" /> Langues
+                                    <Languages size={20} className="text-indigo-400" /> {t.cv.languages}
                                 </h3>
                                 <ul className="space-y-2 text-sm text-gray-300 print:text-black">
                                     {languages.map(l => (
@@ -178,7 +181,7 @@ export default function CE() { // CV - Curriculum Vitae
                             {/* Interests & Others */}
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Heart size={20} className="text-indigo-400" /> Intérêts
+                                    <Heart size={20} className="text-indigo-400" /> {t.cv.interests}
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {["Photographie", "Peinture", "Cyclisme"].map(i => (
@@ -191,7 +194,7 @@ export default function CE() { // CV - Curriculum Vitae
 
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Car size={20} className="text-indigo-400" /> Permis
+                                    <Car size={20} className="text-indigo-400" /> {t.cv.license}
                                 </h3>
                                 <p className="text-gray-300 print:text-black">Permis B</p>
                             </section>
@@ -204,7 +207,7 @@ export default function CE() { // CV - Curriculum Vitae
                             {/* Experience */}
                             <section>
                                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2 flex items-center gap-2">
-                                    <Briefcase className="text-indigo-600 dark:text-indigo-400" /> Expériences Professionnelles
+                                    <Briefcase className="text-indigo-600 dark:text-indigo-400" /> {t.cv.experience}
                                 </h2>
                                 <div className="space-y-8 border-l-2 border-indigo-100 dark:border-gray-700 ml-3 pl-8 relative">
                                     {experiences.map((exp, i) => (
@@ -230,7 +233,7 @@ export default function CE() { // CV - Curriculum Vitae
                             {/* Education */}
                             <section>
                                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2 flex items-center gap-2">
-                                    <GraduationCap className="text-indigo-600 dark:text-indigo-400" /> Éducation
+                                    <GraduationCap className="text-indigo-600 dark:text-indigo-400" /> {t.cv.education}
                                 </h2>
                                 <div className="space-y-6">
                                     {education.map((edu, i) => (

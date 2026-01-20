@@ -2,11 +2,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function NavBar() {
   const { user } = useUser();
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   const linkStyle =
@@ -26,28 +29,29 @@ export default function NavBar() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/" className={linkStyle}>Accueil</Link>
-            <Link href="/portfolio" className={linkStyle}>Portfolio</Link>
-            <Link href="/cv" className={linkStyle}>CV</Link>
+            <Link href="/" className={linkStyle}>{t.nav.home}</Link>
+            <Link href="/portfolio" className={linkStyle}>{t.nav.portfolio}</Link>
+            <Link href="/cv" className={linkStyle}>{t.nav.cv}</Link>
 
-            <Link href="/contact" className={linkStyle}>Contact</Link>
-            {user && <Link href="/dashboard" className={linkStyle}>Dashboard</Link>}
+            <Link href="/contact" className={linkStyle}>{t.nav.contact}</Link>
+            {user && <Link href="/dashboard" className={linkStyle}>{t.nav.dashboard}</Link>}
 
             <ThemeToggle />
+            <LanguageToggle />
 
             {!user ? (
               <a
                 href="/api/auth/login"
                 className="px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700"
               >
-                Se connecter
+                {t.nav.login}
               </a>
             ) : (
               <a
                 href="/api/auth/logout"
                 className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
               >
-                Se déconnecter
+                {t.nav.logout}
               </a>
             )}
           </div>
@@ -72,19 +76,21 @@ export default function NavBar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden bg-white dark:bg-gray-900 shadow-lg overflow-hidden"
+            className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 overflow-hidden"
           >
             <div className="flex flex-col items-start p-4 space-y-3">
-              <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>Accueil</Link>
-              <Link href="/portfolio" className={linkStyle} onClick={() => setIsOpen(false)}>Portfolio</Link>
-              <Link href="/cv" className={linkStyle} onClick={() => setIsOpen(false)}>CV</Link>
-              <Link href="/blog" className={linkStyle} onClick={() => setIsOpen(false)}>Blog</Link>
-              <Link href="/contact" className={linkStyle} onClick={() => setIsOpen(false)}>Contact</Link>
+              <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.home}</Link>
+              <Link href="/portfolio" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.portfolio}</Link>
+              <Link href="/cv" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.cv}</Link>
+              <Link href="/blog" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.blog}</Link>
+              <Link href="/contact" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.contact}</Link>
               {user && (
-                <Link href="/dashboard" className={linkStyle} onClick={() => setIsOpen(false)}>Dashboard</Link>
+                <Link href="/dashboard" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.dashboard}</Link>
               )}
-              <ThemeToggle />
+              <div className="flex gap-4 pt-4 mt-4 border-t border-gray-200 dark:border-gray-700 w-full">
+                <ThemeToggle />
+                <LanguageToggle />
+              </div>
               {!user ? (
                 <a
                   href="/api/auth/login"

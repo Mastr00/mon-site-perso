@@ -1,7 +1,10 @@
 import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Footer() {
+    const { t } = useLanguage();
+
     return (
         <footer className="w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 mt-auto">
             <div className="max-w-7xl mx-auto px-6 py-8">
@@ -13,7 +16,7 @@ export default function Footer() {
                             Mehdi<span className="text-gray-600 dark:text-gray-400">.dev</span>
                         </Link>
                         <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                            © {new Date().getFullYear()} Tous droits réservés.
+                            © {new Date().getFullYear()} {t.footer.rights}
                         </p>
                     </div>
 
@@ -48,9 +51,9 @@ export default function Footer() {
 
                     {/* Quick message */}
                     <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                        <span>Fait avec</span>
+                        <span>{t.footer.madeWith}</span>
                         <Heart size={16} className="text-red-500 fill-red-500" />
-                        <span>par Mehdi</span>
+                        <span>{t.footer.by} Mehdi</span>
                     </div>
                 </div>
             </div>

@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Home() {
+  const { t, locale } = useLanguage();
+
   return (
     <>
       <Head>
-        <title>Mehdi – Étudiant & Développeur</title>
-        <meta name="description" content="Portfolio de Mehdi, étudiant en électronique et cybersécurité. Découvrez mes projets et compétences." />
-        <meta property="og:title" content="Mehdi – Étudiant & Développeur" />
-        <meta property="og:description" content="Portfolio de Mehdi, étudiant en électronique et cybersécurité." />
+        <title>Mehdi – {t.home.studentIn} {t.home.role1}</title>
+        <meta name="description" content="Portfolio of Mehdi, student in electronics and cybersecurity." />
       </Head>
 
       <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden relative">
@@ -28,7 +29,7 @@ export default function Home() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <h1 className="text-6xl md:text-8xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-8 drop-shadow-sm">
-              Salut, je suis <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">Mehdi</span> <span className="animate-wave inline-block origin-[70%_70%]">👋</span>
+              {t.home.heroTitle} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">Mehdi</span> <span className="animate-wave inline-block origin-[70%_70%]">👋</span>
             </h1>
           </motion.div>
 
@@ -38,9 +39,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Étudiant en <span className="font-semibold text-indigo-700 dark:text-indigo-300">électronique</span> & <span className="font-semibold text-purple-700 dark:text-purple-300">cybersécurité</span>.
+            {t.home.studentIn} <span className="font-semibold text-indigo-700 dark:text-indigo-300">{t.home.role1}</span> & <span className="font-semibold text-purple-700 dark:text-purple-300">{t.home.role2}</span>.
             <br className="hidden md:block" />
-            Passionné par l'<span className="font-medium text-pink-600 dark:text-pink-400">IoT</span>, l'embarqué et le web moderne.
+            {t.home.passion} <span className="font-medium text-pink-600 dark:text-pink-400">{t.home.iot}</span>, {t.home.embedded} {locale === 'fr' ? 'et' : 'and'} {t.home.modernWeb}.
           </motion.p>
 
           <motion.div
@@ -53,13 +54,13 @@ export default function Home() {
               href="/portfolio"
               className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Voir mes Projets 🚀
+              {t.home.heroBtn} 🚀
             </Link>
             <Link
               href="/contact"
               className="px-8 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md text-gray-900 dark:text-white border border-white/50 dark:border-gray-600 rounded-2xl font-bold text-lg shadow-lg hover:bg-white dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Me contacter 📩
+              {t.home.contactBtn} 📩
             </Link>
           </motion.div>
         </div>
