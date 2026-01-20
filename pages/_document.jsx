@@ -5,7 +5,8 @@ export default function Document() {
         <Html lang="fr">
             <Head>
                 {/* Favicon */}
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.png" type="image/png" />
+                <link rel="apple-touch-icon" href="/favicon.png" />
 
                 {/* Fonts */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />

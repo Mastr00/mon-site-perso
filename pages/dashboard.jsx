@@ -9,6 +9,9 @@ import QuoteWidget from "../components/dashboard/QuoteWidget";
 import TasksWidget from "../components/dashboard/TasksWidget";
 import NotesWidget from "../components/dashboard/NotesWidget";
 import ProjectsWidget from "../components/dashboard/ProjectsWidget";
+import MiniGameWidget from "../components/dashboard/MiniGameWidget";
+import RandomFactWidget from "../components/dashboard/RandomFactWidget";
+import MoodWidget from "../components/dashboard/MoodWidget";
 
 function DashboardPage() {
   const { user } = useUser();
@@ -50,6 +53,15 @@ function DashboardPage() {
           {/* Grid Layout - Responsive Fix & Restore Sizes */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
 
+            {/* Mood Widget - 1 col */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.05 }}
+            >
+              <MoodWidget />
+            </motion.div>
+
             {/* Weather - 1 col */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -63,9 +75,18 @@ function DashboardPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.15 }}
             >
               <GithubWidget />
+            </motion.div>
+
+            {/* Random Fact - 1 col */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <RandomFactWidget />
             </motion.div>
 
             {/* Quote - 2 cols */}
@@ -73,9 +94,19 @@ function DashboardPage() {
               className="md:col-span-2"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.25 }}
             >
               <QuoteWidget />
+            </motion.div>
+
+            {/* Mini Game - 2 cols */}
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <MiniGameWidget />
             </motion.div>
 
             {/* Tasks - 2 cols */}
@@ -83,7 +114,7 @@ function DashboardPage() {
               className="md:col-span-2"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.35 }}
             >
               <TasksWidget />
             </motion.div>
@@ -93,7 +124,7 @@ function DashboardPage() {
               className="md:col-span-2"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.4 }}
             >
               <NotesWidget />
             </motion.div>
@@ -103,7 +134,7 @@ function DashboardPage() {
               className="md:col-span-2"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.45 }}
             >
               <ProjectsWidget />
             </motion.div>
