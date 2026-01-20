@@ -18,6 +18,10 @@ export default function SEO({
             <meta name="robots" content="index, follow" />
             <link rel="canonical" href={url} />
 
+            {/* Favicon */}
+            <link rel="icon" href="/favicon.ico" />
+            <link rel="apple-touch-icon" href="/favicon.ico" />
+
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
             <meta property="og:url" content={url} />
