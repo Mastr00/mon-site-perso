@@ -19,8 +19,9 @@ export default function SEO({
             <link rel="canonical" href={url} />
 
             {/* Favicon */}
-            <link rel="icon" href="/favicon.ico" />
-            <link rel="apple-touch-icon" href="/favicon.ico" />
+            <link rel="icon" type="image/png" href="/logo.png" />
+            <link rel="shortcut icon" type="image/png" href="/logo.png" />
+            <link rel="apple-touch-icon" href="/logo.png" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
