@@ -24,7 +24,7 @@ export default function NavBar() {
             href="/"
             className="flex items-center gap-2 text-xl font-bold text-indigo-600 dark:text-indigo-400"
           >
-            <img src="/logo.png" alt="Logo" className="h-8 w-8 object-contain" />
+            <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
             MMSA.app
           </Link>
 
