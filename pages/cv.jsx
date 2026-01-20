@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Download, Briefcase, GraduationCap, Wrench, Languages, Car, Heart, Calendar } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Wrench, Languages, Car, Heart, Calendar, Zap } from "lucide-react";
 
 export default function CE() { // CV - Curriculum Vitae
     const experiences = [
@@ -69,11 +69,12 @@ export default function CE() { // CV - Curriculum Vitae
         }
     ];
 
+    // Updated Skills List: Replaced "CNC / Gcode" with "Programmation G-code"
     const skills = [
         { name: "C / C++", level: 80 },
         { name: "Python", level: 75 },
         { name: "Autodesk Fusion 360", level: 85 },
-        { name: "CNC / Gcode", level: 90 },
+        { name: "Programmation G-code", level: 90 }, // Renamed from "CNC / Gcode"
         { name: "Microsoft Office", level: 90 },
         { name: "HTML/CSS/JS", level: 70 },
     ];
@@ -118,7 +119,7 @@ export default function CE() { // CV - Curriculum Vitae
                         {/* Sidebar (Left) */}
                         <div className="bg-gray-900 text-white p-8 md:col-span-1 space-y-8 print:bg-gray-200 print:text-black">
 
-                            {/* Skills */}
+                            {/* Skills (Progress Bars) */}
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
                                     <Wrench size={20} className="text-indigo-400" /> Compétences
@@ -141,98 +142,117 @@ export default function CE() { // CV - Curriculum Vitae
                                 </div>
                             </section>
 
-                            {/* Languages */}
+                            {/* NEW SECTION: Machines & Hardware */}
                             <section>
                                 <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Languages size={20} className="text-indigo-400" /> Langues
+                                    <Zap size={20} className="text-indigo-400" /> Machines & Matériel
                                 </h3>
-                                <ul className="space-y-2 text-sm text-gray-300 print:text-black">
-                                    {languages.map(l => (
-                                        <li key={l.name} className="flex justify-between">
-                                            <span className="font-semibold">{l.name}</span>
-                                            <span className="opacity-80">{l.level}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </section>
-
-                            {/* Interests & Others */}
-                            <section>
-                                <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Heart size={20} className="text-indigo-400" /> Intérêts
-                                </h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {["Photographie", "Peinture", "Cyclisme"].map(i => (
-                                        <span key={i} className="px-2 py-1 bg-gray-800 rounded text-xs print:border print:border-black">
-                                            {i}
-                                        </span>
-                                    ))}
+                                <div className="p-4 bg-gray-800 rounded-lg print:bg-gray-300 print:text-black">
+                                    <p className="text-sm leading-relaxed text-gray-300 print:text-black">
+                                        <span className="text-indigo-400 font-bold block mb-1">Expertise Fabrication Numérique :</span>
+                                        Maitrise complète des processus de fabrication :
+                                        <ul className="list-disc list-inside mt-1 ml-1 space-y-0.5">
+                                            <li><strong>CNC</strong> (Fraisage, réglage, maintenance)</li>
+                                            <li><strong>Impression 3D</strong> (FDM, SLA, Maintenance)</li>
+                                            <li><strong>Découpe & Gravure Laser</strong></li>
+                                        </ul>
+                                    </p>
                                 </div>
-                            </section>
-
-                            <section>
-                                <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
-                                    <Car size={20} className="text-indigo-400" /> Permis
-                                </h3>
-                                <p className="text-gray-300 print:text-black">Permis B</p>
-                            </section>
-
                         </div>
+                    </section>
 
-                        {/* Main Content (Right) */}
-                        <div className="p-8 md:col-span-2 space-y-10 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                    {/* Languages */}
+                    <section>
+                        <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
+                            <Languages size={20} className="text-indigo-400" /> Langues
+                        </h3>
+                        <ul className="space-y-2 text-sm text-gray-300 print:text-black">
+                            {languages.map(l => (
+                                <li key={l.name} className="flex justify-between">
+                                    <span className="font-semibold">{l.name}</span>
+                                    <span className="opacity-80">{l.level}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
 
-                            {/* Experience */}
-                            <section>
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2 flex items-center gap-2">
-                                    <Briefcase className="text-indigo-600 dark:text-indigo-400" /> Expériences Professionnelles
-                                </h2>
-                                <div className="space-y-8 border-l-2 border-indigo-100 dark:border-gray-700 ml-3 pl-8 relative">
-                                    {experiences.map((exp, i) => (
-                                        <div key={i} className="relative">
-                                            <span className="absolute -left-[41px] top-1 w-5 h-5 bg-indigo-600 rounded-full border-4 border-white dark:border-gray-800"></span>
-                                            <h3 className="text-lg font-bold text-gray-900 dark:text-white">{exp.role}</h3>
-                                            <div className="text-indigo-600 dark:text-indigo-400 font-medium mb-2">
-                                                {exp.company} | <span className="text-sm text-gray-500 dark:text-gray-400">{exp.location}</span>
-                                            </div>
-                                            <span className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded mb-3 text-gray-600 dark:text-gray-300">
-                                                {exp.period}
-                                            </span>
-                                            <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1 text-sm">
-                                                {exp.tasks.map((task, j) => (
-                                                    <li key={j}>{task}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-
-                            {/* Education */}
-                            <section>
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2 flex items-center gap-2">
-                                    <GraduationCap className="text-indigo-600 dark:text-indigo-400" /> Éducation
-                                </h2>
-                                <div className="space-y-6">
-                                    {education.map((edu, i) => (
-                                        <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                                            <div>
-                                                <h3 className="font-bold text-gray-900 dark:text-white">{edu.school}</h3>
-                                                <p className="text-gray-700 dark:text-gray-300">{edu.degree}</p>
-                                            </div>
-                                            <div className="text-right">
-                                                <span className="text-indigo-600 dark:text-indigo-400 font-bold block">{edu.year}</span>
-                                                <span className="text-xs text-gray-500">{edu.location}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-
+                    {/* Interests & Others */}
+                    <section>
+                        <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
+                            <Heart size={20} className="text-indigo-400" /> Intérêts
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {["Photographie", "Peinture", "Cyclisme"].map(i => (
+                                <span key={i} className="px-2 py-1 bg-gray-800 rounded text-xs print:border print:border-black">
+                                    {i}
+                                </span>
+                            ))}
                         </div>
-                    </div>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold border-b-2 border-indigo-500 pb-2 mb-4 flex items-center gap-2">
+                            <Car size={20} className="text-indigo-400" /> Permis
+                        </h3>
+                        <p className="text-gray-300 print:text-black">Permis B</p>
+                    </section>
+
+                </div>
+
+                {/* Main Content (Right) */}
+                <div className="p-8 md:col-span-2 space-y-10 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+
+                    {/* Experience */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2 flex items-center gap-2">
+                            <Briefcase className="text-indigo-600 dark:text-indigo-400" /> Expériences Professionnelles
+                        </h2>
+                        <div className="space-y-8 border-l-2 border-indigo-100 dark:border-gray-700 ml-3 pl-8 relative">
+                            {experiences.map((exp, i) => (
+                                <div key={i} className="relative">
+                                    <span className="absolute -left-[41px] top-1 w-5 h-5 bg-indigo-600 rounded-full border-4 border-white dark:border-gray-800"></span>
+                                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">{exp.role}</h3>
+                                    <div className="text-indigo-600 dark:text-indigo-400 font-medium mb-2">
+                                        {exp.company} | <span className="text-sm text-gray-500 dark:text-gray-400">{exp.location}</span>
+                                    </div>
+                                    <span className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded mb-3 text-gray-600 dark:text-gray-300">
+                                        {exp.period}
+                                    </span>
+                                    <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1 text-sm">
+                                        {exp.tasks.map((task, j) => (
+                                            <li key={j}>{task}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Education */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b pb-2 flex items-center gap-2">
+                            <GraduationCap className="text-indigo-600 dark:text-indigo-400" /> Éducation
+                        </h2>
+                        <div className="space-y-6">
+                            {education.map((edu, i) => (
+                                <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                                    <div>
+                                        <h3 className="font-bold text-gray-900 dark:text-white">{edu.school}</h3>
+                                        <p className="text-gray-700 dark:text-gray-300">{edu.degree}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <span className="text-indigo-600 dark:text-indigo-400 font-bold block">{edu.year}</span>
+                                        <span className="text-xs text-gray-500">{edu.location}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
                 </div>
             </div>
+        </div >
+            </div >
         </>
     );
 }
