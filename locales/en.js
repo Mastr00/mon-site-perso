@@ -63,7 +63,6 @@ export const en = {
     // Footer
     footer: {
         rights: "All rights reserved.",
-        madeWith: "Made with",
         by: "by",
     },
     // Common
