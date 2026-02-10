@@ -23,21 +23,21 @@ function DashboardPage() {
         <meta name="description" content="Mon tableau de bord personnel" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 md:p-8">
+      <div className="min-h-screen bg-[#020617] dark:bg-[#020617] p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
 
           {/* Header / Welcome */}
           <motion.div
-            className="flex flex-col md:flex-row items-center justify-between mb-8 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm"
+            className="flex flex-col md:flex-row items-center justify-between mb-8 bg-[#0F172A] border border-neon-violet/20 p-6 rounded-2xl shadow-neon"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                Bonjour, <span className="text-indigo-600 dark:text-indigo-400">{user ? user.name : "Mehdi"}</span> 👋
+              <h1 className="text-3xl font-bold text-white">
+                Bonjour, <span className="neon-text">{user ? user.name : "Mehdi"}</span> 👋
               </h1>
-              <p className="text-gray-500 dark:text-gray-400 mt-1">Voici ton tableau de bord personnel.</p>
+              <p className="text-slate-400 mt-1">Voici ton tableau de bord personnel.</p>
             </div>
             {user && user.picture && (
               <Image
@@ -45,12 +45,12 @@ function DashboardPage() {
                 alt="Profile"
                 width={64}
                 height={64}
-                className="rounded-full border-4 border-indigo-100 dark:border-indigo-900/50 shadow-md"
+                className="rounded-full border-4 border-neon-violet/30 shadow-neon"
               />
             )}
           </motion.div>
 
-          {/* Grid Layout - Responsive Fix & Restore Sizes */}
+          {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
 
             {/* Mood Widget - 1 col */}
@@ -150,4 +150,3 @@ function DashboardPage() {
 export const getServerSideProps = withPageAuthRequired();
 
 export default DashboardPage;
-

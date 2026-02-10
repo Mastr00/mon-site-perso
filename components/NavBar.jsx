@@ -13,19 +13,22 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const linkStyle =
-    "text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400";
+    "text-slate-300 dark:text-slate-300 hover:text-neon-cyan transition-colors duration-300 relative group";
+
+  const linkStyleLight =
+    "text-slate-600 hover:text-neon-violet transition-colors duration-300 relative group";
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-[#020617]/80 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-neon-violet/20 dark:border-neon-violet/20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-indigo-600 dark:text-indigo-400"
+            className="flex items-center gap-2 text-xl font-extrabold"
           >
             <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
-            MMSA.app
+            <span className="neon-text">MMSA.app</span>
           </Link>
 
           {/* Desktop menu */}
@@ -33,7 +36,6 @@ export default function NavBar() {
             <Link href="/" className={linkStyle}>{t.nav.home}</Link>
             <Link href="/portfolio" className={linkStyle}>{t.nav.portfolio}</Link>
             <Link href="/cv" className={linkStyle}>{t.nav.cv}</Link>
-
             <Link href="/contact" className={linkStyle}>{t.nav.contact}</Link>
             {user && <Link href="/dashboard" className={linkStyle}>{t.nav.dashboard}</Link>}
 
@@ -43,14 +45,14 @@ export default function NavBar() {
             {!user ? (
               <a
                 href="/api/auth/login"
-                className="px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                className="px-4 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-white rounded-lg font-semibold hover:shadow-neon transition-all duration-300 hover:-translate-y-0.5"
               >
                 {t.nav.login}
               </a>
             ) : (
               <a
                 href="/api/auth/logout"
-                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                className="px-4 py-2 bg-red-500/80 text-white rounded-lg font-semibold hover:bg-red-500 transition-all duration-300"
               >
                 {t.nav.logout}
               </a>
@@ -61,7 +63,7 @@ export default function NavBar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-800 dark:text-gray-200 focus:outline-none"
+              className="text-slate-200 dark:text-slate-200 focus:outline-none hover:text-neon-cyan transition-colors"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -77,36 +79,35 @@ export default function NavBar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 overflow-hidden"
+            className="md:hidden bg-[#0F172A] dark:bg-[#0F172A] border-b border-neon-violet/20 overflow-hidden"
           >
             <div className="flex flex-col items-start p-4 space-y-3">
               <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.home}</Link>
               <Link href="/portfolio" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.portfolio}</Link>
               <Link href="/cv" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.cv}</Link>
-              <Link href="/blog" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.blog}</Link>
               <Link href="/contact" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.contact}</Link>
               {user && (
                 <Link href="/dashboard" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.dashboard}</Link>
               )}
-              <div className="flex gap-4 pt-4 mt-4 border-t border-gray-200 dark:border-gray-700 w-full">
+              <div className="flex gap-4 pt-4 mt-4 border-t border-neon-violet/20 w-full">
                 <ThemeToggle />
                 <LanguageToggle />
               </div>
               {!user ? (
                 <a
                   href="/api/auth/login"
-                  className="w-full px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-center"
+                  className="w-full px-4 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-white rounded-lg font-semibold text-center hover:shadow-neon transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Se connecter
+                  {t.nav.login}
                 </a>
               ) : (
                 <a
                   href="/api/auth/logout"
-                  className="w-full px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-center"
+                  className="w-full px-4 py-2 bg-red-500/80 text-white rounded-lg font-semibold text-center hover:bg-red-500 transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Se déconnecter
+                  {t.nav.logout}
                 </a>
               )}
             </div>

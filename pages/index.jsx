@@ -2,9 +2,35 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { Zap, Mail, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+// Typing animation hook
+function useTypingEffect(text, speed = 80) {
+  const [displayed, setDisplayed] = useState('');
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setDisplayed('');
+    setDone(false);
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        setDone(true);
+      }
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
+
+  return { displayed, done };
+}
 
 export default function Home() {
   const { t, locale } = useLanguage();
+  const { displayed, done } = useTypingEffect('Mehdi', 120);
 
   return (
     <>
@@ -13,93 +39,122 @@ export default function Home() {
         <meta name="description" content="Portfolio of Mehdi, student in electronics and cybersecurity." />
       </Head>
 
-      <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden relative">
+      <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-[#020617] overflow-hidden relative">
 
-        {/* Animated Background Blobs */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-400/30 dark:bg-purple-900/20 rounded-full blur-3xl opacity-60 mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
-          <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-indigo-400/30 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-60 mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-[-10%] left-[30%] w-96 h-96 bg-pink-400/30 dark:bg-pink-900/20 rounded-full blur-3xl opacity-60 mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
+        {/* Animated circuit background */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {/* Neon glow blobs */}
+          <div className="absolute top-[10%] left-[10%] w-96 h-96 bg-neon-violet/20 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute top-[20%] right-[5%] w-96 h-96 bg-neon-magenta/15 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-[10%] left-[40%] w-96 h-96 bg-neon-cyan/15 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+
+          {/* Circuit lines SVG overlay */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="circuit" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                <path d="M0 100 H80 M120 100 H200" stroke="#8B5CF6" strokeWidth="1" fill="none" />
+                <path d="M100 0 V80 M100 120 V200" stroke="#22D3EE" strokeWidth="1" fill="none" />
+                <circle cx="100" cy="100" r="4" fill="#8B5CF6" />
+                <circle cx="0" cy="100" r="2" fill="#22D3EE" />
+                <circle cx="200" cy="100" r="2" fill="#22D3EE" />
+                <circle cx="100" cy="0" r="2" fill="#D946EF" />
+                <circle cx="100" cy="200" r="2" fill="#D946EF" />
+                <path d="M80 100 L100 80 L120 100 L100 120 Z" stroke="#D946EF" strokeWidth="0.5" fill="none" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#circuit)" />
+          </svg>
+
+          {/* Floating code snippets */}
+          <motion.div
+            className="absolute top-[15%] left-[8%] text-neon-cyan/10 font-mono text-sm hidden lg:block"
+            animate={{ y: [0, -15, 0], opacity: [0.08, 0.15, 0.08] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {'{ IoT: true }'}
+          </motion.div>
+          <motion.div
+            className="absolute top-[25%] right-[12%] text-neon-violet/10 font-mono text-sm hidden lg:block"
+            animate={{ y: [0, 12, 0], opacity: [0.08, 0.15, 0.08] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          >
+            {'#include <esp32.h>'}
+          </motion.div>
+          <motion.div
+            className="absolute bottom-[25%] left-[15%] text-neon-magenta/10 font-mono text-sm hidden lg:block"
+            animate={{ y: [0, -10, 0], opacity: [0.05, 0.12, 0.05] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          >
+            {'sudo nmap -sV'}
+          </motion.div>
+          <motion.div
+            className="absolute bottom-[30%] right-[8%] text-neon-cyan/10 font-mono text-sm hidden lg:block"
+            animate={{ y: [0, 10, 0], opacity: [0.06, 0.14, 0.06] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          >
+            {'0x4F 0x6B'}
+          </motion.div>
         </div>
 
-        <div className="relative z-10 backdrop-blur-sm bg-white/30 dark:bg-black/20 p-12 rounded-3xl border border-white/40 dark:border-white/10 shadow-xl">
+        <div className="relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="text-6xl md:text-8xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-8 drop-shadow-sm">
-              {t.home.heroTitle} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">Mehdi</span> <span className="animate-wave inline-block origin-[70%_70%]">👋</span>
+            <h1 className="hero-title text-white mb-4">
+              {t.home.heroTitle}{' '}
+              <span className="highlight">
+                {displayed}
+                {!done && <span className="animate-pulse text-neon-cyan">|</span>}
+              </span>
             </h1>
           </motion.div>
 
           <motion.p
-            className="mt-6 text-xl md:text-2xl text-gray-700 dark:text-gray-200 max-w-2xl mx-auto leading-relaxed font-light"
+            className="hero-subtitle max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
           >
-            {t.home.studentIn} <span className="font-semibold text-indigo-700 dark:text-indigo-300">{t.home.role1}</span> & <span className="font-semibold text-purple-700 dark:text-purple-300">{t.home.role2}</span>.
+            {t.home.studentIn} <span className="keyword-electronique">{t.home.role1}</span> & <span className="keyword-cyber">{t.home.role2}</span>.
             <br className="hidden md:block" />
-            {t.home.passion} <span className="font-medium text-pink-600 dark:text-pink-400">{t.home.iot}</span>, {t.home.embedded} {locale === 'fr' ? 'et' : 'and'} {t.home.modernWeb}.
+            {t.home.passion} <span className="keyword-electronique">{t.home.iot}</span>, {t.home.embedded} {locale === 'fr' ? 'et' : 'and'} <span className="keyword-cyber">{t.home.modernWeb}</span>.
           </motion.p>
 
           <motion.div
-            className="mt-12 flex flex-col sm:flex-row gap-6 justify-center"
+            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
           >
             <Link
               href="/portfolio"
-              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+              className="btn-primary animate-pulse-glow flex items-center justify-center gap-2"
             >
-              {t.home.heroBtn} 🚀
+              <Zap size={20} />
+              {t.home.heroBtn}
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md text-gray-900 dark:text-white border border-white/50 dark:border-gray-600 rounded-2xl font-bold text-lg shadow-lg hover:bg-white dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+              className="px-8 py-4 rounded-xl font-semibold border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2"
             >
-              {t.home.contactBtn} 📩
+              <Mail size={20} />
+              {t.home.contactBtn}
             </Link>
           </motion.div>
         </div>
 
-        <style jsx global>{`
-          @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-          }
-          .animate-blob {
-            animation: blob 10s infinite;
-          }
-          .animation-delay-2000 {
-            animation-delay: 2s;
-          }
-          .animation-delay-4000 {
-            animation-delay: 4s;
-          }
-          @keyframes wave {
-            0% { transform: rotate(0.0deg) }
-            10% { transform: rotate(14.0deg) }  
-            20% { transform: rotate(-8.0deg) }
-            30% { transform: rotate(14.0deg) }
-            40% { transform: rotate(-4.0deg) }
-            50% { transform: rotate(10.0deg) }
-            60% { transform: rotate(0.0deg) } 
-            100% { transform: rotate(0.0deg) }
-          }
-          .animate-wave {
-            animation-name: wave;
-            animation-duration: 2.5s;
-            animation-iteration-count: infinite;
-            transform-origin: 70% 70%;
-            display: inline-block;
-          }
-        `}</style>
-      </div>
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown size={28} className="text-neon-violet/50" />
+        </motion.div>
+
+      </section>
     </>
   );
 }
