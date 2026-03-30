@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Download, Briefcase, GraduationCap, Wrench, Languages, Car, Heart, Zap, Github, Linkedin, Mail, Phone, MapPin, Globe, CheckCircle2, Server, Lightbulb } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Wrench, Languages, Car, Heart, Zap, Github, Linkedin, Mail, Phone, MapPin, Globe, CheckCircle2, Server, Lightbulb, Code2 } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 
