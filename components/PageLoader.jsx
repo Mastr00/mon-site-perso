@@ -1,13 +1,31 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Head from "next/head";
 
 export default function PageLoader() {
     const [loading, setLoading] = useState(true);
+    const [filledBlocks, setFilledBlocks] = useState(0);
+    const totalBlocks = 20;
 
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 1500);
-        return () => clearTimeout(timer);
-    }, []);
+        // Respect prefers-reduced-motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) {
+            setFilledBlocks(totalBlocks);
+            setLoading(false);
+            return;
+        }
+
+        if (filledBlocks < totalBlocks) {
+            const timer = setTimeout(() => {
+                setFilledBlocks(prev => prev + 1);
+            }, 100);
+            return () => clearTimeout(timer);
+        } else {
+            const timer = setTimeout(() => setLoading(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [filledBlocks]);
 
     return (
         <AnimatePresence>
@@ -15,58 +33,37 @@ export default function PageLoader() {
                 <motion.div
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="fixed inset-0 z-[9999] bg-cyber-50 dark:bg-cyber-950 flex items-center justify-center"
+                    transition={{ duration: 0.4 }}
+                    className="fixed inset-0 z-[9999] bg-cyber-50 dark:bg-cyber-950 flex items-center justify-center font-mono"
+                    style={{ fontFamily: "'Press Start 2P', system-ui" }}
                 >
-                    {/* Subtle background glow */}
-                    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyber-500/10 rounded-full blur-3xl"></div>
-                        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-cyber-500/8 rounded-full blur-3xl"></div>
-                        <div className="absolute bottom-1/3 left-1/3 w-72 h-72 bg-cyber-accent/8 rounded-full blur-3xl"></div>
-                    </div>
-
-                    <div className="text-center relative z-10">
-                        {/* Animated Logo */}
-                        <motion.div
-                            initial={{ scale: 0.5, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.5 }}
-                            className="mb-8"
-                        >
-                            <span className="text-7xl font-black text-cyber-accent font-mono drop-shadow-2xl">M</span>
-                        </motion.div>
-
-                        {/* Loading Dots - neon colors */}
-                        <div className="flex justify-center gap-3">
-                            {[
-                                'bg-cyber-500 shadow-[0_0_10px_rgba(139,92,246,0.6)]',
-                                'bg-cyber-500 shadow-[0_0_10px_rgba(217,70,239,0.6)]',
-                                'bg-cyber-accent shadow-[0_0_10px_rgba(34,211,238,0.6)]',
-                            ].map((color, i) => (
-                                <motion.div
+                    <Head>
+                        <style>{`
+                            @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+                        `}</style>
+                    </Head>
+                    
+                    <div className="flex flex-col items-center justify-center gap-4">
+                        <span className="text-[48px] md:text-[64px] text-cyber-accent">
+                            M
+                        </span>
+                        
+                        <p className="text-[12px] text-cyber-accent uppercase tracking-widest">
+                            Chargement...
+                        </p>
+                        
+                        {/* Terminal loading bar */}
+                        <div className="w-[240px] h-[20px] border-2 border-cyber-accent rounded-none p-[2px] flex gap-[2px]">
+                            {Array.from({ length: totalBlocks }).map((_, i) => (
+                                <div 
                                     key={i}
-                                    className={`w-3 h-3 rounded-full ${color}`}
-                                    animate={{
-                                        y: [0, -15, 0],
-                                    }}
-                                    transition={{
-                                        duration: 0.6,
-                                        repeat: Infinity,
-                                        delay: i * 0.15,
+                                    className="w-[8px] h-full bg-green-600 dark:bg-green-500 transition-opacity duration-75"
+                                    style={{
+                                        opacity: i < filledBlocks ? 1 : 0
                                     }}
                                 />
                             ))}
                         </div>
-
-                        {/* Loading Text */}
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="mt-6 text-cyber-500 text-sm tracking-widest uppercase"
-                        >
-                            Chargement...
-                        </motion.p>
                     </div>
                 </motion.div>
             )}

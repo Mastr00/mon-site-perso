@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import { Download, Briefcase, GraduationCap, Wrench, Languages, Car, Heart, Zap, Github, Linkedin, Mail, Phone, MapPin, Globe, CheckCircle2, Server, Lightbulb, Code2 } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
@@ -111,12 +112,26 @@ export default function CE() {
 
                     {/* Header */}
                     <div className="bg-cyber-100 dark:bg-cyber-800/50 border-b border-cyber-200 dark:border-cyber-800 p-8 text-cyber-950 dark:text-cyber-100 grid grid-cols-1 md:grid-cols-2 gap-8 print:bg-none print:text-black">
-                        <div>
-                            <h1 className="text-4xl font-bold font-mono tracking-tight mb-1 text-cyber-accent">Mehdi Mamdouh</h1>
-                            <h2 className="text-lg font-bold text-cyber-950 dark:text-cyber-100 mb-4">Étudiant en Licence Électronique</h2>
-                            <p className="text-cyber-600 dark:text-cyber-300 text-[13px] leading-relaxed mb-4 text-justify">
-                                Étudiant en L2 Électronique à l'Université Côte d'Azur, passionné par les systèmes embarqués, l'IoT et le développement web. 3 ans d'expérience au FabLab UniCA en tant que Manager/Superviseur : fabrication numérique (CNC, impression 3D, découpe laser), formation des utilisateurs et maintenance des équipements. Projets personnels en robotique, vision par ordinateur et capteurs connectés.
-                            </p>
+                        <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                            <div className="flex-shrink-0">
+                                <Image
+                                    src="/images/profile.jpg"
+                                    alt="Mehdi Mamdouh"
+                                    width={120}
+                                    height={120}
+                                    priority
+                                    className="rounded-full border-[3px] border-cyber-accent w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover"
+                                    draggable="false"
+                                    onContextMenu={(e) => e.preventDefault()}
+                                />
+                            </div>
+                            <div className="text-center md:text-left">
+                                <h1 className="text-4xl font-bold font-mono tracking-tight mb-1 text-cyber-accent">Mehdi Mamdouh</h1>
+                                <h2 className="text-lg font-bold text-cyber-950 dark:text-cyber-100 mb-4">Étudiant en Licence Électronique</h2>
+                                <p className="text-cyber-600 dark:text-cyber-300 text-[13px] leading-relaxed mb-4 text-justify">
+                                    Étudiant en L2 Électronique à l'Université Côte d'Azur, passionné par les systèmes embarqués, l'IoT et le développement web. 3 ans d'expérience au FabLab UniCA en tant que Manager/Superviseur : fabrication numérique (CNC, impression 3D, découpe laser), formation des utilisateurs et maintenance des équipements. Projets personnels en robotique, vision par ordinateur et capteurs connectés.
+                                </p>
+                            </div>
                         </div>
 
                         <div className="flex flex-col justify-center gap-3 text-sm text-cyber-700 dark:text-cyber-300 font-mono">
