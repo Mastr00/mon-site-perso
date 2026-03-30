@@ -62,12 +62,12 @@ export default function Portfolio() {
         <meta property="og:description" content="Découvrez mes projets en électronique, IoT et développement web." />
       </Head>
 
-      <div className="min-h-screen bg-slate-50 dark:bg-[#020617] py-16 px-6 relative overflow-hidden bg-grid">
+      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 py-16 px-6 relative overflow-hidden bg-grid">
         {/* Neon glow blobs */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neon-violet/15 rounded-full blur-3xl animate-blob"></div>
-          <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-neon-magenta/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-cyber-500/15 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-cyber-500/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-cyber-accent/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -77,10 +77,10 @@ export default function Portfolio() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl md:text-6xl font-extrabold neon-text mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-cyber-accent font-mono mb-6 tracking-tight">
               {t.portfolio.title}
             </h1>
-            <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-lg md:text-xl text-cyber-500 dark:text-cyber-400 max-w-2xl mx-auto leading-relaxed mb-8">
               {t.portfolio.subtitle}
             </p>
 
@@ -91,8 +91,8 @@ export default function Portfolio() {
                   key={cat}
                   onClick={() => setFilter(cat)}
                   className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border backdrop-blur-md ${filter === cat
-                    ? "bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white border-transparent shadow-neon scale-105"
-                    : "bg-white dark:bg-[#0F172A]/50 text-slate-500 dark:text-slate-400 border-neon-violet/20 hover:border-neon-violet/50 hover:text-neon-violet"
+                    ? "bg-gradient-to-r from-cyber-500 to-cyber-500 text-cyber-950 dark:text-cyber-100 border-transparent shadow-[0_0_15px_rgba(56,189,248,0.2)] scale-105"
+                    : "bg-cyber-50 dark:bg-cyber-900/50 text-cyber-500 dark:text-cyber-400 border-cyber-500/20 hover:border-cyber-500/50 hover:text-cyber-500"
                     }`}
                 >
                   {cat === "All" ? t.portfolio.filterAll : cat}
@@ -114,11 +114,11 @@ export default function Portfolio() {
                     scale={1.02}
                     className="h-full"
                   >
-                  <article className="group flex flex-col bg-white dark:bg-[#0F172A] border border-neon-violet/15 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(139,92,246,0.4),0_0_80px_rgba(217,70,239,0.15)] hover:border-neon-violet/50 h-full relative">
+                  <article className="group flex flex-col bg-cyber-50 dark:bg-cyber-900 border border-cyber-500/15 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(139,92,246,0.4),0_0_80px_rgba(217,70,239,0.15)] hover:border-cyber-500/50 h-full relative">
 
                     {/* Image Section */}
-                    <div className="relative h-60 w-full overflow-hidden bg-slate-100 dark:bg-[#1E293B]">
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+                    <div className="relative h-60 w-full overflow-hidden bg-cyber-100 dark:bg-cyber-800">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-[#1E293B]/40 to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
                       <Image
                         src={p.image}
                         alt={p.title}
@@ -130,14 +130,14 @@ export default function Portfolio() {
                         }}
                       />
                       {/* Fallback */}
-                      <div className="hidden absolute inset-0 items-center justify-center flex-col gap-2 bg-gradient-to-br from-[#1E293B] to-[#0F172A]">
+                      <div className="hidden absolute inset-0 items-center justify-center flex-col gap-2 bg-gradient-to-br from-[#334155] to-[#1E293B]">
                         <span className="text-4xl">🖼️</span>
-                        <span className="text-slate-500 text-sm font-medium">Image non disponible</span>
+                        <span className="text-cyber-500 text-sm font-medium">Image non disponible</span>
                       </div>
 
                       {/* Hover overlay */}
-                      <div className="absolute inset-0 z-20 bg-gradient-to-t from-neon-violet/60 via-neon-magenta/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
-                        <span className="text-slate-900 dark:text-white font-bold text-sm px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-2">
+                      <div className="absolute inset-0 z-20 bg-gradient-to-t from-cyber-500/60 via-cyber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
+                        <span className="text-cyber-950 dark:text-cyber-100 font-bold text-sm px-4 py-2 bg-cyber-50/10 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-2">
                           <Eye size={16} /> {t.portfolio.viewProject}
                         </span>
                       </div>
@@ -145,11 +145,11 @@ export default function Portfolio() {
 
                     <div className="p-6 flex flex-col flex-grow relative">
                       {/* Title without emoji */}
-                      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-neon-cyan transition-colors">
+                      <h2 className="text-xl font-bold text-cyber-950 dark:text-cyber-100 mb-2 group-hover:text-cyber-accent transition-colors">
                         {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
                       </h2>
 
-                      <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
+                      <p className="text-cyber-500 dark:text-cyber-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
                         {typeof p.desc === 'string' ? p.desc : p.desc[locale]}
                       </p>
 
@@ -158,9 +158,9 @@ export default function Portfolio() {
                         {p.tags.map((tag, i) => {
                           const Icon = getTagIcon(tag);
                           const colorClasses = [
-                            'bg-neon-violet/15 text-neon-violet border-neon-violet/25',
-                            'bg-neon-cyan/15 text-neon-cyan border-neon-cyan/25',
-                            'bg-neon-magenta/15 text-neon-magenta border-neon-magenta/25',
+                            'bg-cyber-500/15 text-cyber-500 border-cyber-500/25',
+                            'bg-cyber-accent/15 text-cyber-accent border-cyber-accent/25',
+                            'bg-cyber-500/15 text-cyber-500 border-cyber-500/25',
                           ];
                           return (
                             <span key={tag} className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg border ${colorClasses[i % 3]}`}>
@@ -172,10 +172,10 @@ export default function Portfolio() {
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-3 items-center pt-4 border-t border-neon-violet/10">
+                      <div className="flex gap-3 items-center pt-4 border-t border-cyber-500/10">
                         <Link
                           href={`/projects/${p.id}`}
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white rounded-xl font-medium shadow-neon hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:scale-[1.02] transition-all active:scale-95 text-sm"
+                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyber-500 to-cyber-500 text-cyber-950 dark:text-cyber-100 rounded-xl font-medium shadow-[0_0_15px_rgba(56,189,248,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:scale-[1.02] transition-all active:scale-95 text-sm"
                         >
                           <ExternalLink size={16} />
                           {t.portfolio.viewProject}
@@ -186,7 +186,7 @@ export default function Portfolio() {
                             href={p.repo}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-2.5 text-slate-500 hover:text-neon-cyan hover:bg-neon-cyan/10 rounded-xl transition-all border border-transparent hover:border-neon-cyan/20"
+                            className="p-2.5 text-cyber-500 hover:text-cyber-accent hover:bg-cyber-accent/10 rounded-xl transition-all border border-transparent hover:border-cyber-accent/20"
                             aria-label="Code Source"
                             title={t.portfolio.sourceCode}
                           >

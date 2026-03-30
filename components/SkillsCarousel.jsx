@@ -11,7 +11,7 @@ export default function SkillsCarousel() {
   
   return (
     <div className="w-full mt-24 overflow-hidden relative z-10 flex flex-col items-center">
-      <p className="text-slate-500 uppercase tracking-widest text-sm font-bold mb-8">
+      <p className="text-cyber-500 uppercase tracking-widest text-sm font-bold mb-8">
         Technologies & Outils
       </p>
       
@@ -21,13 +21,12 @@ export default function SkillsCarousel() {
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 25, repeat: Infinity }}
         >
-          {/* Duplicate arrays to make infinite loop smooth (-50% translation) */}
-          {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
+          {[...skills, ...skills].map((skill, index) => (
             <div 
               key={index}
-              className="px-6 py-3 mx-3 bg-white dark:bg-[#0F172A]/80 backdrop-blur-md border border-slate-700/50 rounded-xl text-slate-700 dark:text-slate-300 font-medium flex items-center gap-2 hover:border-cyan-400/50 hover:text-cyan-300 transition-colors shadow-sm"
+              className="px-[14px] py-[6px] mx-2 bg-cyber-100 dark:bg-cyber-900 border border-transparent rounded-[6px] text-cyber-cta-dark dark:text-cyber-accent font-mono font-medium text-[0.875rem] flex items-center gap-2 hover:border-cyber-accent transition-colors"
             >
-              <span className="text-neon-violet/70">✦</span> {skill}
+              <span className="text-cyber-accent">●</span> {skill}
             </div>
           ))}
         </motion.div>

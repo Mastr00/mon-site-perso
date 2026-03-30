@@ -40,58 +40,38 @@ export default function Home() {
         <meta name="description" content="Portfolio of Mehdi, student in electronics and cybersecurity." />
       </Head>
 
-      <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-slate-50 dark:bg-[#020617] overflow-hidden relative">
+      <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-cyber-50 dark:bg-cyber-950 overflow-hidden relative">
 
         {/* Animated circuit background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {/* Neon glow blobs */}
-          <div className="absolute top-[10%] left-[10%] w-96 h-96 bg-neon-violet/20 rounded-full blur-3xl animate-blob"></div>
-          <div className="absolute top-[20%] right-[5%] w-96 h-96 bg-neon-magenta/15 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-[10%] left-[40%] w-96 h-96 bg-neon-cyan/15 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-
-          {/* Circuit lines SVG overlay */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="circuit" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-                <path d="M0 100 H80 M120 100 H200" stroke="#8B5CF6" strokeWidth="1" fill="none" />
-                <path d="M100 0 V80 M100 120 V200" stroke="#22D3EE" strokeWidth="1" fill="none" />
-                <circle cx="100" cy="100" r="4" fill="#8B5CF6" />
-                <circle cx="0" cy="100" r="2" fill="#22D3EE" />
-                <circle cx="200" cy="100" r="2" fill="#22D3EE" />
-                <circle cx="100" cy="0" r="2" fill="#D946EF" />
-                <circle cx="100" cy="200" r="2" fill="#D946EF" />
-                <path d="M80 100 L100 80 L120 100 L100 120 Z" stroke="#D946EF" strokeWidth="0.5" fill="none" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#circuit)" />
-          </svg>
+          {/* Removed SVGs and Neon blobs for cleaner look */}
 
           {/* Floating code snippets */}
           <motion.div
-            className="absolute top-[15%] left-[8%] text-neon-cyan/10 font-mono text-sm hidden lg:block"
-            animate={{ y: [0, -15, 0], opacity: [0.08, 0.15, 0.08] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[15%] left-[8%] text-cyber-400 dark:text-cyber-500 font-mono text-sm hidden lg:block opacity-5 dark:opacity-8 blur-[1px]"
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           >
             {'{ IoT: true }'}
           </motion.div>
           <motion.div
-            className="absolute top-[25%] right-[12%] text-neon-violet/10 font-mono text-sm hidden lg:block"
-            animate={{ y: [0, 12, 0], opacity: [0.08, 0.15, 0.08] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute top-[25%] right-[12%] text-cyber-400 dark:text-cyber-500 font-mono text-sm hidden lg:block opacity-5 dark:opacity-8 blur-[1px]"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           >
             {'#include <esp32.h>'}
           </motion.div>
           <motion.div
-            className="absolute bottom-[25%] left-[15%] text-neon-magenta/10 font-mono text-sm hidden lg:block"
-            animate={{ y: [0, -10, 0], opacity: [0.05, 0.12, 0.05] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[25%] left-[15%] text-cyber-400 dark:text-cyber-500 font-mono text-sm hidden lg:block opacity-5 dark:opacity-8 blur-[1px]"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           >
             {'sudo nmap -sV'}
           </motion.div>
           <motion.div
-            className="absolute bottom-[30%] right-[8%] text-neon-cyan/10 font-mono text-sm hidden lg:block"
-            animate={{ y: [0, 10, 0], opacity: [0.06, 0.14, 0.06] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+            className="absolute bottom-[30%] right-[8%] text-cyber-400 dark:text-cyber-500 font-mono text-sm hidden lg:block opacity-5 dark:opacity-8 blur-[1px]"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 3 }}
           >
             {'0x4F 0x6B'}
           </motion.div>
@@ -103,24 +83,24 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="hero-title text-slate-900 dark:text-white mb-4">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl text-cyber-950 dark:text-cyber-100 mb-4 font-mono font-semibold tracking-tight">
               {t.home.heroTitle}{' '}
-              <span className="highlight">
+              <span className="text-cyber-accent">
                 {displayed}
-                {!done && <span className="animate-pulse text-neon-cyan">|</span>}
+                {!done && <span className="animate-pulse text-cyber-accent">|</span>}
               </span>
             </h1>
           </motion.div>
 
           <motion.p
-            className="hero-subtitle max-w-2xl mx-auto"
+            className="hero-subtitle max-w-2xl mx-auto text-cyber-700 dark:text-cyber-400 font-sans"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
           >
-            {t.home.studentIn} <span className="keyword-electronique">{t.home.role1}</span> & <span className="keyword-cyber">{t.home.role2}</span>.
+            {t.home.studentIn} <span className="text-cyber-500 dark:text-cyber-200">{t.home.role1}</span> & <span className="text-cyber-500 dark:text-cyber-200">{t.home.role2}</span>.
             <br className="hidden md:block" />
-            {t.home.passion} <span className="keyword-electronique">{t.home.iot}</span>, {t.home.embedded} {locale === 'fr' ? 'et' : 'and'} <span className="keyword-cyber">{t.home.modernWeb}</span>.
+            {t.home.passion} <span className="text-cyber-500 dark:text-cyber-200">{t.home.iot}</span>, {t.home.embedded} {locale === 'fr' ? 'et' : 'and'} <span className="text-cyber-500 dark:text-cyber-200">{t.home.modernWeb}</span>.
           </motion.p>
 
           <motion.div
@@ -131,14 +111,14 @@ export default function Home() {
           >
             <Link
               href="/portfolio"
-              className="btn-primary animate-pulse-glow flex items-center justify-center gap-2"
+              className="bg-cyber-cta text-cyber-100 rounded-lg px-6 py-3 hover:bg-cyber-accent hover:scale-[1.02] transition-all duration-200 flex items-center justify-center gap-2 font-semibold font-sans"
             >
               <Zap size={20} />
               {t.home.heroBtn}
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-4 rounded-xl font-semibold border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+              className="border-[1.5px] border-cyber-accent text-cyber-accent bg-transparent hover:bg-cyber-accent hover:text-cyber-950 rounded-lg px-6 py-3 transition-all duration-200 flex items-center justify-center gap-2 font-semibold font-sans"
             >
               <Mail size={20} />
               {t.home.contactBtn}
@@ -155,7 +135,7 @@ export default function Home() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown size={28} className="text-neon-violet/50" />
+          <ChevronDown size={28} className="text-cyber-500/50" />
         </motion.div>
 
       </section>

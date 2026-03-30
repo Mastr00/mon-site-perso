@@ -25,21 +25,21 @@ function DashboardPage() {
         <meta name="description" content="Mon tableau de bord personnel" />
       </Head>
 
-      <div className="min-h-screen bg-slate-50 dark:bg-[#020617] dark:bg-[#020617] p-4 md:p-8">
+      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 dark:bg-cyber-950 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
 
           {/* Header / Welcome */}
           <motion.div
-            className="flex flex-col md:flex-row items-center justify-between mb-8 bg-white dark:bg-[#0F172A] border border-neon-violet/20 p-6 rounded-2xl shadow-neon"
+            className="flex flex-col md:flex-row items-center justify-between mb-8 bg-cyber-50 dark:bg-cyber-900 border border-cyber-500/20 p-6 rounded-2xl shadow-[0_0_15px_rgba(56,189,248,0.2)]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-                Bonjour, <span className="neon-text">{user ? user.name : "Mehdi"}</span> 👋
+              <h1 className="text-3xl font-bold text-cyber-950 dark:text-cyber-100">
+                Bonjour, <span className="text-cyber-accent font-mono">{user ? user.name : "Mehdi"}</span> 👋
               </h1>
-              <p className="text-slate-500 dark:text-slate-400 mt-1">Voici ton tableau de bord personnel.</p>
+              <p className="text-cyber-500 dark:text-cyber-400 mt-1">Voici ton tableau de bord personnel.</p>
             </div>
             {user && user.picture && (
               <Image
@@ -47,7 +47,7 @@ function DashboardPage() {
                 alt="Profile"
                 width={64}
                 height={64}
-                className="rounded-full border-4 border-neon-violet/30 shadow-neon"
+                className="rounded-full border-4 border-cyber-500/30 shadow-[0_0_15px_rgba(56,189,248,0.2)]"
               />
             )}
           </motion.div>

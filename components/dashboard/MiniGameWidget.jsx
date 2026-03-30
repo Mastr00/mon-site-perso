@@ -44,7 +44,7 @@ export default function MiniGameWidget() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-2xl p-6 text-slate-900 dark:text-white h-full flex flex-col">
+        <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-2xl p-6 text-cyber-950 dark:text-cyber-100 h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2">
                     <Gamepad2 size={20} /> Click Game
@@ -67,7 +67,7 @@ export default function MiniGameWidget() {
                     )}
                     <button
                         onClick={startGame}
-                        className="px-6 py-3 bg-white text-pink-600 font-bold rounded-xl hover:scale-105 transition-transform flex items-center gap-2"
+                        className="px-6 py-3 bg-cyber-50 text-pink-600 font-bold rounded-xl hover:scale-105 transition-transform flex items-center gap-2"
                     >
                         {timeLeft === 0 ? <RotateCcw size={18} /> : null}
                         {timeLeft === 0 ? "Rejouer" : "Jouer !"}
@@ -75,7 +75,7 @@ export default function MiniGameWidget() {
                     <p className="text-xs mt-3 opacity-80">Clique sur la cible le plus vite possible !</p>
                 </div>
             ) : (
-                <div className="flex-grow relative bg-white/20 rounded-xl overflow-hidden">
+                <div className="flex-grow relative bg-cyber-50/20 rounded-xl overflow-hidden">
                     {/* Timer & Score */}
                     <div className="absolute top-2 left-2 right-2 flex justify-between text-sm font-bold">
                         <span>⏱️ {timeLeft}s</span>

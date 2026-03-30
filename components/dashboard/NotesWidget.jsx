@@ -29,7 +29,7 @@ export default function NotesWidget() {
     return (
         <motion.div
             whileHover={{ y: -5 }}
-            className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 md:col-span-2 flex flex-col h-full bg-gradient-to-bl from-white to-orange-50/30 dark:from-gray-800 dark:to-gray-900/50"
+            className="p-6 bg-cyber-50 dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 md:col-span-2 flex flex-col h-full bg-gradient-to-bl from-white to-orange-50/30 dark:from-gray-800 dark:to-gray-900/50"
         >
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
@@ -47,12 +47,12 @@ export default function NotesWidget() {
                         value={noteInput}
                         onChange={(e) => setNoteInput(e.target.value)}
                         onKeyDown={(e) => { if (e.key === 'Enter') addNote(); }}
-                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all dark:text-white"
+                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all dark:text-cyber-100"
                         placeholder="Nouvelle idée..."
                     />
                     <button
                         onClick={addNote}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-yellow-500 hover:bg-yellow-600 text-slate-900 dark:text-white rounded-lg transition-colors"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-yellow-500 hover:bg-yellow-600 text-cyber-950 dark:text-cyber-100 rounded-lg transition-colors"
                     >
                         <Plus size={16} />
                     </button>

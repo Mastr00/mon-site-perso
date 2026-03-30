@@ -7,18 +7,26 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        mono: ['"JetBrains Mono"', 'monospace'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
-        neon: {
-          violet: '#8B5CF6',
-          magenta: '#D946EF',
-          cyan: '#22D3EE',
-          pink: '#F472B6',
+        cyber: {
+          950: '#0F172A',
+          900: '#1E293B',
+          800: '#334155',
+          700: '#475569',
+          500: '#64748B',
+          400: '#94A3B8',
+          200: '#E2E8F0',
+          100: '#F1F5F9',
+          50: '#F8FAFC',
+          accent: '#38BDF8',
+          'accent-hover': '#22D3EE',
+          cta: '#0EA5E9',
+          'cta-dark': '#0284C7',
         },
-        dark: {
-          DEFAULT: '#020617',
-          card: '#0F172A',
-          elevated: '#1E293B',
-        }
       },
       boxShadow: {
         'neon': '0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(217, 70, 239, 0.2)',

@@ -54,13 +54,13 @@ export default function MoodWidget() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-slate-900 dark:text-white h-full flex flex-col">
+        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-cyber-950 dark:text-cyber-100 h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2">
                     <Smile size={20} /> Comment tu te sens ?
                 </h3>
                 {streak > 1 && (
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">
+                    <span className="text-xs bg-cyber-50/20 px-2 py-1 rounded-full">
                         🔥 {streak} jours
                     </span>
                 )}
@@ -84,7 +84,7 @@ export default function MoodWidget() {
                             <button
                                 key={mood.label}
                                 onClick={() => selectMood(mood.label)}
-                                className="flex flex-col items-center p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all hover:scale-105"
+                                className="flex flex-col items-center p-3 bg-cyber-50/10 rounded-xl hover:bg-cyber-50/20 transition-all hover:scale-105"
                             >
                                 <span className="text-2xl mb-1">{mood.emoji}</span>
                                 <span className="text-xs">{mood.label}</span>

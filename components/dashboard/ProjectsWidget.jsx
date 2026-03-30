@@ -31,14 +31,14 @@ export default function ProjectsWidget() {
     };
 
     return (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm h-full flex flex-col border border-gray-100 dark:border-gray-700 relative overflow-hidden group">
+        <div className="bg-cyber-50 dark:bg-gray-800 p-6 rounded-2xl shadow-sm h-full flex flex-col border border-gray-100 dark:border-gray-700 relative overflow-hidden group">
             {/* Decorative background element */}
             <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Package size={100} />
             </div>
 
             <div className="flex justify-between items-center mb-6 relative z-10">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-cyber-100 flex items-center gap-2">
                     <span className="p-2 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg text-indigo-600 dark:text-indigo-400">
                         🚀
                     </span>
@@ -91,7 +91,7 @@ export default function ProjectsWidget() {
 
                         <button
                             type="submit"
-                            className="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-slate-900 dark:text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all transform active:scale-95"
+                            className="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-cyber-950 dark:text-cyber-100 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all transform active:scale-95"
                         >
                             Ajouter (Simulé)
                         </button>

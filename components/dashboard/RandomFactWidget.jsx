@@ -36,14 +36,14 @@ export default function RandomFactWidget() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-slate-900 dark:text-white h-full flex flex-col">
+        <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-cyber-950 dark:text-cyber-100 h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2">
                     <Lightbulb size={20} /> Le savais-tu ?
                 </h3>
                 <button
                     onClick={getNewFact}
-                    className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                    className="p-2 bg-cyber-50/20 rounded-full hover:bg-cyber-50/30 transition-colors"
                     disabled={isSpinning}
                 >
                     <RefreshCw size={16} className={isSpinning ? "animate-spin" : ""} />
