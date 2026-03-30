@@ -31,6 +31,13 @@ export const en = {
         viewProject: "View Project",
         sourceCode: "Source Code",
         madeWith: "Made with:",
+        idea: "The Core Idea",
+        challenges: "The Challenges",
+        solution: "Our Solution",
+        hardware: "Hardware & Technologies",
+        back: "Back to Portfolio",
+        notFound: "Project not found",
+        demo: "Presentation / Demo",
     },
     // Contact
     contact: {

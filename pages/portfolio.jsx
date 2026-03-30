@@ -41,7 +41,7 @@ function AnimatedCard({ children, index }) {
 }
 
 export default function Portfolio() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const [filter, setFilter] = useState("All");
 
   const categories = ["All", "Web", "IoT", "Embedded"];
@@ -146,11 +146,11 @@ export default function Portfolio() {
                     <div className="p-6 flex flex-col flex-grow relative">
                       {/* Title without emoji */}
                       <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-neon-cyan transition-colors">
-                        {p.title.replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
+                        {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
                       </h2>
 
                       <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
-                        {p.desc}
+                        {typeof p.desc === 'string' ? p.desc : p.desc[locale]}
                       </p>
 
                       {/* Technologies with icons */}

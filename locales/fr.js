@@ -31,6 +31,13 @@ export const fr = {
         viewProject: "Voir le projet",
         sourceCode: "Code Source",
         madeWith: "Réalisé avec :",
+        idea: "L'Idée générale",
+        challenges: "Les Défis",
+        solution: "Notre Solution",
+        hardware: "Matériel & Technologies",
+        back: "Retour au Portfolio",
+        notFound: "Projet non trouvé",
+        demo: "Présentation / Démo",
     },
     // Contact
     contact: {

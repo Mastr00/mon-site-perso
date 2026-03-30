@@ -23,7 +23,7 @@ function DashboardPage() {
         <meta name="description" content="Mon tableau de bord personnel" />
       </Head>
 
-      <div className="min-h-screen bg-slate-50 dark:bg-[#020617] dark:bg-slate-50 dark:bg-[#020617] p-4 md:p-8">
+      <div className="min-h-screen bg-slate-50 dark:bg-[#020617] dark:bg-[#020617] p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
 
           {/* Header / Welcome */}

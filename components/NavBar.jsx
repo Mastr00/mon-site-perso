@@ -13,13 +13,13 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const linkStyle =
-    "text-slate-700 dark:text-slate-300 dark:text-slate-700 dark:text-slate-300 hover:text-neon-cyan transition-colors duration-300 relative group";
+    "text-slate-700 dark:text-slate-300 dark:text-slate-300 hover:text-neon-cyan transition-colors duration-300 relative group";
 
   const linkStyleLight =
     "text-slate-600 hover:text-neon-violet transition-colors duration-300 relative group";
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-50 dark:bg-[#020617]/80 dark:bg-slate-50 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-neon-violet/20 dark:border-neon-violet/20 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-slate-50 dark:bg-[#020617]/80 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-neon-violet/20 dark:border-neon-violet/20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -79,7 +79,7 @@ export default function NavBar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-white dark:bg-[#0F172A] dark:bg-white dark:bg-[#0F172A] border-b border-neon-violet/20 overflow-hidden"
+            className="md:hidden bg-white dark:bg-[#0F172A] dark:bg-[#0F172A] border-b border-neon-violet/20 overflow-hidden"
           >
             <div className="flex flex-col items-start p-4 space-y-3">
               <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.home}</Link>

@@ -38,7 +38,7 @@ export default function ProjectsWidget() {
             </div>
 
             <div className="flex justify-between items-center mb-6 relative z-10">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-slate-900 dark:text-white flex items-center gap-2">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
                     <span className="p-2 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg text-indigo-600 dark:text-indigo-400">
                         🚀
                     </span>
