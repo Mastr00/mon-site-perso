@@ -9,9 +9,11 @@ import QuoteWidget from "../components/dashboard/QuoteWidget";
 import TasksWidget from "../components/dashboard/TasksWidget";
 import NotesWidget from "../components/dashboard/NotesWidget";
 import ProjectsWidget from "../components/dashboard/ProjectsWidget";
-import MiniGameWidget from "../components/dashboard/MiniGameWidget";
-import RandomFactWidget from "../components/dashboard/RandomFactWidget";
 import MoodWidget from "../components/dashboard/MoodWidget";
+import JokeWidget from "../components/dashboard/JokeWidget";
+import CryptoWidget from "../components/dashboard/CryptoWidget";
+import LofiWidget from "../components/dashboard/LofiWidget";
+import PetWidget from "../components/dashboard/PetWidget";
 
 function DashboardPage() {
   const { user } = useUser();
@@ -80,33 +82,43 @@ function DashboardPage() {
               <GithubWidget />
             </motion.div>
 
-            {/* Random Fact - 1 col */}
+            {/* Pet Widget - 1 col */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <RandomFactWidget />
+              <PetWidget />
             </motion.div>
 
-            {/* Quote - 2 cols */}
+            {/* Crypto - 2 cols */}
             <motion.div
-              className="md:col-span-2"
+              className="md:col-span-2 lg:col-span-2"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.25 }}
             >
-              <QuoteWidget />
+              <CryptoWidget />
             </motion.div>
 
-            {/* Mini Game - 2 cols */}
+            {/* Lofi Radio - 2 cols */}
             <motion.div
-              className="md:col-span-2"
+              className="md:col-span-2 lg:col-span-2"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
             >
-              <MiniGameWidget />
+              <LofiWidget />
+            </motion.div>
+
+            {/* Jokes - 2 cols */}
+            <motion.div
+              className="md:col-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.35 }}
+            >
+              <JokeWidget />
             </motion.div>
 
             {/* Tasks - 2 cols */}
