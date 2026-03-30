@@ -42,7 +42,7 @@ export const en = {
     // Contact
     contact: {
         title: "Let's discuss your project",
-        subtitle: "Have an idea in mind, a question about my skills, or just want to say hi? Fill out the form and I'll get back to you quickly.",
+        subtitle: "Open to professional opportunities and technical collaborations. Please feel free to reach out via the form below to discuss your needs.",
         nameLabel: "Full Name",
         namePlaceholder: "Your name",
         nameRequired: "Name is required.",
