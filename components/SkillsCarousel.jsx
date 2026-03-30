@@ -24,7 +24,7 @@ export default function SkillsCarousel() {
           {[...skills, ...skills].map((skill, index) => (
             <div 
               key={index}
-              className="px-[14px] py-[6px] mx-2 bg-cyber-100 dark:bg-cyber-900 border border-transparent rounded-[6px] text-cyber-cta-dark dark:text-cyber-accent font-mono font-medium text-[0.875rem] flex items-center gap-2 hover:border-cyber-accent transition-colors"
+              className="px-[14px] py-[6px] mx-2 bg-cyber-100 dark:bg-cyber-900 border border-transparent rounded-[3px] text-cyber-cta-dark dark:text-cyber-accent font-mono font-medium text-[0.875rem] flex items-center gap-2 hover:border-cyber-accent transition-colors"
             >
               <span className="text-cyber-accent">●</span> {skill}
             </div>

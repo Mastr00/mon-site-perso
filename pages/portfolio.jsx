@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Tilt from "react-parallax-tilt";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { projects as staticProjects } from '../lib/projectsData';
 import { useLanguage } from '../context/LanguageContext';
@@ -34,9 +34,106 @@ function AnimatedCard({ children, index }) {
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
+      className="h-full"
     >
       {children}
     </motion.div>
+  );
+}
+
+function ProjectCard({ p, index, t, locale }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <AnimatedCard index={index}>
+      <Tilt 
+        tiltMaxAngleX={8} 
+        tiltMaxAngleY={8} 
+        perspective={1000} 
+        transitionSpeed={1000} 
+        className="h-full block"
+      >
+        <article className="group flex flex-col bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-800 rounded-sm overflow-hidden project-card h-full relative cursor-pointer">
+
+          {/* Image Section */}
+          <div className="relative h-60 w-full overflow-hidden bg-cyber-100 dark:bg-cyber-800 rounded-t-sm">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-[#1E293B]/40 to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+            
+            {!imgError ? (
+              <Image
+                src={p.image}
+                alt={typeof p.title === 'string' ? p.title : p.title[locale]}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 bg-gradient-to-br from-[#334155] to-[#1E293B] z-0">
+                <span className="text-4xl">🖼️</span>
+                <span className="text-cyber-400 text-sm font-medium">Image non disponible</span>
+              </div>
+            )}
+
+            {/* Hover overlay */}
+            <div className="absolute inset-0 z-20 bg-gradient-to-t from-cyber-500/60 via-cyber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
+              <span className="text-cyber-950 dark:text-cyber-100 font-bold text-sm px-4 py-2 bg-cyber-50/10 backdrop-blur-md rounded-sm border border-white/20 flex items-center gap-2">
+                <Eye size={16} /> {t.portfolio.viewProject}
+              </span>
+            </div>
+          </div>
+
+          <div className="p-6 flex flex-col flex-grow relative">
+            <h2 className="text-xl font-bold text-cyber-950 dark:text-cyber-100 mb-2 group-hover:text-cyber-accent transition-colors">
+              {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
+            </h2>
+
+            <p className="text-cyber-500 dark:text-cyber-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
+              {typeof p.desc === 'string' ? p.desc : p.desc[locale]}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-5">
+              {p.tags.map((tag, i) => {
+                const Icon = getTagIcon(tag);
+                const colorClasses = [
+                  'bg-cyber-200 dark:bg-cyber-800 text-cyber-500 border-transparent',
+                  'bg-cyber-accent/15 text-cyber-accent border-transparent',
+                  'bg-cyber-200 dark:bg-cyber-800 text-cyber-500 border-transparent',
+                ];
+                return (
+                  <span key={tag} className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-[3px] border ${colorClasses[i % 3]}`}>
+                    <Icon size={12} />
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+
+            <div className="flex gap-3 items-center pt-4 border-t border-cyber-200 dark:border-cyber-800">
+              <Link
+                href={`/projects/${p.id}`}
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-cyber-cta text-white rounded-sm font-medium hover:bg-cyber-accent transition-colors text-sm"
+              >
+                <ExternalLink size={16} />
+                {t.portfolio.viewProject}
+              </Link>
+
+              {p.repo && (
+                <a
+                  href={p.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 text-cyber-500 hover:text-cyber-accent hover:bg-cyber-200 dark:hover:bg-cyber-800 rounded-sm transition-colors border border-transparent hover:border-cyber-accent/20"
+                  aria-label="Code Source"
+                  title={t.portfolio.sourceCode}
+                >
+                  <Github size={20} />
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      </Tilt>
+    </AnimatedCard>
   );
 }
 
@@ -63,13 +160,6 @@ export default function Portfolio() {
       </Head>
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 py-16 px-6 relative overflow-hidden bg-grid">
-        {/* Neon glow blobs */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-cyber-500/15 rounded-full blur-3xl animate-blob"></div>
-          <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-cyber-500/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-cyber-accent/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-        </div>
-
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -90,10 +180,11 @@ export default function Portfolio() {
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border backdrop-blur-md ${filter === cat
-                    ? "bg-gradient-to-r from-cyber-500 to-cyber-500 text-cyber-950 dark:text-cyber-100 border-transparent shadow-[0_0_15px_rgba(56,189,248,0.2)] scale-105"
-                    : "bg-cyber-50 dark:bg-cyber-900/50 text-cyber-500 dark:text-cyber-400 border-cyber-500/20 hover:border-cyber-500/50 hover:text-cyber-500"
-                    }`}
+                  className={`px-[16px] py-[6px] text-sm font-bold transition-all duration-150 border rounded-[3px] ${
+                    filter === cat
+                    ? "bg-cyber-accent text-white border-transparent"
+                    : "bg-transparent text-cyber-500 dark:text-cyber-400 border-transparent hover:bg-cyber-200 dark:hover:bg-cyber-800"
+                  }`}
                 >
                   {cat === "All" ? t.portfolio.filterAll : cat}
                 </button>
@@ -101,103 +192,10 @@ export default function Portfolio() {
             </div>
           </motion.div>
 
-          {/* 2-column layout for visual impact */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((p, index) => (
-                <AnimatedCard key={p.id} index={index}>
-                  <Tilt 
-                    tiltMaxAngleX={8} 
-                    tiltMaxAngleY={8} 
-                    perspective={1000} 
-                    transitionSpeed={1000} 
-                    scale={1.02}
-                    className="h-full"
-                  >
-                  <article className="group flex flex-col bg-cyber-50 dark:bg-cyber-900 border border-cyber-500/15 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(139,92,246,0.4),0_0_80px_rgba(217,70,239,0.15)] hover:border-cyber-500/50 h-full relative">
-
-                    {/* Image Section */}
-                    <div className="relative h-60 w-full overflow-hidden bg-cyber-100 dark:bg-cyber-800">
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-[#1E293B]/40 to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
-                      <Image
-                        src={p.image}
-                        alt={p.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
-                        }}
-                      />
-                      {/* Fallback */}
-                      <div className="hidden absolute inset-0 items-center justify-center flex-col gap-2 bg-gradient-to-br from-[#334155] to-[#1E293B]">
-                        <span className="text-4xl">🖼️</span>
-                        <span className="text-cyber-500 text-sm font-medium">Image non disponible</span>
-                      </div>
-
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 z-20 bg-gradient-to-t from-cyber-500/60 via-cyber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
-                        <span className="text-cyber-950 dark:text-cyber-100 font-bold text-sm px-4 py-2 bg-cyber-50/10 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-2">
-                          <Eye size={16} /> {t.portfolio.viewProject}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-6 flex flex-col flex-grow relative">
-                      {/* Title without emoji */}
-                      <h2 className="text-xl font-bold text-cyber-950 dark:text-cyber-100 mb-2 group-hover:text-cyber-accent transition-colors">
-                        {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
-                      </h2>
-
-                      <p className="text-cyber-500 dark:text-cyber-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
-                        {typeof p.desc === 'string' ? p.desc : p.desc[locale]}
-                      </p>
-
-                      {/* Technologies with icons */}
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {p.tags.map((tag, i) => {
-                          const Icon = getTagIcon(tag);
-                          const colorClasses = [
-                            'bg-cyber-500/15 text-cyber-500 border-cyber-500/25',
-                            'bg-cyber-accent/15 text-cyber-accent border-cyber-accent/25',
-                            'bg-cyber-500/15 text-cyber-500 border-cyber-500/25',
-                          ];
-                          return (
-                            <span key={tag} className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg border ${colorClasses[i % 3]}`}>
-                              <Icon size={12} />
-                              {tag}
-                            </span>
-                          );
-                        })}
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex gap-3 items-center pt-4 border-t border-cyber-500/10">
-                        <Link
-                          href={`/projects/${p.id}`}
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyber-500 to-cyber-500 text-cyber-950 dark:text-cyber-100 rounded-xl font-medium shadow-[0_0_15px_rgba(56,189,248,0.2)] hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:scale-[1.02] transition-all active:scale-95 text-sm"
-                        >
-                          <ExternalLink size={16} />
-                          {t.portfolio.viewProject}
-                        </Link>
-
-                        {p.repo && (
-                          <a
-                            href={p.repo}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="p-2.5 text-cyber-500 hover:text-cyber-accent hover:bg-cyber-accent/10 rounded-xl transition-all border border-transparent hover:border-cyber-accent/20"
-                            aria-label="Code Source"
-                            title={t.portfolio.sourceCode}
-                          >
-                            <Github size={20} />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </article>
-                  </Tilt>
-                </AnimatedCard>
+                <ProjectCard key={p.id} p={p} index={index} t={t} locale={locale} />
               ))}
             </AnimatePresence>
           </div>

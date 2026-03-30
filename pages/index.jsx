@@ -6,32 +6,62 @@ import { Zap, Mail, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SkillsCarousel from '../components/SkillsCarousel';
 
-// Typing animation hook
-function useTypingEffect(text, speed = 80) {
-  const [displayed, setDisplayed] = useState('');
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    setDisplayed('');
-    setDone(false);
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(text.slice(0, i + 1));
-      i++;
-      if (i >= text.length) {
-        clearInterval(interval);
-        setDone(true);
-      }
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, speed]);
-
-  return { displayed, done };
-}
-
 export default function Home() {
   const { t, locale } = useLanguage();
-  const { displayed, done } = useTypingEffect('Mehdi', 120);
+  
+  const [displayedTitle, setDisplayedTitle] = useState("");
+  const [displayedName, setDisplayedName] = useState("");
+  const [phase, setPhase] = useState("init"); // 'init' | 'typing' | 'name' | 'done'
+
+  useEffect(() => {
+    // Check if user prefers reduced motion or if already animated
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasAnimated = sessionStorage.getItem('heroAnimated');
+    
+    if (prefersReducedMotion || hasAnimated) {
+      setDisplayedTitle(t.home.heroTitle + " ");
+      setDisplayedName("Mehdi");
+      setPhase("done");
+      sessionStorage.setItem('heroAnimated', 'true');
+      return;
+    }
+
+    setPhase("typing");
+  }, [t.home.heroTitle]);
+
+  useEffect(() => {
+    if (phase === "init") return;
+    
+    const fullText = t.home.heroTitle + " ";
+    const name = "Mehdi";
+
+    if (phase === "typing") {
+      if (displayedTitle.length < fullText.length) {
+        const timer = setTimeout(() => {
+          setDisplayedTitle(fullText.slice(0, displayedTitle.length + 1));
+        }, 70);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => setPhase("name"), 200);
+        return () => clearTimeout(timer);
+      }
+    }
+    
+    if (phase === "name") {
+      if (displayedName.length < name.length) {
+        const timer = setTimeout(() => {
+          setDisplayedName(name.slice(0, displayedName.length + 1));
+        }, 120);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => {
+          setPhase("done");
+          sessionStorage.setItem('heroAnimated', 'true');
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [displayedTitle, displayedName, phase, t.home.heroTitle]);
 
   return (
     <>
@@ -44,8 +74,6 @@ export default function Home() {
 
         {/* Animated circuit background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {/* Removed SVGs and Neon blobs for cleaner look */}
-
           {/* Floating code snippets */}
           <motion.div
             className="absolute top-[15%] left-[8%] text-cyber-400 dark:text-cyber-500 font-mono text-sm hidden lg:block opacity-5 dark:opacity-8 blur-[1px]"
@@ -78,25 +106,21 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl text-cyber-950 dark:text-cyber-100 mb-4 font-mono font-semibold tracking-tight">
-              {t.home.heroTitle}{' '}
+          <div className="mb-4">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl text-cyber-950 dark:text-cyber-100 font-mono font-semibold tracking-tight min-h-[1.2em]">
+              {displayedTitle}
               <span className="text-cyber-accent">
-                {displayed}
-                {!done && <span className="animate-pulse text-cyber-accent">|</span>}
+                {displayedName}
               </span>
+              <span className="inline-block w-[3px] h-[1em] bg-cyber-accent ml-[2px] align-text-bottom animate-[blink_0.8s_steps(2)_infinite] opacity-100"></span>
             </h1>
-          </motion.div>
+          </div>
 
           <motion.p
-            className="hero-subtitle max-w-2xl mx-auto text-cyber-700 dark:text-cyber-400 font-sans"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            className="hero-subtitle max-w-2xl mx-auto text-cyber-700 dark:text-cyber-400 font-sans mt-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={phase === "done" ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             {t.home.studentIn} <span className="text-cyber-500 dark:text-cyber-200">{t.home.role1}</span> & <span className="text-cyber-500 dark:text-cyber-200">{t.home.role2}</span>.
             <br className="hidden md:block" />
@@ -105,20 +129,20 @@ export default function Home() {
 
           <motion.div
             className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={phase === "done" ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           >
             <Link
               href="/portfolio"
-              className="bg-cyber-cta text-cyber-100 rounded-lg px-6 py-3 hover:bg-cyber-accent hover:scale-[1.02] transition-all duration-200 flex items-center justify-center gap-2 font-semibold font-sans"
+              className="bg-cyber-cta text-cyber-100 rounded-sm px-6 py-3 hover:bg-cyber-accent hover:scale-[1.02] transition-all duration-200 flex items-center justify-center gap-2 font-semibold font-sans"
             >
               <Zap size={20} />
               {t.home.heroBtn}
             </Link>
             <Link
               href="/contact"
-              className="border-[1.5px] border-cyber-accent text-cyber-accent bg-transparent hover:bg-cyber-accent hover:text-cyber-950 rounded-lg px-6 py-3 transition-all duration-200 flex items-center justify-center gap-2 font-semibold font-sans"
+              className="border-[1.5px] border-cyber-accent text-cyber-accent bg-transparent hover:bg-cyber-accent hover:text-cyber-950 rounded-sm px-6 py-3 transition-all duration-200 flex items-center justify-center gap-2 font-semibold font-sans"
             >
               <Mail size={20} />
               {t.home.contactBtn}
@@ -126,14 +150,21 @@ export default function Home() {
           </motion.div>
           
           {/* Skills Infinite Carousel */}
-          <SkillsCarousel />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={phase === "done" ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="w-full mt-12"
+          >
+            <SkillsCarousel />
+          </motion.div>
         </div>
 
         {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          animate={phase === "done" ? { y: [0, 8, 0], opacity: 1 } : { opacity: 0 }}
+          transition={phase === "done" ? { y: { duration: 2, repeat: Infinity, ease: "easeInOut" }, opacity: { duration: 0.5 } } : {}}
         >
           <ChevronDown size={28} className="text-cyber-500/50" />
         </motion.div>
