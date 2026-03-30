@@ -125,23 +125,17 @@ export default function CE() {
                                     <a href="mailto:mehdimamdouh20@gmail.com" className="flex items-center gap-2 hover:text-cyber-accent transition-colors">
                                         <Mail size={16} className="text-cyber-500" /> mehdimamdouh20@gmail.com
                                     </a>
-                                    <a href="tel:+33617644229" className="flex items-center gap-2 hover:text-cyber-accent transition-colors">
-                                        <Phone size={16} className="text-cyber-500" /> +33 6 17 64 42 29
-                                    </a>
                                     <span className="flex items-center gap-2">
                                         <MapPin size={16} className="text-cyber-500" /> 06000 Nice
                                     </span>
-                                </div>
-                                <div className="space-y-3">
-                                    <a href="https://mmsa.app" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cyber-accent transition-colors">
-                                        <Globe size={16} className="text-cyber-500" /> mmsa.app
-                                    </a>
-                                    <a href="https://github.com/Mastr00" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cyber-accent transition-colors">
-                                        <Github size={16} className="text-cyber-500" /> github.com/Mastr00
-                                    </a>
-                                    <a href="https://linkedin.com/in/mehdi-mamdouh" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cyber-accent transition-colors">
-                                        <Linkedin size={16} className="text-cyber-500" /> linkedin.com/in/mehdi-mamdouh
-                                    </a>
+                                    <div className="flex items-center gap-3 pt-1">
+                                        <a href="https://github.com/Mastr00" target="_blank" rel="noreferrer" className="p-2 bg-cyber-100 dark:bg-cyber-800 rounded-sm hover:text-cyber-accent transition-colors">
+                                            <Github size={16} className="text-cyber-500 hover:text-cyber-accent" />
+                                        </a>
+                                        <a href="https://linkedin.com/in/mehdi-mamdouh" target="_blank" rel="noreferrer" className="p-2 bg-cyber-100 dark:bg-cyber-800 rounded-sm hover:text-cyber-accent transition-colors">
+                                            <Linkedin size={16} className="text-cyber-500 hover:text-cyber-accent" />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -209,22 +203,11 @@ export default function CE() {
                                 <h3 className="text-[17px] font-mono font-bold border-b-2 border-cyber-accent pb-2 mb-4 flex items-center gap-2 text-cyber-950 dark:text-cyber-100">
                                     <Languages size={18} className="text-cyber-accent" /> Langues
                                 </h3>
-                                <ul className="space-y-4 text-sm text-cyber-700 dark:text-cyber-100">
+                                <ul className="space-y-2 text-[13px] text-cyber-700 dark:text-cyber-300 font-medium">
                                     {languages.map(l => (
-                                        <li key={l.name} className="flex flex-col">
-                                            <div className="flex justify-between items-center mb-1.5">
-                                                <span className="font-semibold text-[13px]">{l.name}</span>
-                                                <span className="text-[11px] font-bold text-cyber-400">{l.level}</span>
-                                            </div>
-                                            <div className="w-full h-[6px] bg-cyber-200 dark:bg-cyber-800 rounded-[3px] overflow-hidden">
-                                                <motion.div
-                                                    className="h-full bg-cyber-accent"
-                                                    initial={{ width: 0 }}
-                                                    whileInView={{ width: `${levelsMap[l.level] || 50}%` }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ duration: 1, ease: "easeOut" }}
-                                                />
-                                            </div>
+                                        <li key={l.name} className="flex justify-between items-center pb-2 border-b border-cyber-200 dark:border-cyber-800/50 last:border-0 last:pb-0">
+                                            <span className="font-semibold text-cyber-950 dark:text-cyber-100">{l.name}</span>
+                                            <span className="text-cyber-500">{l.level}</span>
                                         </li>
                                     ))}
                                 </ul>
