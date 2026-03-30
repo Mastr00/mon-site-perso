@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { Zap, Mail, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import SkillsCarousel from '../components/SkillsCarousel';
 
 // Typing animation hook
 function useTypingEffect(text, speed = 80) {
@@ -39,7 +40,7 @@ export default function Home() {
         <meta name="description" content="Portfolio of Mehdi, student in electronics and cybersecurity." />
       </Head>
 
-      <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-[#020617] overflow-hidden relative">
+      <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-slate-50 dark:bg-[#020617] overflow-hidden relative">
 
         {/* Animated circuit background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -102,7 +103,7 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="hero-title text-white mb-4">
+            <h1 className="hero-title text-slate-900 dark:text-white mb-4">
               {t.home.heroTitle}{' '}
               <span className="highlight">
                 {displayed}
@@ -143,6 +144,9 @@ export default function Home() {
               {t.home.contactBtn}
             </Link>
           </motion.div>
+          
+          {/* Skills Infinite Carousel */}
+          <SkillsCarousel />
         </div>
 
         {/* Scroll indicator */}

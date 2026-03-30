@@ -47,12 +47,12 @@ export default function NotesWidget() {
                         value={noteInput}
                         onChange={(e) => setNoteInput(e.target.value)}
                         onKeyDown={(e) => { if (e.key === 'Enter') addNote(); }}
-                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all dark:text-white"
+                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all dark:text-slate-900 dark:text-white"
                         placeholder="Nouvelle idée..."
                     />
                     <button
                         onClick={addNote}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-yellow-500 hover:bg-yellow-600 text-slate-900 dark:text-white rounded-lg transition-colors"
                     >
                         <Plus size={16} />
                     </button>

@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+import Tilt from "react-parallax-tilt";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { projects as staticProjects } from '../lib/projectsData';
@@ -60,7 +62,7 @@ export default function Portfolio() {
         <meta property="og:description" content="Découvrez mes projets en électronique, IoT et développement web." />
       </Head>
 
-      <div className="min-h-screen bg-[#020617] py-16 px-6 relative overflow-hidden bg-grid">
+      <div className="min-h-screen bg-slate-50 dark:bg-[#020617] py-16 px-6 relative overflow-hidden bg-grid">
         {/* Neon glow blobs */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neon-violet/15 rounded-full blur-3xl animate-blob"></div>
@@ -78,7 +80,7 @@ export default function Portfolio() {
             <h1 className="text-5xl md:text-6xl font-extrabold neon-text mb-6 tracking-tight">
               {t.portfolio.title}
             </h1>
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
               {t.portfolio.subtitle}
             </p>
 
@@ -89,8 +91,8 @@ export default function Portfolio() {
                   key={cat}
                   onClick={() => setFilter(cat)}
                   className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border backdrop-blur-md ${filter === cat
-                    ? "bg-gradient-to-r from-neon-violet to-neon-magenta text-white border-transparent shadow-neon scale-105"
-                    : "bg-[#0F172A]/50 text-slate-400 border-neon-violet/20 hover:border-neon-violet/50 hover:text-neon-violet"
+                    ? "bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white border-transparent shadow-neon scale-105"
+                    : "bg-white dark:bg-[#0F172A]/50 text-slate-500 dark:text-slate-400 border-neon-violet/20 hover:border-neon-violet/50 hover:text-neon-violet"
                     }`}
                 >
                   {cat === "All" ? t.portfolio.filterAll : cat}
@@ -104,10 +106,18 @@ export default function Portfolio() {
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((p, index) => (
                 <AnimatedCard key={p.id} index={index}>
-                  <article className="group flex flex-col bg-[#0F172A] border border-neon-violet/15 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(139,92,246,0.4),0_0_80px_rgba(217,70,239,0.15)] hover:border-neon-violet/50 h-full relative">
+                  <Tilt 
+                    tiltMaxAngleX={8} 
+                    tiltMaxAngleY={8} 
+                    perspective={1000} 
+                    transitionSpeed={1000} 
+                    scale={1.02}
+                    className="h-full"
+                  >
+                  <article className="group flex flex-col bg-white dark:bg-[#0F172A] border border-neon-violet/15 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(139,92,246,0.4),0_0_80px_rgba(217,70,239,0.15)] hover:border-neon-violet/50 h-full relative">
 
                     {/* Image Section */}
-                    <div className="relative h-60 w-full overflow-hidden bg-[#1E293B]">
+                    <div className="relative h-60 w-full overflow-hidden bg-slate-100 dark:bg-[#1E293B]">
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
                       <Image
                         src={p.image}
@@ -127,7 +137,7 @@ export default function Portfolio() {
 
                       {/* Hover overlay */}
                       <div className="absolute inset-0 z-20 bg-gradient-to-t from-neon-violet/60 via-neon-magenta/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
-                        <span className="text-white font-bold text-sm px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-2">
+                        <span className="text-slate-900 dark:text-white font-bold text-sm px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-2">
                           <Eye size={16} /> {t.portfolio.viewProject}
                         </span>
                       </div>
@@ -135,11 +145,11 @@ export default function Portfolio() {
 
                     <div className="p-6 flex flex-col flex-grow relative">
                       {/* Title without emoji */}
-                      <h2 className="text-xl font-bold text-white mb-2 group-hover:text-neon-cyan transition-colors">
+                      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-neon-cyan transition-colors">
                         {p.title.replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
                       </h2>
 
-                      <p className="text-slate-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
+                      <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
                         {p.desc}
                       </p>
 
@@ -163,15 +173,13 @@ export default function Portfolio() {
 
                       {/* Actions */}
                       <div className="flex gap-3 items-center pt-4 border-t border-neon-violet/10">
-                        <a
-                          href={p.demo}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-neon-violet to-neon-magenta text-white rounded-xl font-medium shadow-neon hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:scale-[1.02] transition-all active:scale-95 text-sm"
+                        <Link
+                          href={`/projects/${p.id}`}
+                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white rounded-xl font-medium shadow-neon hover:shadow-[0_0_30px_rgba(139,92,246,0.6)] hover:scale-[1.02] transition-all active:scale-95 text-sm"
                         >
                           <ExternalLink size={16} />
                           {t.portfolio.viewProject}
-                        </a>
+                        </Link>
 
                         {p.repo && (
                           <a
@@ -188,6 +196,7 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </article>
+                  </Tilt>
                 </AnimatedCard>
               ))}
             </AnimatePresence>

@@ -13,13 +13,13 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const linkStyle =
-    "text-slate-300 dark:text-slate-300 hover:text-neon-cyan transition-colors duration-300 relative group";
+    "text-slate-700 dark:text-slate-300 dark:text-slate-700 dark:text-slate-300 hover:text-neon-cyan transition-colors duration-300 relative group";
 
   const linkStyleLight =
     "text-slate-600 hover:text-neon-violet transition-colors duration-300 relative group";
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#020617]/80 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-neon-violet/20 dark:border-neon-violet/20 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-slate-50 dark:bg-[#020617]/80 dark:bg-slate-50 dark:bg-[#020617]/80 backdrop-blur-xl border-b border-neon-violet/20 dark:border-neon-violet/20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -45,14 +45,14 @@ export default function NavBar() {
             {!user ? (
               <a
                 href="/api/auth/login"
-                className="px-4 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-white rounded-lg font-semibold hover:shadow-neon transition-all duration-300 hover:-translate-y-0.5"
+                className="px-4 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white rounded-lg font-semibold hover:shadow-neon transition-all duration-300 hover:-translate-y-0.5"
               >
                 {t.nav.login}
               </a>
             ) : (
               <a
                 href="/api/auth/logout"
-                className="px-4 py-2 bg-red-500/80 text-white rounded-lg font-semibold hover:bg-red-500 transition-all duration-300"
+                className="px-4 py-2 bg-red-500/80 text-slate-900 dark:text-white rounded-lg font-semibold hover:bg-red-500 transition-all duration-300"
               >
                 {t.nav.logout}
               </a>
@@ -79,7 +79,7 @@ export default function NavBar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-[#0F172A] dark:bg-[#0F172A] border-b border-neon-violet/20 overflow-hidden"
+            className="md:hidden bg-white dark:bg-[#0F172A] dark:bg-white dark:bg-[#0F172A] border-b border-neon-violet/20 overflow-hidden"
           >
             <div className="flex flex-col items-start p-4 space-y-3">
               <Link href="/" className={linkStyle} onClick={() => setIsOpen(false)}>{t.nav.home}</Link>
@@ -96,7 +96,7 @@ export default function NavBar() {
               {!user ? (
                 <a
                   href="/api/auth/login"
-                  className="w-full px-4 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-white rounded-lg font-semibold text-center hover:shadow-neon transition-all"
+                  className="w-full px-4 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white rounded-lg font-semibold text-center hover:shadow-neon transition-all"
                   onClick={() => setIsOpen(false)}
                 >
                   {t.nav.login}
@@ -104,7 +104,7 @@ export default function NavBar() {
               ) : (
                 <a
                   href="/api/auth/logout"
-                  className="w-full px-4 py-2 bg-red-500/80 text-white rounded-lg font-semibold text-center hover:bg-red-500 transition-all"
+                  className="w-full px-4 py-2 bg-red-500/80 text-slate-900 dark:text-white rounded-lg font-semibold text-center hover:bg-red-500 transition-all"
                   onClick={() => setIsOpen(false)}
                 >
                   {t.nav.logout}

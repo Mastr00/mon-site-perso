@@ -17,12 +17,12 @@ function Toast({ message, show, onClose }) {
 
   return (
     <div className="fixed top-6 right-6 z-50 animate-[slideIn_0.3s_ease-out]">
-      <div className="bg-[#0F172A] border border-neon-cyan/30 rounded-xl px-5 py-4 shadow-[0_0_30px_rgba(34,211,238,0.2)] flex items-center gap-3 max-w-sm">
+      <div className="bg-white dark:bg-[#0F172A] border border-neon-cyan/30 rounded-xl px-5 py-4 shadow-[0_0_30px_rgba(34,211,238,0.2)] flex items-center gap-3 max-w-sm">
         <div className="bg-neon-cyan/10 p-1.5 rounded-full">
           <CheckCircle size={20} className="text-neon-cyan" />
         </div>
-        <p className="text-white text-sm font-medium flex-1">{message}</p>
-        <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
+        <p className="text-slate-900 dark:text-white text-sm font-medium flex-1">{message}</p>
+        <button onClick={onClose} className="text-slate-500 hover:text-slate-900 dark:text-white transition-colors">
           <X size={16} />
         </button>
       </div>
@@ -61,7 +61,7 @@ export default function Contact() {
 
   const fieldClasses = (field) => {
     const fieldState = getFieldState(field);
-    const base = "w-full px-4 py-3 rounded-xl bg-[#1E293B] text-white outline-none transition-all placeholder-slate-500 border";
+    const base = "w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-[#1E293B] text-slate-900 dark:text-white outline-none transition-all placeholder-slate-500 border";
     if (fieldState === 'error') return `${base} border-red-500/50 focus:ring-2 focus:ring-red-500/30 focus:border-red-500`;
     if (fieldState === 'valid') return `${base} border-green-500/50 focus:ring-2 focus:ring-green-500/30 focus:border-green-500`;
     return `${base} border-neon-violet/20 focus:ring-2 focus:ring-neon-cyan/30 focus:border-neon-cyan`;
@@ -71,14 +71,14 @@ export default function Contact() {
     return (
       <>
         <Toast message={t.contact.successTitle} show={showToast} onClose={() => setShowToast(false)} />
-        <div className="min-h-screen flex items-center justify-center bg-[#020617] px-4">
-          <div className="bg-[#0F172A] border border-neon-violet/20 p-8 rounded-2xl shadow-neon text-center max-w-md w-full">
+        <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617] px-4">
+          <div className="bg-white dark:bg-[#0F172A] border border-neon-violet/20 p-8 rounded-2xl shadow-neon text-center max-w-md w-full">
             <div className="mx-auto bg-neon-cyan/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 border border-neon-cyan/30">
               <CheckCircle size={32} className="text-neon-cyan" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">{t.contact.successTitle}</h2>
-            <p className="text-slate-400 mb-8">{t.contact.successText}</p>
-            <a href="/" className="px-6 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-white rounded-lg hover:shadow-neon transition-all">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">{t.contact.successTitle}</h2>
+            <p className="text-slate-500 dark:text-slate-400 mb-8">{t.contact.successText}</p>
+            <a href="/" className="px-6 py-2 bg-gradient-to-r from-neon-violet to-neon-magenta text-slate-900 dark:text-white rounded-lg hover:shadow-neon transition-all">
               {t.contact.backHome}
             </a>
           </div>
@@ -95,11 +95,11 @@ export default function Contact() {
 
       <Toast message={t.contact.successTitle} show={showToast} onClose={() => setShowToast(false)} />
 
-      <div className="min-h-screen py-20 px-4 sm:px-6 bg-[#020617] flex flex-col justify-center">
-        <div className="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-0 bg-[#0F172A] rounded-3xl shadow-neon overflow-hidden border border-neon-violet/20">
+      <div className="min-h-screen py-20 px-4 sm:px-6 bg-slate-50 dark:bg-[#020617] flex flex-col justify-center">
+        <div className="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-0 bg-white dark:bg-[#0F172A] rounded-3xl shadow-neon overflow-hidden border border-neon-violet/20">
 
           {/* Left Side: Info */}
-          <div className="bg-gradient-to-br from-neon-violet to-neon-magenta p-10 text-white flex flex-col justify-between relative overflow-hidden">
+          <div className="bg-gradient-to-br from-neon-violet to-neon-magenta p-10 text-slate-900 dark:text-white flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-[radial-gradient(circle,rgba(34,211,238,0.2)_0%,transparent_70%)]"></div>
             <div className="relative z-10">
               <h1 className="text-4xl font-bold mb-6">{t.contact.title}</h1>
@@ -118,11 +118,11 @@ export default function Contact() {
           </div>
 
           {/* Right Side: Form */}
-          <div className="p-10 bg-[#0F172A]">
+          <div className="p-10 bg-white dark:bg-[#0F172A]">
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Name */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-400 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
                   {t.contact.nameLabel}
                 </label>
                 <input
@@ -143,7 +143,7 @@ export default function Contact() {
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-400 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
                   {t.contact.emailLabel}
                 </label>
                 <input
@@ -165,7 +165,7 @@ export default function Contact() {
 
               {/* Subject */}
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-slate-400 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
                   {t.contact.subjectLabel}
                 </label>
                 <input
@@ -186,7 +186,7 @@ export default function Contact() {
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-400 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
                   {t.contact.messageLabel}
                 </label>
                 <textarea
@@ -209,7 +209,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="w-full py-3 px-6 bg-gradient-to-r from-neon-violet to-neon-magenta hover:shadow-neon text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
+                className="w-full py-3 px-6 bg-gradient-to-r from-neon-violet to-neon-magenta hover:shadow-neon text-slate-900 dark:text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
               >
                 {state.submitting ? (
                   <>

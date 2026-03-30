@@ -309,3 +309,9 @@ body {
   transform-origin: 70% 70%;
   display: inline-block;
 }
+
+/* Edge Mask for Marquee */
+.mask-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}

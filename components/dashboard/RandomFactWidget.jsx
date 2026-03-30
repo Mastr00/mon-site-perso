@@ -36,7 +36,7 @@ export default function RandomFactWidget() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-white h-full flex flex-col">
+        <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-slate-900 dark:text-white h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2">
                     <Lightbulb size={20} /> Le savais-tu ?

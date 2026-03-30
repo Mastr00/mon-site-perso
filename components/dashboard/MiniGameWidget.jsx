@@ -44,7 +44,7 @@ export default function MiniGameWidget() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-2xl p-6 text-white h-full flex flex-col">
+        <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-2xl p-6 text-slate-900 dark:text-white h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2">
                     <Gamepad2 size={20} /> Click Game

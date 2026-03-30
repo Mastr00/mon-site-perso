@@ -43,7 +43,7 @@ export default function WeatherWidget() {
     }, []);
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow text-white">
+        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow text-slate-900 dark:text-white">
             <h2 className="text-lg font-semibold opacity-90 mb-2">Météo - {locationName}</h2>
             {error ? (
                 <p className="text-sm opacity-80">Impossible de charger la météo.</p>

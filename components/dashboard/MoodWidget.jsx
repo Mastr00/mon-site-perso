@@ -54,7 +54,7 @@ export default function MoodWidget() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-white h-full flex flex-col">
+        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-slate-900 dark:text-white h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold flex items-center gap-2">
                     <Smile size={20} /> Comment tu te sens ?

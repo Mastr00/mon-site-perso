@@ -99,11 +99,11 @@ export default function CE() {
                 <title>CV – Mehdi Mamdouh</title>
             </Head>
 
-            <div className="min-h-screen bg-[#020617] py-12 px-4 sm:px-6">
-                <div className="max-w-4xl mx-auto bg-[#0F172A] shadow-neon rounded-2xl overflow-hidden border border-neon-violet/20 print:shadow-none print:max-w-full print:border-none">
+            <div className="min-h-screen bg-slate-50 dark:bg-[#020617] py-12 px-4 sm:px-6">
+                <div className="max-w-4xl mx-auto bg-white dark:bg-[#0F172A] shadow-neon rounded-2xl overflow-hidden border border-neon-violet/20 print:shadow-none print:max-w-full print:border-none">
 
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-neon-violet to-neon-magenta p-8 text-white flex flex-col md:flex-row justify-between items-center gap-6 print:bg-none print:text-black">
+                    <div className="bg-gradient-to-r from-neon-violet to-neon-magenta p-8 text-slate-900 dark:text-white flex flex-col md:flex-row justify-between items-center gap-6 print:bg-none print:text-black">
                         <div className="text-center md:text-left">
                             <h1 className="text-4xl font-bold mb-2">Mehdi Mamdouh</h1>
                             <p className="text-violet-100 flex items-center gap-2 justify-center md:justify-start">
@@ -146,7 +146,7 @@ export default function CE() {
                     <div className="grid grid-cols-1 md:grid-cols-3">
 
                         {/* Sidebar */}
-                        <div className="bg-[#0F172A] text-white p-8 md:col-span-1 space-y-8 print:bg-gray-200 print:text-black">
+                        <div className="bg-white dark:bg-[#0F172A] text-slate-900 dark:text-white p-8 md:col-span-1 space-y-8 print:bg-gray-200 print:text-black">
 
                             {/* Skills with icons and written levels */}
                             <section>
@@ -157,7 +157,7 @@ export default function CE() {
                                     {skills.map(s => {
                                         const Icon = s.icon;
                                         return (
-                                            <div key={s.name} className="flex items-center justify-between p-3 bg-[#1E293B] rounded-xl border border-neon-violet/10 hover:border-neon-violet/30 transition-colors">
+                                            <div key={s.name} className="flex items-center justify-between p-3 bg-slate-100 dark:bg-[#1E293B] rounded-xl border border-neon-violet/10 hover:border-neon-violet/30 transition-colors">
                                                 <div className="flex items-center gap-3">
                                                     <div className="p-1.5 bg-neon-violet/15 rounded-lg">
                                                         <Icon size={16} className="text-neon-violet" />
@@ -178,8 +178,8 @@ export default function CE() {
                                 <h3 className="text-xl font-bold border-b-2 border-neon-cyan pb-2 mb-4 flex items-center gap-2">
                                     <Zap size={20} className="text-neon-cyan" /> {t.cv.machines}
                                 </h3>
-                                <div className="p-4 bg-[#1E293B] rounded-lg border border-neon-violet/10 print:bg-gray-300 print:text-black">
-                                    <p className="text-sm leading-relaxed text-slate-300 print:text-black">
+                                <div className="p-4 bg-slate-100 dark:bg-[#1E293B] rounded-lg border border-neon-violet/10 print:bg-gray-300 print:text-black">
+                                    <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 print:text-black">
                                         <span className="text-neon-cyan font-bold block mb-1">{t.cv.machinesTitle}</span>
                                         {t.cv.machinesDesc}
                                         <ul className="list-disc list-inside mt-1 ml-1 space-y-0.5">
@@ -196,9 +196,9 @@ export default function CE() {
                                 <h3 className="text-xl font-bold border-b-2 border-neon-cyan pb-2 mb-4 flex items-center gap-2">
                                     <Languages size={20} className="text-neon-cyan" /> {t.cv.languages}
                                 </h3>
-                                <ul className="space-y-2 text-sm text-slate-300 print:text-black">
+                                <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300 print:text-black">
                                     {languages.map(l => (
-                                        <li key={l.name} className="flex justify-between items-center p-2 bg-[#1E293B]/50 rounded-lg">
+                                        <li key={l.name} className="flex justify-between items-center p-2 bg-slate-100 dark:bg-[#1E293B]/50 rounded-lg">
                                             <span className="font-semibold">{l.name}</span>
                                             <span className="text-neon-cyan/80 text-xs font-medium">{l.level}</span>
                                         </li>
@@ -224,30 +224,30 @@ export default function CE() {
                                 <h3 className="text-xl font-bold border-b-2 border-neon-cyan pb-2 mb-4 flex items-center gap-2">
                                     <Car size={20} className="text-neon-cyan" /> {t.cv.license}
                                 </h3>
-                                <p className="text-slate-300 print:text-black">Permis B</p>
+                                <p className="text-slate-700 dark:text-slate-300 print:text-black">Permis B</p>
                             </section>
                         </div>
 
                         {/* Main Content (Right) */}
-                        <div className="p-8 md:col-span-2 space-y-10 bg-[#0F172A] text-slate-200">
+                        <div className="p-8 md:col-span-2 space-y-10 bg-white dark:bg-[#0F172A] text-slate-200">
 
                             {/* Experience */}
                             <section>
-                                <h2 className="text-2xl font-bold text-white mb-6 border-b border-neon-violet/20 pb-2 flex items-center gap-2">
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 border-b border-neon-violet/20 pb-2 flex items-center gap-2">
                                     <Briefcase className="text-neon-magenta" /> {t.cv.experience}
                                 </h2>
                                 <div className="space-y-8 border-l-2 border-neon-violet/30 ml-3 pl-8 relative">
                                     {experiences.map((exp, i) => (
                                         <div key={i} className="relative">
                                             <span className="absolute -left-[41px] top-1 w-5 h-5 bg-gradient-to-r from-neon-violet to-neon-magenta rounded-full border-4 border-[#0F172A] shadow-neon"></span>
-                                            <h3 className="text-lg font-bold text-white">{exp.role}</h3>
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-white">{exp.role}</h3>
                                             <div className="text-neon-violet font-medium mb-2">
-                                                {exp.company} | <span className="text-sm text-slate-400">{exp.location}</span>
+                                                {exp.company} | <span className="text-sm text-slate-500 dark:text-slate-400">{exp.location}</span>
                                             </div>
                                             <span className="inline-block px-3 py-1 bg-neon-magenta/15 text-neon-magenta text-xs rounded-lg mb-3 font-semibold border border-neon-magenta/20">
                                                 {exp.period}
                                             </span>
-                                            <ul className="list-disc list-inside text-slate-400 space-y-1 text-sm">
+                                            <ul className="list-disc list-inside text-slate-500 dark:text-slate-400 space-y-1 text-sm">
                                                 {exp.tasks.map((task, j) => (
                                                     <li key={j}>{task}</li>
                                                 ))}
@@ -259,15 +259,15 @@ export default function CE() {
 
                             {/* Education */}
                             <section>
-                                <h2 className="text-2xl font-bold text-white mb-6 border-b border-neon-violet/20 pb-2 flex items-center gap-2">
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 border-b border-neon-violet/20 pb-2 flex items-center gap-2">
                                     <GraduationCap className="text-neon-cyan" /> {t.cv.education}
                                 </h2>
                                 <div className="space-y-6">
                                     {education.map((edu, i) => (
-                                        <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 p-4 bg-[#1E293B]/50 rounded-xl border border-neon-violet/10 hover:border-neon-violet/30 transition-colors">
+                                        <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 p-4 bg-slate-100 dark:bg-[#1E293B]/50 rounded-xl border border-neon-violet/10 hover:border-neon-violet/30 transition-colors">
                                             <div>
-                                                <h3 className="font-bold text-white">{edu.school}</h3>
-                                                <p className="text-slate-400">{edu.degree}</p>
+                                                <h3 className="font-bold text-slate-900 dark:text-white">{edu.school}</h3>
+                                                <p className="text-slate-500 dark:text-slate-400">{edu.degree}</p>
                                             </div>
                                             <div className="text-right">
                                                 <span className="text-neon-cyan font-bold block">{edu.year}</span>

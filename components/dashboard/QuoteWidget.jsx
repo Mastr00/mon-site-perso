@@ -17,7 +17,7 @@ export default function QuoteWidget() {
     };
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-indigo-600 text-white rounded-2xl shadow md:col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center">
+        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-indigo-600 text-slate-900 dark:text-white rounded-2xl shadow md:col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center">
             <p className="text-xl italic font-medium mb-4">“{quote}”</p>
             <button onClick={newQuote} className="px-4 py-1 bg-white/20 hover:bg-white/30 rounded-full text-sm transition">
                 Nouvelle citation

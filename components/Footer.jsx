@@ -29,7 +29,7 @@ export default function Footer() {
             {/* Easter Egg Modal */}
             {showEasterEgg && (
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowEasterEgg(false)}>
-                    <div className="bg-gradient-to-br from-neon-violet to-neon-magenta p-8 rounded-3xl text-white text-center max-w-md animate-bounce shadow-neon">
+                    <div className="bg-gradient-to-br from-neon-violet to-neon-magenta p-8 rounded-3xl text-slate-900 dark:text-white text-center max-w-md animate-bounce shadow-neon">
                         <p className="text-6xl mb-4">🎉</p>
                         <h2 className="text-2xl font-bold mb-2">Bien joué !</h2>
                         <p className="text-violet-100">Tu as trouvé l'easter egg secret ! Tu es curieux, j'aime ça. 😎</p>
@@ -38,14 +38,14 @@ export default function Footer() {
                 </div>
             )}
 
-            <footer className="w-full bg-[#020617] dark:bg-[#020617] border-t border-neon-violet/20 mt-auto">
+            <footer className="w-full bg-slate-50 dark:bg-[#020617] dark:bg-slate-50 dark:bg-[#020617] border-t border-neon-violet/20 mt-auto">
                 <div className="max-w-7xl mx-auto px-6 py-8">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
 
                         {/* Brand / Copyright */}
                         <div className="text-center md:text-left">
                             <Link href="/" className="text-xl font-extrabold neon-text">
-                                MMSA<span className="text-slate-400">.app</span>
+                                MMSA<span className="text-slate-500 dark:text-slate-400">.app</span>
                             </Link>
                             <p className="text-sm text-slate-500 mt-2">
                                 © {new Date().getFullYear()} {t.footer.rights}
@@ -58,7 +58,7 @@ export default function Footer() {
                                 href="https://github.com/Mastr00"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-slate-400 hover:text-neon-cyan hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-300"
+                                className="text-slate-500 dark:text-slate-400 hover:text-neon-cyan hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-300"
                                 aria-label="GitHub"
                             >
                                 <Github size={24} />
@@ -67,14 +67,14 @@ export default function Footer() {
                                 href="https://www.linkedin.com/in/mehdi-mamdouh-8493162b3/"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-slate-400 hover:text-neon-violet hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] transition-all duration-300"
+                                className="text-slate-500 dark:text-slate-400 hover:text-neon-violet hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] transition-all duration-300"
                                 aria-label="LinkedIn"
                             >
                                 <Linkedin size={24} />
                             </a>
                             <a
                                 href="mailto:mehdimamdouh20@gmail.com"
-                                className="text-slate-400 hover:text-neon-magenta hover:drop-shadow-[0_0_8px_rgba(217,70,239,0.5)] transition-all duration-300"
+                                className="text-slate-500 dark:text-slate-400 hover:text-neon-magenta hover:drop-shadow-[0_0_8px_rgba(217,70,239,0.5)] transition-all duration-300"
                                 aria-label="Email"
                             >
                                 <Mail size={24} />

@@ -38,7 +38,7 @@ export default function ProjectsWidget() {
             </div>
 
             <div className="flex justify-between items-center mb-6 relative z-10">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-slate-900 dark:text-white flex items-center gap-2">
                     <span className="p-2 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg text-indigo-600 dark:text-indigo-400">
                         🚀
                     </span>
@@ -91,7 +91,7 @@ export default function ProjectsWidget() {
 
                         <button
                             type="submit"
-                            className="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all transform active:scale-95"
+                            className="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-slate-900 dark:text-white rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all transform active:scale-95"
                         >
                             Ajouter (Simulé)
                         </button>

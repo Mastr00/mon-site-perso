@@ -19,7 +19,7 @@ export default function GithubWidget() {
     }, []);
 
     return (
-        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-gray-800 text-white rounded-2xl shadow">
+        <motion.div whileHover={{ scale: 1.02 }} className="p-6 bg-gray-800 text-slate-900 dark:text-white rounded-2xl shadow">
             <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
                 GitHub <span className="text-xs bg-gray-700 px-2 py-0.5 rounded text-gray-300">@Mastr00</span>
             </h2>
