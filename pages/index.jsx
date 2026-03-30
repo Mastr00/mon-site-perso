@@ -97,7 +97,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="relative z-10">
+        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
