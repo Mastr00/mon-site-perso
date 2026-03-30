@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import PageLoader from '../components/PageLoader';
 import { LanguageProvider } from '../context/LanguageContext';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }) {
           </main>
           <Footer />
         </div>
+        <Analytics />
       </LanguageProvider>
     </UserProvider>
   );
