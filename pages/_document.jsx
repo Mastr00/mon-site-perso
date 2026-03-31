@@ -5,9 +5,9 @@ export default function Document() {
         <Html lang="fr">
             <Head>
                 {/* Favicon */}
-                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-                <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-                <link rel="apple-touch-icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.png" type="image/png" />
+                <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+                <link rel="apple-touch-icon" href="/favicon.png" />
 
                 {/* Fonts */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,7 +15,7 @@ export default function Document() {
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
                 {/* Theme Color */}
-                <meta name="theme-color" content="#4f46e5" />
+                <meta name="theme-color" content="#38BDF8" />
             </Head>
             <body className="antialiased">
                 <Main />

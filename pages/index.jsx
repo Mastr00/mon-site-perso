@@ -16,13 +16,10 @@ export default function Home() {
   useEffect(() => {
     // Check if user prefers reduced motion or if already animated
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const hasAnimated = sessionStorage.getItem('heroAnimated');
-    
-    if (prefersReducedMotion || hasAnimated) {
+    if (prefersReducedMotion) {
       setDisplayedTitle(t.home.heroTitle + " ");
       setDisplayedName("Mehdi");
       setPhase("done");
-      sessionStorage.setItem('heroAnimated', 'true');
       return;
     }
 
@@ -56,7 +53,6 @@ export default function Home() {
       } else {
         const timer = setTimeout(() => {
           setPhase("done");
-          sessionStorage.setItem('heroAnimated', 'true');
         }, 100);
         return () => clearTimeout(timer);
       }
