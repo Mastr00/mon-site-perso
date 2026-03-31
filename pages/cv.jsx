@@ -115,7 +115,7 @@ export default function CE() {
                         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
                             <div className="flex-shrink-0">
                                 <Image
-                                    src="/images/profile.jpg"
+                                    src="/images/profile.jpeg"
                                     alt="Mehdi Mamdouh"
                                     width={120}
                                     height={120}
