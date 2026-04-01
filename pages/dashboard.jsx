@@ -3,6 +3,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import Head from "next/head";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from '../context/LanguageContext';
 import WeatherWidget from "../components/dashboard/WeatherWidget";
 import GithubWidget from "../components/dashboard/GithubWidget";
 import QuoteWidget from "../components/dashboard/QuoteWidget";
@@ -17,6 +18,7 @@ import PetWidget from "../components/dashboard/PetWidget";
 
 function DashboardPage() {
   const { user } = useUser();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -25,7 +27,7 @@ function DashboardPage() {
         <meta name="description" content="Mon tableau de bord personnel" />
       </Head>
 
-      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 dark:bg-cyber-950 p-4 md:p-8">
+      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
 
           {/* Header / Welcome */}
@@ -37,9 +39,9 @@ function DashboardPage() {
           >
             <div className="text-center md:text-left mb-4 md:mb-0">
               <h1 className="text-3xl font-bold text-cyber-950 dark:text-cyber-100">
-                Bonjour, <span className="text-cyber-accent font-mono">{user ? user.name : "Mehdi"}</span> 👋
+                {t.dashboard.greeting} <span className="text-cyber-accent font-mono">{user ? user.name : "Mehdi"}</span> 👋
               </h1>
-              <p className="text-cyber-500 dark:text-cyber-400 mt-1">Voici ton tableau de bord personnel.</p>
+              <p className="text-cyber-500 dark:text-cyber-400 mt-1">{t.dashboard.subtitle}</p>
             </div>
             {user && user.picture && (
               <Image

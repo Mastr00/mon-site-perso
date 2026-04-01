@@ -32,7 +32,7 @@ export default function JokeWidget() {
     return (
         <motion.div 
             whileHover={{ scale: 1.02 }} 
-            className="h-full p-6 bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-500/20 rounded-2xl shadow-sm dark:shadow-[0_0_15px_rgba(217,70,239,0.1)] flex flex-col justify-between"
+            className="h-full p-6 bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-500/20 rounded-2xl shadow-sm dark:shadow-[0_0_15px_rgba(56,189,248,0.1)] flex flex-col justify-between"
         >
             <div className="flex justify-between items-center mb-4 border-b border-cyber-100 dark:border-cyber-900 pb-3">
                 <h2 className="text-lg font-bold text-cyber-950 dark:text-cyber-100 flex items-center gap-2">
@@ -63,7 +63,7 @@ export default function JokeWidget() {
                             initial={{opacity: 0, y: 10}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -10}}
                             className="space-y-3"
                         >
-                            <p className="text-sm font-medium text-slate-800 dark:text-cyber-50 leading-relaxed">
+                            <p className="text-sm font-medium text-cyber-800 dark:text-cyber-50 leading-relaxed">
                                 {joke?.setup}
                             </p>
                             {joke?.punchline && (

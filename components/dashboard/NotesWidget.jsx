@@ -29,14 +29,14 @@ export default function NotesWidget() {
     return (
         <motion.div
             whileHover={{ y: -5 }}
-            className="p-6 bg-cyber-50 dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 md:col-span-2 flex flex-col h-full bg-gradient-to-bl from-white to-orange-50/30 dark:from-gray-800 dark:to-gray-900/50"
+            className="p-6 bg-cyber-50 dark:bg-cyber-900 rounded-2xl shadow-sm border border-cyber-200 dark:border-cyber-800 md:col-span-2 flex flex-col h-full"
         >
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
-                    <span className="p-1.5 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400 rounded-lg">📝</span>
+                <h2 className="text-xl font-bold text-cyber-950 dark:text-cyber-100 flex items-center gap-2">
+                    <span className="p-1.5 bg-cyber-accent/10 text-cyber-accent rounded-lg">📝</span>
                     Notes Rapides
                 </h2>
-                <div className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-xs font-bold px-2 py-1 rounded-md">
+                <div className="bg-cyber-accent/10 text-cyber-accent text-xs font-bold px-2 py-1 rounded-md">
                     {notes.length}
                 </div>
             </div>
@@ -47,12 +47,12 @@ export default function NotesWidget() {
                         value={noteInput}
                         onChange={(e) => setNoteInput(e.target.value)}
                         onKeyDown={(e) => { if (e.key === 'Enter') addNote(); }}
-                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-yellow-400 focus:border-transparent outline-none transition-all dark:text-cyber-100"
+                        className="w-full pl-4 pr-10 py-3 rounded-xl bg-cyber-100 dark:bg-cyber-800 border border-cyber-200 dark:border-cyber-700 focus:ring-2 focus:ring-cyber-accent focus:border-transparent outline-none transition-all text-cyber-950 dark:text-cyber-100"
                         placeholder="Nouvelle idée..."
                     />
                     <button
                         onClick={addNote}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-yellow-500 hover:bg-yellow-600 text-cyber-950 dark:text-cyber-100 rounded-lg transition-colors"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-cyber-cta hover:bg-cyber-accent text-white rounded-lg transition-colors"
                     >
                         <Plus size={16} />
                     </button>
@@ -67,7 +67,7 @@ export default function NotesWidget() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            className="relative p-4 bg-yellow-50/80 dark:bg-gray-750 border border-yellow-200/50 dark:border-gray-600 rounded-xl group hover:shadow-md transition-all duration-300"
+                            className="relative p-4 bg-cyber-100 dark:bg-cyber-800 border border-cyber-200 dark:border-cyber-700 rounded-xl group hover:shadow-md transition-all duration-300"
                         >
                             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button
@@ -77,7 +77,7 @@ export default function NotesWidget() {
                                     <X size={14} />
                                 </button>
                             </div>
-                            <p className="text-gray-700 dark:text-gray-200 text-sm font-medium break-words leading-relaxed pr-2">
+                            <p className="text-cyber-700 dark:text-cyber-200 text-sm font-medium break-words leading-relaxed pr-2">
                                 {n}
                             </p>
                         </motion.div>

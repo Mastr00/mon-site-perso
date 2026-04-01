@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import SEO from '../components/SEO';
 import { useForm, ValidationError } from '@formspree/react';
 import { Send, CheckCircle, Loader2, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -89,7 +90,7 @@ export default function Contact() {
               </svg>
             </div>
             <h2 className="text-3xl font-bold text-cyber-950 dark:text-cyber-100 mb-4 font-mono">{t.contact.successTitle}</h2>
-            <p className="text-cyber-500 dark:text-cyber-400 mb-8">Message envoyé avec succès !</p>
+            <p className="text-cyber-500 dark:text-cyber-400 mb-8">{t.contact.successText}</p>
             <a href="/" className="inline-block px-6 py-2.5 bg-cyber-cta text-white font-bold rounded-sm hover:bg-cyber-accent transition-colors w-full">
               {t.contact.backHome}
             </a>
@@ -101,9 +102,10 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>{t.nav.contact} – Mehdi Mamdouh</title>
-      </Head>
+      <SEO
+        title={`${t.nav.contact} – Mehdi Mamdouh`}
+        description={t.contact.subtitle}
+      />
 
       <Toast message={t.contact.successTitle} show={showToast} onClose={() => setShowToast(false)} />
 

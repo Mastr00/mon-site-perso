@@ -44,7 +44,7 @@ export default function GithubWidget() {
     return (
         <motion.div 
             whileHover={{ scale: 1.02 }} 
-            className="h-full p-6 bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-500/20 rounded-2xl shadow-sm dark:shadow-[0_0_15px_rgba(139,92,246,0.1)] relative overflow-hidden group flex flex-col justify-between"
+            className="h-full p-6 bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-500/20 rounded-2xl shadow-sm dark:shadow-[0_0_15px_rgba(56,189,248,0.1)] relative overflow-hidden group flex flex-col justify-between"
         >
             <div className="absolute top-[-20%] right-[-10%] opacity-5 pointer-events-none transform scale-150 text-cyber-950 dark:text-cyber-100">
                 <Github size={120} />
@@ -74,7 +74,7 @@ export default function GithubWidget() {
                     </div>
                 </div>
 
-                <p className="text-sm text-slate-600 dark:text-cyber-400 line-clamp-2 mb-4">
+                <p className="text-sm text-cyber-600 dark:text-cyber-400 line-clamp-2 mb-4">
                     {githubUser.bio || "Développeur passionné."}
                 </p>
             </div>

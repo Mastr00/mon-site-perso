@@ -8,10 +8,28 @@ export default function PageLoader() {
     const totalBlocks = 20;
 
     useEffect(() => {
+        // Only show loader once per session
+        const hasLoaded = sessionStorage.getItem('page_loaded');
+        if (hasLoaded) {
+            setLoading(false);
+            return;
+        }
+
         // Respect prefers-reduced-motion
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (prefersReducedMotion.matches) {
             setFilledBlocks(totalBlocks);
+            setLoading(false);
+            sessionStorage.setItem('page_loaded', 'true');
+            return;
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!loading) return;
+
+        const hasLoaded = sessionStorage.getItem('page_loaded');
+        if (hasLoaded) {
             setLoading(false);
             return;
         }
@@ -22,10 +40,13 @@ export default function PageLoader() {
             }, 100);
             return () => clearTimeout(timer);
         } else {
-            const timer = setTimeout(() => setLoading(false), 300);
+            const timer = setTimeout(() => {
+                setLoading(false);
+                sessionStorage.setItem('page_loaded', 'true');
+            }, 300);
             return () => clearTimeout(timer);
         }
-    }, [filledBlocks]);
+    }, [filledBlocks, loading]);
 
     return (
         <AnimatePresence>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Head from 'next/head';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { Zap, Mail, ChevronDown } from 'lucide-react';
@@ -61,10 +61,10 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Mehdi – {t.home.studentIn} {t.home.role1}</title>
-        <meta name="description" content="Portfolio of Mehdi, student in electronics and cybersecurity." />
-      </Head>
+      <SEO
+        title={`Mehdi – ${t.home.studentIn} ${t.home.role1}`}
+        description={`Portfolio of Mehdi, student in electronics and cybersecurity.`}
+      />
 
       <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-cyber-50 dark:bg-cyber-950 overflow-hidden relative">
 

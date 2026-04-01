@@ -29,14 +29,11 @@ module.exports = {
         },
       },
       boxShadow: {
-        'neon': '0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(217, 70, 239, 0.2)',
-        'neon-lg': '0 0 30px rgba(139, 92, 246, 0.6), 0 0 60px rgba(217, 70, 239, 0.3)',
-        'neon-cyan': '0 0 20px rgba(34, 211, 238, 0.4)',
+        'neon-cyan': '0 0 20px rgba(56, 189, 248, 0.4)',
       },
       animation: {
         'float': 'float 3s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'blob': 'blob 10s infinite',
       },
       keyframes: {
         float: {
@@ -44,14 +41,8 @@ module.exports = {
           '50%': { transform: 'translateY(-10px)' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(139, 92, 246, 0.4)' },
-          '50%': { boxShadow: '0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(217, 70, 239, 0.3)' },
-        },
-        blob: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(56, 189, 248, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(56, 189, 248, 0.5)' },
         },
       },
       borderRadius: {

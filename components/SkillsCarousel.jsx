@@ -12,7 +12,7 @@ export default function SkillsCarousel() {
   return (
     <div className="w-full mt-24 overflow-hidden relative z-10 flex flex-col items-center">
       <p className="text-cyber-500 uppercase tracking-widest text-sm font-bold mb-8">
-        Technologies & Outils
+        {t.home.skillsTitle}
       </p>
       
       <div className="relative flex w-full max-w-5xl overflow-hidden mask-edges py-4">

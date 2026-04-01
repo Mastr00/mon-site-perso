@@ -1,4 +1,4 @@
-import Head from "next/head";
+import SEO from "../components/SEO";
 import Image from "next/image";
 import Link from "next/link";
 import Tilt from "react-parallax-tilt";
@@ -153,11 +153,10 @@ export default function Portfolio() {
 
   return (
     <>
-      <Head>
-        <title>Portfolio – Mehdi</title>
-        <meta property="og:title" content="Portfolio – Mehdi" />
-        <meta property="og:description" content="Découvrez mes projets en électronique, IoT et développement web." />
-      </Head>
+      <SEO
+        title="Portfolio – Mehdi"
+        description={t.portfolio.subtitle}
+      />
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 py-16 px-6 relative overflow-hidden bg-grid">
         <div className="max-w-6xl mx-auto relative z-10">

@@ -18,6 +18,19 @@ export default function Document() {
                 <meta name="theme-color" content="#38BDF8" />
             </Head>
             <body className="antialiased">
+                {/* Prevent FOUC: apply dark class before React hydrates */}
+                <script dangerouslySetInnerHTML={{ __html: `
+                    (function() {
+                        try {
+                            var t = localStorage.getItem('theme');
+                            if (t === 'dark' || !t) {
+                                document.documentElement.classList.add('dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                            }
+                        } catch(e) {}
+                    })();
+                `}} />
                 <Main />
                 <NextScript />
             </body>

@@ -31,9 +31,9 @@ export default function Footer() {
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowEasterEgg(false)}>
                     <div className="bg-cyber-800 border-2 border-cyber-accent p-8 rounded-xl text-cyber-50 text-center max-w-md animate-bounce shadow-[0_0_20px_rgba(56,189,248,0.3)]">
                         <p className="text-6xl mb-4">🎉</p>
-                        <h2 className="text-2xl font-bold mb-2">Bien joué !</h2>
-                        <p className="text-cyber-400">Tu as trouvé l'easter egg secret ! Tu es curieux, j'aime ça. 😎</p>
-                        <p className="text-xs mt-4 opacity-60">Clique n'importe où pour fermer</p>
+                        <h2 className="text-2xl font-bold mb-2">{t.footer.easterEggTitle}</h2>
+                        <p className="text-cyber-400">{t.footer.easterEggText}</p>
+                        <p className="text-xs mt-4 opacity-60">{t.footer.easterEggClose}</p>
                     </div>
                 </div>
             )}

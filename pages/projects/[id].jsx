@@ -35,7 +35,7 @@ export default function ProjectDetail({ project }) {
         <meta name="description" content={descStr} />
       </Head>
 
-      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 dark:bg-cyber-950 text-cyber-700 dark:text-cyber-100 py-16 px-4 md:px-8 relative overflow-hidden bg-grid">
+      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 text-cyber-700 dark:text-cyber-100 py-16 px-4 md:px-8 relative overflow-hidden bg-grid">
          {/* Background Elements */}
          <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
              <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyber-500/15 rounded-full blur-3xl"></div>
