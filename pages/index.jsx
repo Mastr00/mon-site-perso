@@ -14,7 +14,7 @@ export default function Home() {
   const [phase, setPhase] = useState("init"); // 'init' | 'typing' | 'name' | 'done'
 
   useEffect(() => {
-    // Check if user prefers reduced motion or if already animated
+    // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setDisplayedTitle(t.home.heroTitle + " ");
@@ -23,7 +23,22 @@ export default function Home() {
       return;
     }
 
-    setPhase("typing");
+    // Check if the loader has already finished (e.g. returning visit in same session)
+    const hasLoaded = sessionStorage.getItem('page_loaded');
+    if (hasLoaded) {
+      // Loader already done, start typing immediately
+      setPhase("typing");
+      return;
+    }
+
+    // Wait for loader to finish before starting typing animation
+    const handleLoaderDone = () => {
+      // Small delay after loader fade-out (400ms exit animation) so typing starts cleanly
+      setTimeout(() => setPhase("typing"), 450);
+    };
+
+    window.addEventListener('loaderDone', handleLoaderDone);
+    return () => window.removeEventListener('loaderDone', handleLoaderDone);
   }, [t.home.heroTitle]);
 
   useEffect(() => {

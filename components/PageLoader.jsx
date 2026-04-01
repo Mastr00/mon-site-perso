@@ -12,6 +12,7 @@ export default function PageLoader() {
         const hasLoaded = sessionStorage.getItem('page_loaded');
         if (hasLoaded) {
             setLoading(false);
+            window.dispatchEvent(new Event('loaderDone'));
             return;
         }
 
@@ -21,6 +22,7 @@ export default function PageLoader() {
             setFilledBlocks(totalBlocks);
             setLoading(false);
             sessionStorage.setItem('page_loaded', 'true');
+            window.dispatchEvent(new Event('loaderDone'));
             return;
         }
     }, []);
@@ -43,6 +45,7 @@ export default function PageLoader() {
             const timer = setTimeout(() => {
                 setLoading(false);
                 sessionStorage.setItem('page_loaded', 'true');
+                window.dispatchEvent(new Event('loaderDone'));
             }, 300);
             return () => clearTimeout(timer);
         }
