@@ -85,7 +85,7 @@ export default function DashboardPage({ initialProjects }: Props) {
         <meta name="description" content="Admin dashboard" />
       </Head>
 
-      <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 p-4 md:p-8">
+      <div className="bg-cyber-50 dark:bg-cyber-950 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
