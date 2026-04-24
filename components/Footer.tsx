@@ -7,7 +7,7 @@ export default function Footer() {
   const { t } = useLanguage();
   const [easterEggCount, setEasterEggCount] = useState(0);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleEasterEgg = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);

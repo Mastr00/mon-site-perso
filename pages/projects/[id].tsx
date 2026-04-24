@@ -103,7 +103,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-20">
               {/* Remove emoji from title cleanly for the main H1 */}
               <h1 className="text-4xl md:text-5xl font-bold font-mono text-white mb-4 drop-shadow-lg">
-                {titleStr.replace(/^[\u0000-\u1FFFF]\s*/u, '')}
+                {titleStr.replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
               </h1>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (

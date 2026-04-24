@@ -13,7 +13,14 @@
       "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__get_publishable_keys",
       "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__apply_migration",
       "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__execute_sql",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "mcp__399907bf-5215-40ca-9b69-77f449594d51__list_teams",
+      "mcp__399907bf-5215-40ca-9b69-77f449594d51__list_projects",
+      "mcp__399907bf-5215-40ca-9b69-77f449594d51__list_deployments",
+      "mcp__399907bf-5215-40ca-9b69-77f449594d51__get_runtime_logs",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }

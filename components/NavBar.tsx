@@ -15,7 +15,7 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  const getLinkStyle = (path) => {
+  const getLinkStyle = (path: string) => {
     const isActive = router.pathname === path;
     return isActive
       ? 'text-cyber-accent border-b-2 border-cyber-accent transition-colors duration-200 pb-1'

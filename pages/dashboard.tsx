@@ -104,7 +104,7 @@ export default function DashboardPage({ initialProjects }: Props) {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              {user?.picture && (
+              {user?.picture && user.picture.startsWith('http') && (
                 <Image
                   src={user.picture}
                   alt="Profile"
