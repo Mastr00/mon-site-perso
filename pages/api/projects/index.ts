@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
-  supabase,
+  getSupabase,
   createAdminClient,
   rowToProject,
   projectToRow,
@@ -12,7 +12,7 @@ import { requireAdmin } from '../../../lib/apiAuth';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     // Public read — RLS already restricts to published=true for anon, but be explicit.
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('projects')
       .select('*')
       .order('display_order', { ascending: true });

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
-  supabase,
+  getSupabase,
   createAdminClient,
   rowToProject,
   projectToRow,
@@ -14,7 +14,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!id) return res.status(400).json({ error: 'Invalid id' });
 
   if (req.method === 'GET') {
-    const { data, error } = await supabase.from('projects').select('*').eq('id', id).maybeSingle();
+    const { data, error } = await getSupabase()
+      .from('projects')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
     if (error) return res.status(500).json({ error: error.message });
     if (!data) return res.status(404).json({ error: 'Not found' });
     return res.status(200).json({ project: rowToProject(data as ProjectRow) });
