@@ -1,11 +1,34 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import type { Project } from '../types';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// Lazy init — on ne crée pas les clients au chargement du module pour que
+// `next build` puisse analyser les pages même si les variables d'env ne sont
+// pas encore définies sur l'environnement de build.
 
-// Client "public" (anon) — lecture seule (RLS applique le filtre published=true)
-export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+function getUrl(): string {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!url) throw new Error('NEXT_PUBLIC_SUPABASE_URL is missing');
+  return url;
+}
+
+let anonClient: SupabaseClient | null = null;
+
+function getAnonClient(): SupabaseClient {
+  if (anonClient) return anonClient;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!key) throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is missing');
+  anonClient = createClient(getUrl(), key);
+  return anonClient;
+}
+
+// Proxy exposant un "supabase" qui se crée à la première utilisation.
+export const supabase: SupabaseClient = new Proxy({} as SupabaseClient, {
+  get(_target, prop: string | symbol) {
+    const client = getAnonClient();
+    const v = (client as unknown as Record<string | symbol, unknown>)[prop];
+    return typeof v === 'function' ? (v as Function).bind(client) : v;
+  },
+});
 
 // Client "admin" (service_role) — bypass RLS. À utiliser UNIQUEMENT côté serveur.
 export function createAdminClient(): SupabaseClient {
@@ -13,7 +36,7 @@ export function createAdminClient(): SupabaseClient {
   if (!serviceRoleKey) {
     throw new Error('SUPABASE_SERVICE_ROLE_KEY is missing');
   }
-  return createClient(supabaseUrl, serviceRoleKey, {
+  return createClient(getUrl(), serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }
