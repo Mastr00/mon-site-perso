@@ -13,22 +13,13 @@ function getUrl(): string {
 
 let anonClient: SupabaseClient | null = null;
 
-function getAnonClient(): SupabaseClient {
+export function getSupabase(): SupabaseClient {
   if (anonClient) return anonClient;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!key) throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is missing');
   anonClient = createClient(getUrl(), key);
   return anonClient;
 }
-
-// Proxy exposant un "supabase" qui se crée à la première utilisation.
-export const supabase: SupabaseClient = new Proxy({} as SupabaseClient, {
-  get(_target, prop: string | symbol) {
-    const client = getAnonClient();
-    const v = (client as unknown as Record<string | symbol, unknown>)[prop];
-    return typeof v === 'function' ? (v as Function).bind(client) : v;
-  },
-});
 
 // Client "admin" (service_role) — bypass RLS. À utiliser UNIQUEMENT côté serveur.
 export function createAdminClient(): SupabaseClient {
@@ -94,7 +85,7 @@ export type ProjectInput = Partial<Project> & {
 
 // Fetch all published projects (ordered). Used by getStaticProps.
 export async function fetchPublishedProjects(): Promise<Project[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('projects')
     .select('*')
     .eq('published', true)
@@ -105,7 +96,7 @@ export async function fetchPublishedProjects(): Promise<Project[]> {
 
 // Fetch one published project by id. Returns null if not found.
 export async function fetchPublishedProjectById(id: string): Promise<Project | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('projects')
     .select('*')
     .eq('published', true)
