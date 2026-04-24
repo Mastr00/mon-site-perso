@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 type SEOProps = {
   title?: string;
@@ -11,8 +12,11 @@ export default function SEO({
   title = 'Mehdi Mamdouh',
   description = 'Portfolio de Mehdi Mamdouh, étudiant en électronique et développeur IoT basé à Nice, France.',
   image,
-  url = 'https://mmsa.app',
+  url,
 }: SEOProps) {
+  const router = useRouter();
+  const siteUrl = 'https://mmsa.app';
+  const canonicalUrl = url || `${siteUrl}${router.asPath.split('?')[0]}`;
   const fullTitle = title.includes('Mehdi') ? title : `${title} – Mehdi Mamdouh`;
   const ogImage =
     image ||
@@ -26,7 +30,7 @@ export default function SEO({
       <meta name="description" content={description} />
       <meta name="author" content="Mehdi Mamdouh" />
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href={url} />
+      <link rel="canonical" href={canonicalUrl} />
 
       {/* Favicon */}
       <link rel="icon" type="image/png" href="/favicon.png" />
@@ -35,7 +39,7 @@ export default function SEO({
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={url} />
+      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
@@ -44,7 +48,7 @@ export default function SEO({
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
+      <meta property="twitter:url" content={canonicalUrl} />
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={ogImage} />
@@ -57,7 +61,7 @@ export default function SEO({
             '@context': 'https://schema.org',
             '@type': 'Person',
             name: 'Mehdi Mamdouh',
-            url: url,
+            url: canonicalUrl,
             image: ogImage,
             jobTitle: 'Étudiant en Électronique & Développeur IoT',
             worksFor: {

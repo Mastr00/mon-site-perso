@@ -11,10 +11,11 @@ import { requireAdmin } from '../../../lib/apiAuth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    // Public read — RLS already restricts to published=true for anon, but be explicit.
+    // Public read — only published projects
     const { data, error } = await getSupabase()
       .from('projects')
       .select('*')
+      .eq('published', true)
       .order('display_order', { ascending: true });
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json({ projects: (data as ProjectRow[]).map(rowToProject) });

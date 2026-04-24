@@ -6,7 +6,7 @@ export default function LanguageToggle() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyber-100 dark:bg-cyber-800 hover:bg-cyber-200 dark:hover:bg-cyber-700 transition-colors border border-cyber-200 dark:border-cyber-700"
       aria-label="Toggle language"
     >
       <span
