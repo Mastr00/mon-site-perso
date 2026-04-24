@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
@@ -105,12 +104,16 @@ export default function DashboardPage({ initialProjects }: Props) {
             </div>
             <div className="flex items-center gap-4">
               {user?.picture && user.picture.startsWith('http') && (
-                <Image
+                // Plain <img> on purpose: next/image optimizer can hang on arbitrary
+                // identity-provider avatar hosts that aren't in remotePatterns.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={user.picture}
                   alt="Profile"
                   width={48}
                   height={48}
-                  className="rounded-full border-2 border-cyber-accent/30"
+                  referrerPolicy="no-referrer"
+                  className="rounded-full border-2 border-cyber-accent/30 w-12 h-12 object-cover"
                 />
               )}
               <a
