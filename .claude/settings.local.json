@@ -20,7 +20,11 @@
       "mcp__399907bf-5215-40ca-9b69-77f449594d51__get_runtime_logs",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(dir /b .env*)",
+      "Bash(git rm *)",
+      "Bash(git reset *)",
+      "mcp__399907bf-5215-40ca-9b69-77f449594d51__get_deployment"
     ]
   }
 }
