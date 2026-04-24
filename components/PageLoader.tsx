@@ -62,9 +62,10 @@ export default function PageLoader() {
           style={{ fontFamily: "'Press Start 2P', system-ui" }}
         >
           <Head>
-            <style>{`
-                            @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-                        `}</style>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            />
           </Head>
 
           <div className="flex flex-col items-center justify-center gap-4">
