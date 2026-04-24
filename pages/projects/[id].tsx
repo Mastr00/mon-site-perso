@@ -17,18 +17,30 @@ import type { Project } from '../../types';
 import { useLanguage } from '../../context/LanguageContext';
 
 export async function getStaticPaths() {
-  const projects = await fetchPublishedProjects();
-  const paths = projects.map((p) => ({ params: { id: p.id } }));
-  return { paths, fallback: 'blocking' as const };
+  try {
+    const projects = await fetchPublishedProjects();
+    const paths = projects.map((p) => ({ params: { id: p.id } }));
+    return { paths, fallback: 'blocking' as const };
+  } catch (e) {
+    // Si Supabase n'est pas joignable au build (env vars manquantes, etc.),
+    // on laisse fallback: 'blocking' générer les pages à la volée.
+    console.warn('[projects/[id]] getStaticPaths failed, using empty paths:', e);
+    return { paths: [], fallback: 'blocking' as const };
+  }
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  const project = await fetchPublishedProjectById(params.id);
-  if (!project) return { notFound: true, revalidate: 60 };
-  return {
-    props: { project },
-    revalidate: 60,
-  };
+  try {
+    const project = await fetchPublishedProjectById(params.id);
+    if (!project) return { notFound: true, revalidate: 60 };
+    return {
+      props: { project },
+      revalidate: 60,
+    };
+  } catch (e) {
+    console.warn('[projects/[id]] getStaticProps failed:', e);
+    return { notFound: true, revalidate: 10 };
+  }
 }
 
 export default function ProjectDetail({ project }: { project: Project }) {
