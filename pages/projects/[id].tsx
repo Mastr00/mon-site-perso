@@ -22,9 +22,10 @@ export async function getStaticPaths() {
     const paths = projects.map((p) => ({ params: { id: p.id } }));
     return { paths, fallback: 'blocking' as const };
   } catch (e) {
-    // Si Supabase n'est pas joignable au build (env vars manquantes, etc.),
-    // on laisse fallback: 'blocking' générer les pages à la volée.
-    console.warn('[projects/[id]] getStaticPaths failed, using empty paths:', e);
+    const msg = e instanceof Error ? e.message : String(e);
+    const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const hasKey = !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    console.error(`[projects/[id]] getStaticPaths FAILED | hasUrl=${hasUrl} hasKey=${hasKey} | err=${msg}`);
     return { paths: [], fallback: 'blocking' as const };
   }
 }
@@ -38,7 +39,8 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
       revalidate: 60,
     };
   } catch (e) {
-    console.warn('[projects/[id]] getStaticProps failed:', e);
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error(`[projects/[id]] getStaticProps FAILED id=${params.id} | err=${msg}`);
     return { notFound: true, revalidate: 10 };
   }
 }
