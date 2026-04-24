@@ -27,7 +27,7 @@ export default function GithubWidget() {
 
   if (loading) {
     return (
-      <div className="h-full min-h-[160px] p-6 bg-cyber-100 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-900 rounded-sm flex flex-col items-center justify-center text-cyber-500">
+      <div className="min-h-[160px] p-6 bg-cyber-100 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-900 rounded-sm flex flex-col items-center justify-center text-cyber-500">
         <Loader2 className="animate-spin mb-2" size={24} />
         <span className="text-sm">Connexion à GitHub...</span>
       </div>
@@ -36,7 +36,7 @@ export default function GithubWidget() {
 
   if (error || !githubUser) {
     return (
-      <div className="h-full p-6 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-sm flex items-center justify-center text-red-500">
+      <div className="p-6 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-sm flex items-center justify-center text-red-500">
         <span className="text-sm">Erreur API GitHub</span>
       </div>
     );
@@ -45,7 +45,7 @@ export default function GithubWidget() {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      className="h-full p-6 bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-500/20 rounded-sm shadow-sm dark:shadow-[0_0_15px_rgba(56,189,248,0.1)] relative overflow-hidden group flex flex-col justify-between"
+      className="p-6 bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-500/20 rounded-sm shadow-sm dark:shadow-[0_0_15px_rgba(56,189,248,0.1)] relative overflow-hidden group flex flex-col justify-between"
     >
       <div className="absolute top-[-20%] right-[-10%] opacity-5 pointer-events-none transform scale-150 text-cyber-950 dark:text-cyber-100">
         <Github size={120} />
