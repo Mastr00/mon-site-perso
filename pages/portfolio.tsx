@@ -10,11 +10,19 @@ import { useLanguage } from '../context/LanguageContext';
 import { ExternalLink, Github, Cpu, Globe, Shield, Radio, Code2, Cog, Eye } from 'lucide-react';
 
 export async function getStaticProps() {
-  const projects = await fetchPublishedProjects();
-  return {
-    props: { projects },
-    revalidate: 60,
-  };
+  try {
+    const projects = await fetchPublishedProjects();
+    return {
+      props: { projects },
+      revalidate: 60,
+    };
+  } catch (e) {
+    console.warn('[portfolio] getStaticProps failed, falling back to empty list:', e);
+    return {
+      props: { projects: [] },
+      revalidate: 10,
+    };
+  }
 }
 
 // Map tags to icons
