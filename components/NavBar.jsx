@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import ThemeToggle from "./ThemeToggle";
-import LanguageToggle from "./LanguageToggle";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../context/LanguageContext";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function NavBar() {
   const { user } = useUser();
@@ -17,8 +17,8 @@ export default function NavBar() {
   const getLinkStyle = (path) => {
     const isActive = router.pathname === path;
     return isActive
-      ? "text-cyber-accent border-b-2 border-cyber-accent transition-colors duration-200 pb-1"
-      : "text-cyber-400 hover:text-cyber-100 transition-colors duration-200 pb-1 relative group";
+      ? 'text-cyber-accent border-b-2 border-cyber-accent transition-colors duration-200 pb-1'
+      : 'text-cyber-400 hover:text-cyber-100 transition-colors duration-200 pb-1 relative group';
   };
 
   return (
@@ -28,16 +28,30 @@ export default function NavBar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 text-xl font-extrabold">
             <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
-            <span className="font-mono font-semibold text-cyber-accent tracking-tighter">MMSA.app</span>
+            <span className="font-mono font-semibold text-cyber-accent tracking-tighter">
+              MMSA.app
+            </span>
           </Link>
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/" className={getLinkStyle("/")}>{t.nav.home}</Link>
-            <Link href="/portfolio" className={getLinkStyle("/portfolio")}>{t.nav.portfolio}</Link>
-            <Link href="/cv" className={getLinkStyle("/cv")}>{t.nav.cv}</Link>
-            <Link href="/contact" className={getLinkStyle("/contact")}>{t.nav.contact}</Link>
-            {user && <Link href="/dashboard" className={getLinkStyle("/dashboard")}>{t.nav.dashboard}</Link>}
+            <Link href="/" className={getLinkStyle('/')}>
+              {t.nav.home}
+            </Link>
+            <Link href="/portfolio" className={getLinkStyle('/portfolio')}>
+              {t.nav.portfolio}
+            </Link>
+            <Link href="/cv" className={getLinkStyle('/cv')}>
+              {t.nav.cv}
+            </Link>
+            <Link href="/contact" className={getLinkStyle('/contact')}>
+              {t.nav.contact}
+            </Link>
+            {user && (
+              <Link href="/dashboard" className={getLinkStyle('/dashboard')}>
+                {t.nav.dashboard}
+              </Link>
+            )}
 
             <ThemeToggle />
             <LanguageToggle />
@@ -77,17 +91,39 @@ export default function NavBar() {
           <motion.div
             key="mobile-menu"
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
+            animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             className="md:hidden bg-cyber-50 dark:bg-cyber-900 border-b border-cyber-200 dark:border-cyber-900 overflow-hidden"
           >
             <div className="flex flex-col items-start p-4 space-y-3">
-              <Link href="/" className={getLinkStyle("/")} onClick={() => setIsOpen(false)}>{t.nav.home}</Link>
-              <Link href="/portfolio" className={getLinkStyle("/portfolio")} onClick={() => setIsOpen(false)}>{t.nav.portfolio}</Link>
-              <Link href="/cv" className={getLinkStyle("/cv")} onClick={() => setIsOpen(false)}>{t.nav.cv}</Link>
-              <Link href="/contact" className={getLinkStyle("/contact")} onClick={() => setIsOpen(false)}>{t.nav.contact}</Link>
+              <Link href="/" className={getLinkStyle('/')} onClick={() => setIsOpen(false)}>
+                {t.nav.home}
+              </Link>
+              <Link
+                href="/portfolio"
+                className={getLinkStyle('/portfolio')}
+                onClick={() => setIsOpen(false)}
+              >
+                {t.nav.portfolio}
+              </Link>
+              <Link href="/cv" className={getLinkStyle('/cv')} onClick={() => setIsOpen(false)}>
+                {t.nav.cv}
+              </Link>
+              <Link
+                href="/contact"
+                className={getLinkStyle('/contact')}
+                onClick={() => setIsOpen(false)}
+              >
+                {t.nav.contact}
+              </Link>
               {user && (
-                <Link href="/dashboard" className={getLinkStyle("/dashboard")} onClick={() => setIsOpen(false)}>{t.nav.dashboard}</Link>
+                <Link
+                  href="/dashboard"
+                  className={getLinkStyle('/dashboard')}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t.nav.dashboard}
+                </Link>
               )}
               <div className="flex gap-4 pt-4 mt-4 border-t border-cyber-200 dark:border-cyber-800 w-full">
                 <ThemeToggle />

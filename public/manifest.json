@@ -1,0 +1,24 @@
+{
+  "name": "Mehdi Mamdouh — Portfolio",
+  "short_name": "Mehdi",
+  "description": "Portfolio de Mehdi Mamdouh — étudiant en électronique et développeur IoT.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F172A",
+  "theme_color": "#38BDF8",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -18,3 +18,12 @@ pnpm-debug.log*
 # Misc
 .DS_Store
 build_log.txt
+
+# TypeScript
+next-env.d.ts
+*.tsbuildinfo
+
+# Sitemap (generated at build time)
+public/sitemap.xml
+public/sitemap-0.xml
+public/robots.txt

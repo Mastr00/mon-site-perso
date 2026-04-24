@@ -5,5 +5,5 @@ export default withMiddlewareAuthRequired();
 
 // Only match these routes
 export const config = {
-  matcher: ['/dashboard']
+  matcher: ['/dashboard'],
 };

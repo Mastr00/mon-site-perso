@@ -8,6 +8,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 's.gravatar.com' },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,20 +1,20 @@
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import Head from "next/head";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import Head from 'next/head';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import WeatherWidget from "../components/dashboard/WeatherWidget";
-import GithubWidget from "../components/dashboard/GithubWidget";
-import QuoteWidget from "../components/dashboard/QuoteWidget";
-import TasksWidget from "../components/dashboard/TasksWidget";
-import NotesWidget from "../components/dashboard/NotesWidget";
-import ProjectsWidget from "../components/dashboard/ProjectsWidget";
-import MoodWidget from "../components/dashboard/MoodWidget";
-import JokeWidget from "../components/dashboard/JokeWidget";
-import CryptoWidget from "../components/dashboard/CryptoWidget";
-import LofiWidget from "../components/dashboard/LofiWidget";
-import PetWidget from "../components/dashboard/PetWidget";
+import WeatherWidget from '../components/dashboard/WeatherWidget';
+import GithubWidget from '../components/dashboard/GithubWidget';
+import QuoteWidget from '../components/dashboard/QuoteWidget';
+import TasksWidget from '../components/dashboard/TasksWidget';
+import NotesWidget from '../components/dashboard/NotesWidget';
+import ProjectsWidget from '../components/dashboard/ProjectsWidget';
+import MoodWidget from '../components/dashboard/MoodWidget';
+import JokeWidget from '../components/dashboard/JokeWidget';
+import CryptoWidget from '../components/dashboard/CryptoWidget';
+import LofiWidget from '../components/dashboard/LofiWidget';
+import PetWidget from '../components/dashboard/PetWidget';
 
 function DashboardPage() {
   const { user } = useUser();
@@ -29,7 +29,6 @@ function DashboardPage() {
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
-
           {/* Header / Welcome */}
           <motion.div
             className="flex flex-col md:flex-row items-center justify-between mb-8 bg-cyber-50 dark:bg-cyber-900 border border-cyber-500/20 p-6 rounded-2xl shadow-[0_0_15px_rgba(56,189,248,0.2)]"
@@ -39,7 +38,8 @@ function DashboardPage() {
           >
             <div className="text-center md:text-left mb-4 md:mb-0">
               <h1 className="text-3xl font-bold text-cyber-950 dark:text-cyber-100">
-                {t.dashboard.greeting} <span className="text-cyber-accent font-mono">{user ? user.name : "Mehdi"}</span> 👋
+                {t.dashboard.greeting}{' '}
+                <span className="text-cyber-accent font-mono">{user ? user.name : 'Mehdi'}</span> 👋
               </h1>
               <p className="text-cyber-500 dark:text-cyber-400 mt-1">{t.dashboard.subtitle}</p>
             </div>
@@ -56,7 +56,6 @@ function DashboardPage() {
 
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
-
             {/* Mood Widget - 1 col */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -152,7 +151,6 @@ function DashboardPage() {
             >
               <ProjectsWidget />
             </motion.div>
-
           </div>
         </div>
       </div>

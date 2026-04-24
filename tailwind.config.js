@@ -1,15 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: [
-    "./pages/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}"
-  ],
+  content: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"JetBrains Mono"', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains)', '"JetBrains Mono"', 'monospace'],
+        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         cyber: {
@@ -32,7 +29,7 @@ module.exports = {
         'neon-cyan': '0 0 20px rgba(56, 189, 248, 0.4)',
       },
       animation: {
-        'float': 'float 3s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
       },
       keyframes: {
@@ -46,9 +43,9 @@ module.exports = {
         },
       },
       borderRadius: {
-        'xl': '16px',
+        xl: '16px',
         '2xl': '24px',
-      }
+      },
     },
   },
   plugins: [],

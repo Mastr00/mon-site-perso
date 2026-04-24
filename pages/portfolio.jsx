@@ -1,22 +1,35 @@
-import SEO from "../components/SEO";
-import Image from "next/image";
-import Link from "next/link";
-import Tilt from "react-parallax-tilt";
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import SEO from '../components/SEO';
+import Image from 'next/image';
+import Link from 'next/link';
+import Tilt from 'react-parallax-tilt';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { projects as staticProjects } from '../lib/projectsData';
 import { useLanguage } from '../context/LanguageContext';
 import { ExternalLink, Github, Cpu, Globe, Shield, Radio, Code2, Cog, Eye } from 'lucide-react';
 
 // Map tags to icons
 const tagIcons = {
-  'ESP32': Cpu, 'ESP32-CAM': Cpu, 'ESP32-S3': Cpu,
-  'IoT': Radio, 'Python': Code2, 'OpenCV': Eye,
-  'C++': Code2, 'Robotique': Cog, 'GPS': Radio,
-  'OLED': Cpu, 'Embedded': Cpu, 'Safety': Shield,
-  'Accel': Cog, 'Lidar': Radio, '3D Mapping': Globe,
-  'Web Interface': Globe, 'Next.js': Globe, 'React': Code2,
-  'Design': Eye, 'TailwindCSS': Code2,
+  ESP32: Cpu,
+  'ESP32-CAM': Cpu,
+  'ESP32-S3': Cpu,
+  IoT: Radio,
+  Python: Code2,
+  OpenCV: Eye,
+  'C++': Code2,
+  Robotique: Cog,
+  GPS: Radio,
+  OLED: Cpu,
+  Embedded: Cpu,
+  Safety: Shield,
+  Accel: Cog,
+  Lidar: Radio,
+  '3D Mapping': Globe,
+  'Web Interface': Globe,
+  'Next.js': Globe,
+  React: Code2,
+  Design: Eye,
+  TailwindCSS: Code2,
 };
 
 function getTagIcon(tag) {
@@ -26,14 +39,14 @@ function getTagIcon(tag) {
 // Scroll-triggered card wrapper
 function AnimatedCard({ children, index }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
       className="h-full"
     >
       {children}
@@ -46,19 +59,18 @@ function ProjectCard({ p, index, t, locale }) {
 
   return (
     <AnimatedCard index={index}>
-      <Tilt 
-        tiltMaxAngleX={8} 
-        tiltMaxAngleY={8} 
-        perspective={1000} 
-        transitionSpeed={1000} 
+      <Tilt
+        tiltMaxAngleX={8}
+        tiltMaxAngleY={8}
+        perspective={1000}
+        transitionSpeed={1000}
         className="h-full block"
       >
         <article className="group flex flex-col bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-800 rounded-sm overflow-hidden project-card h-full relative cursor-pointer">
-
           {/* Image Section */}
           <div className="relative h-60 w-full overflow-hidden bg-cyber-100 dark:bg-cyber-800 rounded-t-sm">
             <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-[#1E293B]/40 to-transparent z-10 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
-            
+
             {!imgError ? (
               <Image
                 src={p.image}
@@ -84,7 +96,10 @@ function ProjectCard({ p, index, t, locale }) {
 
           <div className="p-6 flex flex-col flex-grow relative">
             <h2 className="text-xl font-bold text-cyber-950 dark:text-cyber-100 mb-2 group-hover:text-cyber-accent transition-colors">
-              {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u, '')}
+              {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(
+                /^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u,
+                ''
+              )}
             </h2>
 
             <p className="text-cyber-500 dark:text-cyber-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
@@ -100,7 +115,10 @@ function ProjectCard({ p, index, t, locale }) {
                   'bg-cyber-200 dark:bg-cyber-800 text-cyber-500 border-transparent',
                 ];
                 return (
-                  <span key={tag} className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-[3px] border ${colorClasses[i % 3]}`}>
+                  <span
+                    key={tag}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-[3px] border ${colorClasses[i % 3]}`}
+                  >
                     <Icon size={12} />
                     {tag}
                   </span>
@@ -139,24 +157,23 @@ function ProjectCard({ p, index, t, locale }) {
 
 export default function Portfolio() {
   const { t, locale } = useLanguage();
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState('All');
 
-  const categories = ["All", "Web", "IoT", "Embedded"];
+  const categories = ['All', 'Web', 'IoT', 'Embedded'];
 
-  const filteredProjects = staticProjects.filter(p => {
-    if (filter === "All") return true;
-    return p.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase()) ||
-      (filter === "Web" && (tag.includes("React") || tag.includes("Next.js"))) ||
-      (filter === "Embedded" && (tag.includes("C++") || tag.includes("Lidar")))
+  const filteredProjects = staticProjects.filter((p) => {
+    if (filter === 'All') return true;
+    return p.tags.some(
+      (tag) =>
+        tag.toLowerCase().includes(filter.toLowerCase()) ||
+        (filter === 'Web' && (tag.includes('React') || tag.includes('Next.js'))) ||
+        (filter === 'Embedded' && (tag.includes('C++') || tag.includes('Lidar')))
     );
   });
 
   return (
     <>
-      <SEO
-        title="Portfolio – Mehdi"
-        description={t.portfolio.subtitle}
-      />
+      <SEO title="Portfolio – Mehdi" description={t.portfolio.subtitle} />
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 py-16 px-6 relative overflow-hidden bg-grid">
         <div className="max-w-6xl mx-auto relative z-10">
@@ -181,11 +198,11 @@ export default function Portfolio() {
                   onClick={() => setFilter(cat)}
                   className={`px-[16px] py-[6px] text-sm font-bold transition-all duration-150 border rounded-[3px] ${
                     filter === cat
-                    ? "bg-cyber-accent text-white border-transparent"
-                    : "bg-transparent text-cyber-500 dark:text-cyber-400 border-transparent hover:bg-cyber-200 dark:hover:bg-cyber-800"
+                      ? 'bg-cyber-accent text-white border-transparent'
+                      : 'bg-transparent text-cyber-500 dark:text-cyber-400 border-transparent hover:bg-cyber-200 dark:hover:bg-cyber-800'
                   }`}
                 >
-                  {cat === "All" ? t.portfolio.filterAll : cat}
+                  {cat === 'All' ? t.portfolio.filterAll : cat}
                 </button>
               ))}
             </div>

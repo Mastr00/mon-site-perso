@@ -40,7 +40,9 @@ export default function ThemeToggle() {
       className="p-2 rounded-lg text-cyber-400 hover:text-cyber-accent hover:bg-cyber-200 dark:hover:bg-cyber-800 transition-colors duration-300"
       aria-label="Toggle theme"
     >
-      <div className={`transition-transform duration-500 ${theme === 'dark' ? 'rotate-180' : 'rotate-0'}`}>
+      <div
+        className={`transition-transform duration-500 ${theme === 'dark' ? 'rotate-180' : 'rotate-0'}`}
+      >
         {theme === 'dark' ? <Moon size={20} /> : <Sun size={20} />}
       </div>
     </button>
