@@ -4,9 +4,18 @@ import Link from 'next/link';
 import Tilt from 'react-parallax-tilt';
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { projects as staticProjects } from '../lib/projectsData';
+import { fetchPublishedProjects } from '../lib/supabase';
+import type { Project } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ExternalLink, Github, Cpu, Globe, Shield, Radio, Code2, Cog, Eye } from 'lucide-react';
+
+export async function getStaticProps() {
+  const projects = await fetchPublishedProjects();
+  return {
+    props: { projects },
+    revalidate: 60,
+  };
+}
 
 // Map tags to icons
 const tagIcons = {
@@ -32,12 +41,12 @@ const tagIcons = {
   TailwindCSS: Code2,
 };
 
-function getTagIcon(tag) {
-  return tagIcons[tag] || Code2;
+function getTagIcon(tag: string) {
+  return tagIcons[tag as keyof typeof tagIcons] || Code2;
 }
 
 // Scroll-triggered card wrapper
-function AnimatedCard({ children, index }) {
+function AnimatedCard({ children, index }: { children: React.ReactNode; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
@@ -54,7 +63,14 @@ function AnimatedCard({ children, index }) {
   );
 }
 
-function ProjectCard({ p, index, t, locale }) {
+type ProjectCardProps = {
+  p: Project;
+  index: number;
+  t: ReturnType<typeof useLanguage>['t'];
+  locale: ReturnType<typeof useLanguage>['locale'];
+};
+
+function ProjectCard({ p, index, t, locale }: ProjectCardProps) {
   const [imgError, setImgError] = useState(false);
 
   return (
@@ -155,13 +171,13 @@ function ProjectCard({ p, index, t, locale }) {
   );
 }
 
-export default function Portfolio() {
+export default function Portfolio({ projects }: { projects: Project[] }) {
   const { t, locale } = useLanguage();
   const [filter, setFilter] = useState('All');
 
   const categories = ['All', 'Web', 'IoT', 'Embedded'];
 
-  const filteredProjects = staticProjects.filter((p) => {
+  const filteredProjects = projects.filter((p) => {
     if (filter === 'All') return true;
     return p.tags.some(
       (tag) =>

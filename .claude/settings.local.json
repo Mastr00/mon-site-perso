@@ -4,7 +4,16 @@
       "Bash(npm install *)",
       "Bash(npx next *)",
       "Bash(npx prettier *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__list_projects",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__list_organizations",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__get_project",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__list_tables",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__get_project_url",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__get_publishable_keys",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__apply_migration",
+      "mcp__5d2ea08d-df43-4ae3-a571-dc48b7fb3809__execute_sql",
+      "Bash(npx tsc *)"
     ]
   }
 }

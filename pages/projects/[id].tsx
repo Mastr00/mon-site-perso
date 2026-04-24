@@ -12,24 +12,26 @@ import {
   Lightbulb,
   CheckCircle2,
 } from 'lucide-react';
-import { projects } from '../../lib/projectsData';
+import { fetchPublishedProjects, fetchPublishedProjectById } from '../../lib/supabase';
+import type { Project } from '../../types';
 import { useLanguage } from '../../context/LanguageContext';
 
 export async function getStaticPaths() {
-  const paths = projects.map((p) => ({
-    params: { id: p.id },
-  }));
-  return { paths, fallback: false };
+  const projects = await fetchPublishedProjects();
+  const paths = projects.map((p) => ({ params: { id: p.id } }));
+  return { paths, fallback: 'blocking' as const };
 }
 
-export async function getStaticProps({ params }) {
-  const project = projects.find((p) => p.id === params.id);
+export async function getStaticProps({ params }: { params: { id: string } }) {
+  const project = await fetchPublishedProjectById(params.id);
+  if (!project) return { notFound: true, revalidate: 60 };
   return {
     props: { project },
+    revalidate: 60,
   };
 }
 
-export default function ProjectDetail({ project }) {
+export default function ProjectDetail({ project }: { project: Project }) {
   const { t, locale } = useLanguage();
 
   if (!project) return <div>{t.portfolio.notFound}</div>;
