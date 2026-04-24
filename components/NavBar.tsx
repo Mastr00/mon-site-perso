@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import ThemeToggle from './ThemeToggle';
@@ -27,7 +28,14 @@ export default function NavBar() {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 text-xl font-extrabold">
-            <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={48}
+              height={48}
+              className="h-12 w-12 object-contain"
+              priority
+            />
             <span className="font-mono font-semibold text-cyber-accent tracking-tighter">
               MMSA.app
             </span>

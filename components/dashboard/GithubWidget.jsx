@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Github, Users, BookMarked, GitCommit, Loader2, ExternalLink } from 'lucide-react';
 
@@ -53,10 +54,13 @@ export default function GithubWidget() {
       <div>
         <div className="flex justify-between items-start mb-4">
           <div className="flex items-center gap-3">
-            <img
+            <Image
               src={githubUser.avatar_url}
               alt="GitHub Avatar"
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full border-2 border-cyber-500/30"
+              unoptimized
             />
             <div>
               <h2 className="text-lg font-bold text-cyber-950 dark:text-cyber-100 flex items-center gap-2">

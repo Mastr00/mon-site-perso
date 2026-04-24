@@ -1,11 +1,18 @@
 import Head from 'next/head';
 
+type SEOProps = {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+};
+
 export default function SEO({
   title = 'Mehdi Mamdouh',
   description = 'Portfolio de Mehdi Mamdouh, étudiant en électronique et développeur IoT basé à Nice, France.',
   image,
   url = 'https://mmsa.app',
-}) {
+}: SEOProps) {
   const fullTitle = title.includes('Mehdi') ? title : `${title} – Mehdi Mamdouh`;
   const ogImage =
     image ||

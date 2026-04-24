@@ -7,8 +7,9 @@ import { useLanguage } from '../context/LanguageContext';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-// Toast component
-function Toast({ message, show, onClose }) {
+type ToastProps = { message: string; show: boolean; onClose: () => void };
+
+function Toast({ message, show, onClose }: ToastProps) {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(onClose, 5000);
@@ -36,36 +37,44 @@ function Toast({ message, show, onClose }) {
   );
 }
 
+type ContactField = 'name' | 'email' | 'subject' | 'message';
+type FieldValues = Record<ContactField, string>;
+type TouchedFields = Partial<Record<ContactField, boolean>>;
+
 export default function Contact() {
   const [state, handleSubmit] = useForm('xzddapgr');
   const { t } = useLanguage();
   const [showToast, setShowToast] = useState(false);
-  const [touched, setTouched] = useState({});
-  const [values, setValues] = useState({ name: '', email: '', subject: '', message: '' });
+  const [touched, setTouched] = useState<TouchedFields>({});
+  const [values, setValues] = useState<FieldValues>({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
-  // Show toast on success
   useEffect(() => {
     if (state.succeeded) {
       setShowToast(true);
     }
   }, [state.succeeded]);
 
-  const handleBlur = (field) => {
+  const handleBlur = (field: ContactField) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleChange = (field, value) => {
+  const handleChange = (field: ContactField, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }));
   };
 
-  const getFieldState = (field) => {
+  const getFieldState = (field: ContactField) => {
     if (!touched[field]) return 'default';
     if (!values[field] || values[field].trim() === '') return 'error';
     if (field === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values[field])) return 'error';
     return 'valid';
   };
 
-  const fieldClasses = (field) => {
+  const fieldClasses = (field: ContactField) => {
     const fieldState = getFieldState(field);
     const base =
       'w-full px-4 py-3 rounded-sm bg-cyber-100 dark:bg-cyber-800 text-cyber-950 dark:text-cyber-100 outline-none transition-all duration-200 placeholder-cyber-400 border';
@@ -278,7 +287,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   required
-                  rows="4"
+                  rows={4}
                   value={values.message}
                   onChange={(e) => handleChange('message', e.target.value)}
                   onBlur={() => handleBlur('message')}
