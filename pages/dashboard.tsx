@@ -16,15 +16,17 @@ import {
 import GithubWidget from '../components/dashboard/GithubWidget';
 import ProjectEditor from '../components/dashboard/ProjectEditor';
 import { createAdminClient, rowToProject, type ProjectRow } from '../lib/supabase';
+import { fetchGithubUser, type GithubUser } from '../lib/github';
 import type { Project } from '../types';
 
 type AdminProject = Project & { published: boolean; displayOrder: number };
 
 type Props = {
   initialProjects: AdminProject[];
+  githubUser: GithubUser | null;
 };
 
-export default function DashboardPage({ initialProjects }: Props) {
+export default function DashboardPage({ initialProjects, githubUser }: Props) {
   const { user } = useUser();
   const [projects, setProjects] = useState<AdminProject[]>(initialProjects);
   const [mode, setMode] = useState<'idle' | 'create' | 'edit'>('idle');
@@ -202,7 +204,7 @@ export default function DashboardPage({ initialProjects }: Props) {
 
             {/* Sidebar: GitHub + shortcuts */}
             <aside className="space-y-6">
-              <GithubWidget />
+              <GithubWidget githubUser={githubUser} />
 
               <div className="bg-cyber-50 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-800 rounded-sm p-6 space-y-3">
                 <h3 className="text-sm font-bold font-mono text-cyber-950 dark:text-cyber-100 flex items-center gap-2">
@@ -278,18 +280,18 @@ export const getServerSideProps = withPageAuthRequired({
       };
     }
     const admin = createAdminClient();
-    const { data, error } = await admin
-      .from('projects')
-      .select('*')
-      .order('display_order', { ascending: true });
+    const [{ data, error }, githubUser] = await Promise.all([
+      admin.from('projects').select('*').order('display_order', { ascending: true }),
+      fetchGithubUser('Mastr00'),
+    ]);
     if (error) {
-      return { props: { initialProjects: [] } };
+      return { props: { initialProjects: [], githubUser } };
     }
     const initialProjects: AdminProject[] = (data as ProjectRow[]).map((row) => ({
       ...rowToProject(row),
       published: row.published,
       displayOrder: row.display_order,
     }));
-    return { props: { initialProjects } };
+    return { props: { initialProjects, githubUser } };
   },
 });
