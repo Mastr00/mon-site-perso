@@ -20,7 +20,9 @@ export async function getStaticProps() {
     const msg = e instanceof Error ? e.message : JSON.stringify(e);
     const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
     const hasKey = !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    console.error(`[portfolio] getStaticProps FAILED | hasUrl=${hasUrl} hasKey=${hasKey} | err=${msg}`);
+    console.error(
+      `[portfolio] getStaticProps FAILED | hasUrl=${hasUrl} hasKey=${hasKey} | err=${msg}`
+    );
     return {
       props: { projects: [] },
       revalidate: 10,

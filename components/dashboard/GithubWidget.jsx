@@ -1,40 +1,11 @@
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Github, Users, BookMarked, GitCommit, Loader2, ExternalLink } from 'lucide-react';
+import { Github, Users, BookMarked, ExternalLink } from 'lucide-react';
 
-export default function GithubWidget() {
-  const [githubUser, setGithubUser] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('https://api.github.com/users/Mastr00')
-      .then((res) => {
-        if (!res.ok) throw new Error('Network response was not ok');
-        return res.json();
-      })
-      .then((data) => {
-        setGithubUser(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('GitHub error:', err);
-        setError(true);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-[160px] p-6 bg-cyber-100 dark:bg-cyber-900 border border-cyber-200 dark:border-cyber-900 rounded-sm flex flex-col items-center justify-center text-cyber-500">
-        <Loader2 className="animate-spin mb-2" size={24} />
-        <span className="text-sm">Connexion à GitHub...</span>
-      </div>
-    );
-  }
-
-  if (error || !githubUser) {
+// `githubUser` comes pre-fetched from getServerSideProps via lib/github.ts
+// so the dashboard renders instantly with no client-side spinner.
+export default function GithubWidget({ githubUser }) {
+  if (!githubUser) {
     return (
       <div className="p-6 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-sm flex items-center justify-center text-red-500">
         <span className="text-sm">Erreur API GitHub</span>

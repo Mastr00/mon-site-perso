@@ -91,7 +91,9 @@ export async function fetchPublishedProjects(): Promise<Project[]> {
     .eq('published', true)
     .order('display_order', { ascending: true });
   if (error) {
-    throw new Error(`Supabase query failed: ${error.message} (code=${error.code}, details=${error.details})`);
+    throw new Error(
+      `Supabase query failed: ${error.message} (code=${error.code}, details=${error.details})`
+    );
   }
   return (data as ProjectRow[]).map(rowToProject);
 }
@@ -105,7 +107,9 @@ export async function fetchPublishedProjectById(id: string): Promise<Project | n
     .eq('id', id)
     .maybeSingle();
   if (error) {
-    throw new Error(`Supabase query failed: ${error.message} (code=${error.code}, details=${error.details})`);
+    throw new Error(
+      `Supabase query failed: ${error.message} (code=${error.code}, details=${error.details})`
+    );
   }
   return data ? rowToProject(data as ProjectRow) : null;
 }

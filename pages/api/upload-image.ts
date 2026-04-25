@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createAdminClient } from '../../lib/supabase';
 import { requireAdmin } from '../../lib/apiAuth';
+import { rateLimit } from '../../lib/rateLimit';
 
 export const config = {
   api: {
@@ -22,6 +23,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
+  // 20 uploads per 5 minutes — generous for legitimate admin use, blocks abuse
+  // if a session cookie ever leaks.
+  if (!rateLimit(req, res, { max: 20, windowMs: 5 * 60 * 1000 })) return;
   if (!(await requireAdmin(req, res))) return;
 
   const { fileName, contentType, dataBase64 } = (req.body ?? {}) as Body;
