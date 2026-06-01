@@ -20,7 +20,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        # --omit=optional skips platform/arch-specific optional deps (e.g.
+        # @rolldown/binding-wasm32-wasi pulled by vitest) whose lockfile
+        # entries can be incomplete when the lock was generated on Windows.
+        run: npm ci --omit=optional
 
       - name: Lint
         run: npm run lint
