@@ -16,14 +16,14 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # Node 24 ships npm 11, which tolerates the lockfile's missing
+          # @emnapi entries from @rolldown/binding-wasm32-wasi (vitest dep).
+          # Node 20's npm 10 rejects npm ci on that inconsistency.
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
-        # --omit=optional skips platform/arch-specific optional deps (e.g.
-        # @rolldown/binding-wasm32-wasi pulled by vitest) whose lockfile
-        # entries can be incomplete when the lock was generated on Windows.
-        run: npm ci --omit=optional
+        run: npm ci
 
       - name: Lint
         run: npm run lint
