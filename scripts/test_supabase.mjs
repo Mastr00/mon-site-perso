@@ -1,10 +1,47 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { createClient } from '@supabase/supabase-js';
 
-const url = 'https://jkascxrnpgaqsxcskzzi.supabase.co';
-const anonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprYXNjeHJucGdhcXN4Y3NrenppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwMzY0ODIsImV4cCI6MjA5MjYxMjQ4Mn0.Eax17jsMQ8LXAlPzMuZlcqp6d2y5vsdcPirmHUsp0pw';
-const serviceKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprYXNjeHJucGdhcXN4Y3NrenppIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzAzNjQ4MiwiZXhwIjoyMDkyNjEyNDgyfQ.gnUcuhejje0KrcNDiKh_7v1RF5N_72G1Njf-HfzQmiI';
+function loadEnvFile(fileName) {
+  const path = resolve(process.cwd(), fileName);
+  if (!existsSync(path)) return;
 
-console.log('=== Test avec ANON KEY (ce que portfolio utilise) ===');
+  const lines = readFileSync(path, 'utf8').split(/\r?\n/);
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('#')) continue;
+
+    const separator = line.indexOf('=');
+    if (separator < 0) continue;
+
+    const key = line.slice(0, separator).trim();
+    const value = line
+      .slice(separator + 1)
+      .trim()
+      .replace(/^['"]|['"]$/g, '');
+
+    if (key && process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
+}
+
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} is missing. Add it to .env.local or export it before running.`);
+  }
+  return value;
+}
+
+loadEnvFile('.env.local');
+loadEnvFile('.env');
+
+const url = requireEnv('NEXT_PUBLIC_SUPABASE_URL');
+const anonKey = requireEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+console.log('=== Test with ANON KEY (what portfolio uses) ===');
 const anon = createClient(url, anonKey);
 const { data: anonData, error: anonError } = await anon
   .from('projects')
@@ -14,11 +51,13 @@ const { data: anonData, error: anonError } = await anon
 if (anonError) {
   console.error('ANON ERROR:', anonError.message, anonError.code, anonError.details);
 } else {
-  console.log(`ANON: ${anonData.length} projet(s) trouvé(s)`);
-  anonData.forEach(p => console.log(`  - [${p.published ? 'PUB' : 'DRAFT'}] #${p.display_order} ${p.id}: ${p.title_fr}`));
+  console.log(`ANON: ${anonData.length} project(s) found`);
+  anonData.forEach((p) =>
+    console.log(`  - [${p.published ? 'PUB' : 'DRAFT'}] #${p.display_order} ${p.id}: ${p.title_fr}`)
+  );
 }
 
-console.log('\n=== Test avec ANON + filtre published=true ===');
+console.log('\n=== Test with ANON + published=true filter ===');
 const { data: pubData, error: pubError } = await anon
   .from('projects')
   .select('id, title_fr, published')
@@ -28,12 +67,19 @@ const { data: pubData, error: pubError } = await anon
 if (pubError) {
   console.error('PUB FILTER ERROR:', pubError.message, pubError.code);
 } else {
-  console.log(`ANON+published=true: ${pubData.length} projet(s)`);
-  pubData.forEach(p => console.log(`  - ${p.id}: ${p.title_fr}`));
+  console.log(`ANON+published=true: ${pubData.length} project(s)`);
+  pubData.forEach((p) => console.log(`  - ${p.id}: ${p.title_fr}`));
 }
 
-console.log('\n=== Test avec SERVICE ROLE KEY (bypass RLS) ===');
-const admin = createClient(url, serviceKey, { auth: { persistSession: false } });
+if (!serviceKey) {
+  console.log('\nSkipping SERVICE ROLE KEY test: SUPABASE_SERVICE_ROLE_KEY is not set.');
+  process.exit(0);
+}
+
+console.log('\n=== Test with SERVICE ROLE KEY (server-only RLS bypass) ===');
+const admin = createClient(url, serviceKey, {
+  auth: { persistSession: false, autoRefreshToken: false },
+});
 const { data: adminData, error: adminError } = await admin
   .from('projects')
   .select('id, title_fr, published, display_order')
@@ -42,6 +88,8 @@ const { data: adminData, error: adminError } = await admin
 if (adminError) {
   console.error('ADMIN ERROR:', adminError.message, adminError.code);
 } else {
-  console.log(`ADMIN: ${adminData.length} projet(s) trouvé(s)`);
-  adminData.forEach(p => console.log(`  - [${p.published ? 'PUB' : 'DRAFT'}] #${p.display_order} ${p.id}: ${p.title_fr}`));
+  console.log(`ADMIN: ${adminData.length} project(s) found`);
+  adminData.forEach((p) =>
+    console.log(`  - [${p.published ? 'PUB' : 'DRAFT'}] #${p.display_order} ${p.id}: ${p.title_fr}`)
+  );
 }
