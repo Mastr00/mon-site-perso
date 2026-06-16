@@ -29,7 +29,23 @@ export default function CV() {
 
   return (
     <>
-      <SEO title={`CV – Mehdi Mamdouh`} description={t.cv.bio} />
+      <SEO
+        title="CV Mehdi Mamdouh - Étudiant électronique & IoT à Nice"
+        description="CV de Mehdi Mamdouh, étudiant en électronique à l'Université Côte d'Azur à Nice, expérience FabLab, IoT, systèmes embarqués, C/C++, Python et fabrication numérique."
+        keywords={[
+          'CV Mehdi Mamdouh',
+          'Mehdi Mamdouh CV',
+          'étudiant électronique Université Côte d Azur',
+          'etudiant electronique Universite Cote d Azur',
+          'FabLab UniCA',
+          'fabrication numérique Nice',
+          'fabrication numerique Nice',
+          'compétences électronique IoT',
+          'competences electronique IoT',
+          'C++ Python VHDL',
+        ]}
+        type="profile"
+      />
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 py-12 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto bg-cyber-50 dark:bg-cyber-900 rounded-sm overflow-hidden border border-cyber-200 dark:border-cyber-800 print:shadow-none print:max-w-full print:border-none">

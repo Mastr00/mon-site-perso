@@ -18,7 +18,7 @@ export default function Home() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setDisplayedTitle(t.home.heroTitle + ' ');
-      setDisplayedName('Mehdi');
+      setDisplayedName('Mehdi Mamdouh');
       setPhase('done');
       return;
     }
@@ -45,7 +45,7 @@ export default function Home() {
     if (phase === 'init') return;
 
     const fullText = t.home.heroTitle + ' ';
-    const name = 'Mehdi';
+    const name = 'Mehdi Mamdouh';
 
     if (phase === 'typing') {
       if (displayedTitle.length < fullText.length) {
@@ -74,11 +74,30 @@ export default function Home() {
     }
   }, [displayedTitle, displayedName, phase, t.home.heroTitle]);
 
+  const heroTitleText = phase === 'init' ? `${t.home.heroTitle} ` : displayedTitle;
+  const heroNameText = phase === 'init' ? 'Mehdi Mamdouh' : displayedName;
+
   return (
     <>
       <SEO
-        title={`Mehdi – ${t.home.studentIn} ${t.home.role1}`}
-        description={`Portfolio of Mehdi, student in electronics and cybersecurity.`}
+        title="Mehdi Mamdouh - Étudiant électronique, IoT & cybersécurité à Nice"
+        description="Portfolio de Mehdi Mamdouh, étudiant en électronique à Nice, passionné par l'IoT, les systèmes embarqués, la cybersécurité, ESP32, C/C++, Python et le web moderne."
+        keywords={[
+          'Mehdi Mamdouh électronique',
+          'Mehdi Mamdouh electronique',
+          'Mehdi Mamdouh cybersécurité',
+          'Mehdi Mamdouh cybersecurite',
+          'Mehdi Mamdouh IoT',
+          'étudiant électronique Nice',
+          'etudiant electronique Nice',
+          'développeur systèmes embarqués Nice',
+          'developpeur systemes embarques Nice',
+          'portfolio Mehdi Mamdouh',
+          'ESP32 Nice',
+          'FabLab Université Côte d Azur',
+          'FabLab Universite Cote d Azur',
+        ]}
+        type="profile"
       />
 
       <section className="bg-grid min-h-screen flex flex-col items-center justify-center text-center px-4 bg-cyber-50 dark:bg-cyber-950 overflow-hidden relative">
@@ -118,8 +137,8 @@ export default function Home() {
         <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
           <div className="mb-4">
             <h1 className="text-5xl md:text-7xl lg:text-8xl text-cyber-950 dark:text-cyber-100 font-mono font-semibold tracking-tight min-h-[1.2em]">
-              {displayedTitle}
-              <span className="text-cyber-accent">{displayedName}</span>
+              {heroTitleText}
+              <span className="text-cyber-accent">{heroNameText}</span>
               <span className="inline-block w-[3px] h-[1em] bg-cyber-accent ml-[2px] align-text-bottom animate-[blink_0.8s_steps(2)_infinite] opacity-100"></span>
             </h1>
           </div>
@@ -132,7 +151,8 @@ export default function Home() {
           >
             {t.home.studentIn}{' '}
             <span className="text-cyber-500 dark:text-cyber-200">{t.home.role1}</span> &{' '}
-            <span className="text-cyber-500 dark:text-cyber-200">{t.home.role2}</span>.
+            <span className="text-cyber-500 dark:text-cyber-200">{t.home.role2}</span>
+            {locale === 'fr' ? ' à Nice' : ' in Nice, France'}.
             <br className="hidden md:block" />
             {t.home.passion}{' '}
             <span className="text-cyber-500 dark:text-cyber-200">{t.home.iot}</span>,{' '}

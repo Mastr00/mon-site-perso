@@ -58,6 +58,12 @@ function getTagIcon(tag: string) {
   return tagIcons[tag as keyof typeof tagIcons] || Code2;
 }
 
+function cleanProjectTitle(title: string): string {
+  const chars = Array.from(title.trim());
+  const firstTextIndex = chars.findIndex((char) => /[A-Za-z0-9À-ÿ]/.test(char));
+  return firstTextIndex >= 0 ? chars.slice(firstTextIndex).join('').trim() : title.trim();
+}
+
 // Scroll-triggered card wrapper
 function AnimatedCard({ children, index }: { children: React.ReactNode; index: number }) {
   const ref = useRef(null);
@@ -125,10 +131,7 @@ function ProjectCard({ p, index, t, locale }: ProjectCardProps) {
 
           <div className="p-6 flex flex-col flex-grow relative">
             <h2 className="text-xl font-bold text-cyber-950 dark:text-cyber-100 mb-2 group-hover:text-cyber-accent transition-colors">
-              {(typeof p.title === 'string' ? p.title : p.title[locale]).replace(
-                /^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u,
-                ''
-              )}
+              {cleanProjectTitle(typeof p.title === 'string' ? p.title : p.title[locale])}
             </h2>
 
             <p className="text-cyber-500 dark:text-cyber-400 text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
@@ -202,7 +205,21 @@ export default function Portfolio({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <SEO title="Portfolio – Mehdi" description={t.portfolio.subtitle} />
+      <SEO
+        title="Projets électronique, IoT, ESP32 & web - Mehdi Mamdouh"
+        description="Projets de Mehdi Mamdouh à Nice : électronique, IoT, ESP32, systèmes embarqués, robotique, cybersécurité, Python, C/C++, React et Next.js."
+        keywords={[
+          'projets Mehdi Mamdouh',
+          'portfolio électronique Nice',
+          'portfolio electronique Nice',
+          'projets IoT ESP32',
+          'systèmes embarqués ESP32',
+          'systemes embarques ESP32',
+          'robotique OpenCV',
+          'projets C++ Python',
+          'developpeur React Next.js Nice',
+        ]}
+      />
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 py-16 px-6 relative overflow-hidden bg-grid">
         <div className="max-w-6xl mx-auto relative z-10">

@@ -9,7 +9,8 @@ export default function handler(req) {
     const { searchParams } = new URL(req.url);
     const title = searchParams.get('title')?.slice(0, 100) || 'Mehdi Mamdouh';
     const subtitle =
-      searchParams.get('subtitle')?.slice(0, 120) || 'Étudiant en électronique & développeur IoT';
+      searchParams.get('subtitle')?.slice(0, 120) ||
+      'Étudiant en électronique à Nice, IoT, systèmes embarqués & cybersécurité';
 
     return new ImageResponse(
       <div
@@ -86,8 +87,8 @@ export default function handler(req) {
             paddingTop: '24px',
           }}
         >
-          <span>Mehdi Mamdouh — Nice, France</span>
-          <span>Portfolio & IoT</span>
+          <span>Mehdi Mamdouh - Nice, France</span>
+          <span>Électronique | IoT | Cybersécurité</span>
         </div>
       </div>,
       {

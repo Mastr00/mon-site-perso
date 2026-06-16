@@ -138,7 +138,20 @@ export default function Contact() {
 
   return (
     <>
-      <SEO title={`${t.nav.contact} – Mehdi Mamdouh`} description={t.contact.subtitle} />
+      <SEO
+        title="Contact Mehdi Mamdouh - Électronique, IoT & projets à Nice"
+        description="Contacter Mehdi Mamdouh à Nice pour une opportunité, une collaboration technique ou un projet en électronique, IoT, systèmes embarqués, cybersécurité ou web."
+        keywords={[
+          'contact Mehdi Mamdouh',
+          'Mehdi Mamdouh email',
+          'collaboration électronique Nice',
+          'collaboration electronique Nice',
+          'projet IoT Nice',
+          'developpeur IoT contact',
+          'systèmes embarqués Nice',
+          'systemes embarques Nice',
+        ]}
+      />
 
       <Toast
         message={t.contact.successTitle}

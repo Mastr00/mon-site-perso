@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -15,6 +14,13 @@ import {
 import { fetchPublishedProjects, fetchPublishedProjectById } from '../../lib/supabase';
 import type { Project } from '../../types';
 import { useLanguage } from '../../context/LanguageContext';
+import SEO from '../../components/SEO';
+
+function cleanProjectTitle(title: string): string {
+  const chars = Array.from(title.trim());
+  const firstTextIndex = chars.findIndex((char) => /[A-Za-z0-9À-ÿ]/.test(char));
+  return firstTextIndex >= 0 ? chars.slice(firstTextIndex).join('').trim() : title.trim();
+}
 
 export async function getStaticPaths() {
   try {
@@ -53,15 +59,54 @@ export default function ProjectDetail({ project }: { project: Project }) {
   if (!project) return <div>{t.portfolio.notFound}</div>;
 
   const titleStr = typeof project.title === 'string' ? project.title : project.title[locale];
+  const cleanTitle = cleanProjectTitle(titleStr);
   const descStr =
     typeof project.descShort === 'string' ? project.descShort : project.descShort[locale];
+  const projectUrl = `https://mmsa.app/projects/${project.id}`;
+  const projectImage = project.image.startsWith('http')
+    ? project.image
+    : `https://mmsa.app${project.image}`;
+  const seoDescription =
+    `${descStr} Projet de Mehdi Mamdouh en électronique, IoT, systèmes embarqués et web à Nice.`.slice(
+      0,
+      160
+    );
 
   return (
     <>
-      <Head>
-        <title>{titleStr} – Portfolio</title>
-        <meta name="description" content={descStr} />
-      </Head>
+      <SEO
+        title={`${cleanTitle} - Projet technique de Mehdi Mamdouh`}
+        description={seoDescription}
+        image={project.image}
+        url={projectUrl}
+        keywords={[
+          cleanTitle,
+          `${cleanTitle} Mehdi Mamdouh`,
+          ...project.tags,
+          ...project.hardware,
+          'projet électronique',
+          'projet electronique',
+          'projet IoT',
+          'systèmes embarqués',
+          'systemes embarques',
+          'ESP32',
+          'portfolio Mehdi Mamdouh',
+        ]}
+        type="article"
+        structuredData={{
+          '@type': 'CreativeWork',
+          '@id': `${projectUrl}#project`,
+          name: cleanTitle,
+          headline: cleanTitle,
+          description: seoDescription,
+          url: projectUrl,
+          image: projectImage,
+          creator: {
+            '@id': 'https://mmsa.app/#mehdi-mamdouh',
+          },
+          keywords: [...project.tags, ...project.hardware, 'électronique', 'IoT'].join(', '),
+        }}
+      />
 
       <div className="min-h-screen bg-cyber-50 dark:bg-cyber-950 text-cyber-700 dark:text-cyber-100 py-16 px-4 md:px-8 relative overflow-hidden bg-grid">
         {/* Background Elements */}
@@ -105,10 +150,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-20">
               {/* Remove emoji from title cleanly for the main H1 */}
               <h1 className="text-4xl md:text-5xl font-bold font-mono text-white mb-4 drop-shadow-lg">
-                {titleStr.replace(
-                  /^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}✨🤖🌦️🚨📡]\s*/u,
-                  ''
-                )}
+                {cleanTitle}
               </h1>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
